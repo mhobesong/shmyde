@@ -28,6 +28,10 @@ body
 	font-size:18px;
 }
 
+.logo-section p{
+	display:inline-block;
+}
+
 .logo-image{
 	
 	padding:2px;
@@ -70,7 +74,7 @@ body
 .start-customizing
 {
 	position:absolute;
-	top:60%;
+	top:50%;
 	right:10%;
 	z-index:20;
 	box-shadow:10px 10px 15px #222 ;
