@@ -1,0 +1,126 @@
+body
+{
+	
+}
+/* Top Menu */
+@import url(https://fonts.googleapis.com/css?family=Raleway);
+.top-menu
+{
+	width:100%;
+	height:35px;
+	background:url(../images/top-menu-bg.png);
+	background-size:100% 100%;
+	position:absolute;
+	top:0px;
+	right:0px;
+	z-index:20;
+	text-align:right;
+
+}
+
+.top-menu ul
+{
+	display:block;
+	list-style-type:none;
+}
+
+.top-menu ul li
+{
+	display:inline-block;
+	margin-right: 25px;
+	padding:5px;
+}
+
+.top-menu a
+{
+	font-family: 'Raleway', sans-serif;
+	color:#a45a5a;
+	font-size:18px;
+}
+
+.top-menu a:hover
+{
+	text-decoration:underline;
+}
+.top-menu a:active
+{
+	color:#a45a5a;
+}
+
+.start-customizing
+{
+	position:absolute;
+	top:50%;
+	right:10%;
+	z-index:20;
+	box-shadow:10px 10px 15px #222 ;
+}
+
+.middle-band p
+{
+	font-family: 'Raleway', sans-serif;
+	color:#fff;
+	font-size:25px;
+	text-align:center;
+	
+}
+
+.middle-band
+{
+	background:url(../images/bg2.jpg);
+	width:100%;
+	height:75px;
+	background-repeat: repeat-x;
+	background-size: 1000px 500px; 
+}
+
+
+/*Responsive settings*/
+
+@media only screen and (max-height:500px)
+{
+		.start-customizing
+		{
+			position:absolute;
+			top:60%;
+			left:30%;
+			z-index:20;
+			width:200px;
+			
+		}
+}
+@media only screen and (max-width:600px){    
+
+		.top-menu a
+		{
+			font-size:9px;
+		}
+}
+
+@media only screen and (max-width:1100px){    
+		.top-menu a
+		{
+			font-size:18px;
+		}
+}
+
+@media only screen and (max-width:700px){    
+    .top-menu a
+		{
+			font-size:10px;
+		}
+
+	.start-customizing
+		{
+			position:absolute;
+			top:20%;
+			left:10%;
+			z-index:20;
+			width:100px;
+		}
+
+	.start-customizing img
+		{
+			height:30px;
+		}
+}
