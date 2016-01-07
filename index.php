@@ -19,8 +19,20 @@
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
   </head>
+
   <body>
+
+
+	
+
 	<div class='top-menu'>
+	
+	<div class="logo-section">
+		<p>START DESIGN</p>
+		<img src="images/logo_shmyde.png" class="logo-image">
+		<p>GET PRODUCT</p>
+	</div>
+	
 		<ul>
 			<li><a href='#'>ABOUT US</a></li>
 			<li><a href='#'>CONTACT US</a></li>
