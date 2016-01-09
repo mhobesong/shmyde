@@ -74,7 +74,7 @@ if( ! isset( $on_hold_message ) )
 		?>
 
 		<p>
-			<a href="<?php echo secure_site_url('examples/recover'); ?>">
+			<a href="<?php echo secure_site_url('account/recover'); ?>">
 				Can't access your account?
 			</a>
 		</p>
@@ -104,7 +104,7 @@ if( ! isset( $on_hold_message ) )
 					Your access to login and account recovery has been blocked for ' . ( (int) config_item('seconds_on_hold') / 60 ) . ' minutes.
 				</p>
 				<p>
-					Please use the ' . secure_anchor('examples/recover','Account Recovery') . ' after ' . ( (int) config_item('seconds_on_hold') / 60 ) . ' minutes has passed,<br />
+					Please use the ' . secure_anchor('account/recover','Account Recovery') . ' after ' . ( (int) config_item('seconds_on_hold') / 60 ) . ' minutes has passed,<br />
 					or contact us if you require assistance gaining access to your account.
 				</p>
 			</div>
@@ -112,4 +112,4 @@ if( ! isset( $on_hold_message ) )
 	}
 
 /* End of file login_form.php */
-/* Location: /views/examples/login_form.php */ 
+/* Location: /views/account/login_form.php */ 
