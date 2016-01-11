@@ -13,10 +13,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @link        http://community-auth.com
  */
 
-if( ! isset( $optional_login ) )
-{
-	echo '<h1>Login</h1>';
-}
 
 if( ! isset( $on_hold_message ) )
 {
@@ -45,44 +41,38 @@ if( ! isset( $on_hold_message ) )
 		';
 	}
 
-	echo form_open( $login_url, array( 'class' => 'std-form' ) ); 
 ?>
 
-	<div>
+<style>
+div.container{
+	
+	margin-top: 100px;
+}
+</style>
 
-		<label for="login_string" class="form_label">Username or Email</label>
-		<input type="text" name="login_string" id="login_string" class="form_input" autocomplete="off" maxlength="255" />
+<div class="container">
+    <div class="row">
+        <div class="col-sm-6 col-md-4 col-md-offset-4">
+            <div class="account-wall">
+                <img class="profile-img" src="<?php echo $application_path; ?>images/logo_shmyde.png"
+                    alt="">
+				<?php echo form_open( $login_url, array( 'class' => 'form-signin' ) ); ?>
+                <input type="text" class="form-control" placeholder="Email" required autofocus>
+                <input type="password" class="form-control" placeholder="Password" required>
+                <button class="btn btn-lg btn-primary btn-block" type="submit">
+                    Sign in</button>
+                <label class="checkbox pull-left">
+                    <input type="checkbox" value="remember-me">
+                    Remember me
+                </label>
+                <a href="#" class="pull-right need-help">Need help? </a><span class="clearfix"></span>
+                </form>
+            </div>
+            <a href="#" class="text-center new-account">Create an account </a>
+        </div>
+    </div>
+</div>
 
-		<br />
-
-		<label for="login_pass" class="form_label">Password</label>
-		<input type="password" name="login_pass" id="login_pass" class="form_input password" maxlength="<?php echo config_item('max_chars_for_password'); ?>" autocomplete="off" readonly="readonly" onfocus="this.removeAttribute('readonly');" />
-
-
-		<?php
-			if( config_item('allow_remember_me') )
-			{
-		?>
-
-			<br />
-
-			<label for="remember_me" class="form_label">Remember Me</label>
-			<input type="checkbox" id="remember_me" name="remember_me" value="yes" />
-
-		<?php
-			}
-		?>
-
-		<p>
-			<a href="<?php echo secure_site_url('account/recover'); ?>">
-				Can't access your account?
-			</a>
-		</p>
-
-
-		<input type="submit" name="submit" value="Login" id="submit_button"  />
-
-	</div>
 </form>
 
 <?php
