@@ -17,8 +17,20 @@
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
   </head>
+  
+  <style>
+  body{
+	  
+	  -moz-background-size: cover;
+	  -webkit-background-size: cover;
+	  background-size: cover;
+	  background-position: top center !important;
+	  background-repeat: no-repeat !important;
+	  background-attachment: fixed;
+  }
+  </style>
 
-  <body>
+  <body background="<?php echo $application_path; ?>images/login_image.png">
 
     <link href="<?php echo $application_path; ?>frameworks/bootstrap-3.3.6-dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="<?php echo $application_path; ?>css/style.css" rel="stylesheet">

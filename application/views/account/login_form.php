@@ -13,34 +13,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @link        http://community-auth.com
  */
 
-
-if( ! isset( $on_hold_message ) )
-{
-	if( isset( $login_error_mesg ) )
-	{
-		echo '
-			<div style="border:1px solid red;">
-				<p>
-					Login Error #' . $this->authentication->login_errors_count . '/' . config_item('max_allowed_attempts') . ': Invalid Username, Email Address, or Password.
-				</p>
-				<p>
-					Username, email address and password are all case sensitive.
-				</p>
-			</div>
-		';
-	}
-
-	if( $this->input->get('logout') )
-	{
-		echo '
-			<div style="border:1px solid green">
-				<p>
-					You have successfully logged out.
-				</p>
-			</div>
-		';
-	}
-
 ?>
 
 <style>
@@ -66,40 +38,12 @@ div.container{
                     Remember me
                 </label>
                 <a href="#" class="pull-right need-help">Need help? </a><span class="clearfix"></span>
+				            <a href="#" class="text-center new-account">Create an account </a>
+
                 </form>
             </div>
-            <a href="#" class="text-center new-account">Create an account </a>
         </div>
     </div>
 </div>
 
 </form>
-
-<?php
-
-	}
-	else
-	{
-		// EXCESSIVE LOGIN ATTEMPTS ERROR MESSAGE
-		echo '
-			<div style="border:1px solid red;">
-				<p>
-					Excessive Login Attempts
-				</p>
-				<p>
-					You have exceeded the maximum number of failed login<br />
-					attempts that this website will allow.
-				<p>
-				<p>
-					Your access to login and account recovery has been blocked for ' . ( (int) config_item('seconds_on_hold') / 60 ) . ' minutes.
-				</p>
-				<p>
-					Please use the ' . secure_anchor('account/recover','Account Recovery') . ' after ' . ( (int) config_item('seconds_on_hold') / 60 ) . ' minutes has passed,<br />
-					or contact us if you require assistance gaining access to your account.
-				</p>
-			</div>
-		';
-	}
-
-/* End of file login_form.php */
-/* Location: /views/account/login_form.php */ 
