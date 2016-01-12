@@ -13,7 +13,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
  * @link        http://community-auth.com
  */
 
-class Examples extends MY_Controller
+class Account extends MY_Controller
 {
     public function __construct()
     {
@@ -34,13 +34,13 @@ class Examples extends MY_Controller
      */
     public function index()
     {
-        if( $this->require_role('admin') )
+        if($this->require_role('admin'))
         {
-            echo $this->load->view('examples/page_header', '', TRUE);
+            echo $this->load->view('account/page_header', '', TRUE);
 
             echo '<p>You are logged in!</p>';
 
-            echo $this->load->view('examples/page_footer', '', TRUE);
+            echo $this->load->view('account/page_footer', '', TRUE);
         }
     }
     
@@ -48,7 +48,7 @@ class Examples extends MY_Controller
 
     /**
      * Demonstrate an optional login.
-     * Remember to add "examples/optional_login_test" to the
+     * Remember to add "account/optional_login_test" to the
      * allowed_pages_for_login array in config/authentication.php.
      *
      * Notice that we are using verify_min_level to check if
@@ -56,6 +56,8 @@ class Examples extends MY_Controller
      */
     public function optional_login_test()
     {
+		
+
         if( $this->verify_min_level(1) )
         {
             $page_content = '<p>Although not required, you are logged in!</p>';
@@ -71,14 +73,16 @@ class Examples extends MY_Controller
 
             $page_content = '<p>You are not logged in, but can still see this page.</p>';
 
-            $page_content .= $this->load->view('examples/login_form', '', TRUE);
+            $page_content .= $this->load->view('account/login_form', $data, TRUE);
         }
+		
 
-        echo $this->load->view('examples/page_header', '', TRUE);
+
+        echo $this->load->view('account/header', $data);
 
         echo $page_content;
 
-        echo $this->load->view('examples/page_footer', '', TRUE);
+        echo $this->load->view('account/page_footer', $data, TRUE);
     }
     
     // -----------------------------------------------------------------------
@@ -94,7 +98,7 @@ class Examples extends MY_Controller
     {
         $this->is_logged_in();
 
-        echo $this->load->view('examples/page_header', '', TRUE);
+        echo $this->load->view('account/page_header', '', TRUE);
 
         echo '<p>';
         if( ! empty( $this->auth_role ) )
@@ -123,7 +127,7 @@ class Examples extends MY_Controller
 
         echo '</p>';
 
-        echo $this->load->view('examples/page_footer', '', TRUE);
+        echo $this->load->view('account/page_footer', '', TRUE);
     }
     
     // -----------------------------------------------------------------------
@@ -149,15 +153,15 @@ class Examples extends MY_Controller
             'username'   => 'skunkbot',
             'passwd'     => 'PepeLePew7',
             'email'      => 'skunkbot@example.com',
-            'auth_level' => '1', // 9 if you want to login @ examples/index.
+            'auth_level' => '1', // 9 if you want to login @ account/index.
         );
 
         $this->is_logged_in();
 
-        echo $this->load->view('examples/page_header', '', TRUE);
+        echo $this->load->view('account/page_header', '', TRUE);
 
         // Load resources
-        $this->load->model('examples_model');
+        $this->load->model('account_model');
         $this->load->library('form_validation');
 
         $this->form_validation->set_data( $user_data );
@@ -210,7 +214,7 @@ class Examples extends MY_Controller
 			echo '<h1>User Creation Error(s)</h1>' . validation_errors();
 		}
 
-        echo $this->load->view('examples/page_footer', '', TRUE);
+        echo $this->load->view('account/page_footer', '', TRUE);
     }
     
     // -----------------------------------------------------------------------
@@ -223,8 +227,11 @@ class Examples extends MY_Controller
      */
     public function login()
     {
+		
+		$data["application_path"] = base_url().'assets/';
+
         // Method should not be directly accessible
-        if( $this->uri->uri_string() == 'examples/login')
+        if( $this->uri->uri_string() == 'account/login')
             show_404();
 
         if( strtolower( $_SERVER['REQUEST_METHOD'] ) == 'post' )
@@ -232,9 +239,9 @@ class Examples extends MY_Controller
 
         $this->setup_login_form();
 
-        $html = $this->load->view('examples/page_header', '', TRUE);
-        $html .= $this->load->view('examples/login_form', '', TRUE);
-        $html .= $this->load->view('examples/page_footer', '', TRUE);
+        $html = $this->load->view('account/header', $data, TRUE);
+        $html .= $this->load->view('account/login_form', $data, TRUE);
+        $html .= $this->load->view('account/page_footer', '', TRUE);
 
         echo $html;
     }
@@ -303,8 +310,8 @@ class Examples extends MY_Controller
                         );
 
                         $view_data['special_link'] = secure_anchor( 
-                            'examples/recovery_verification/' . $user_data->user_id . '/' . $recovery_code, 
-                            secure_site_url( 'examples/recovery_verification/' . $user_data->user_id . '/' . $recovery_code ), 
+                            'account/recovery_verification/' . $user_data->user_id . '/' . $recovery_code, 
+                            secure_site_url( 'account/recovery_verification/' . $user_data->user_id . '/' . $recovery_code ), 
                             'target ="_blank"' 
                         );
 
@@ -323,11 +330,11 @@ class Examples extends MY_Controller
             }
         }
 
-        echo $this->load->view('examples/page_header', '', TRUE);
+        echo $this->load->view('account/page_header', '', TRUE);
 
-        echo $this->load->view('examples/recover_form', ( isset( $view_data ) ) ? $view_data : '', TRUE );
+        echo $this->load->view('account/recover_form', ( isset( $view_data ) ) ? $view_data : '', TRUE );
 
-        echo $this->load->view('examples/page_footer', '', TRUE);
+        echo $this->load->view('account/page_footer', '', TRUE);
     }
 
     // --------------------------------------------------------------
@@ -348,7 +355,7 @@ class Examples extends MY_Controller
         else
         {
             // Load resources
-            $this->load->model('examples_model');
+            $this->load->model('account_model');
 
             if( 
                 /**
@@ -407,11 +414,11 @@ class Examples extends MY_Controller
             }
         }
 
-        echo $this->load->view('examples/page_header', '', TRUE);
+        echo $this->load->view('account/page_header', '', TRUE);
 
-        echo $this->load->view( 'examples/choose_password_form', $view_data, TRUE );
+        echo $this->load->view( 'account/choose_password_form', $view_data, TRUE );
 
-        echo $this->load->view('examples/page_footer', '', TRUE);
+        echo $this->load->view('account/page_footer', '', TRUE);
     }
 
     // --------------------------------------------------------------
