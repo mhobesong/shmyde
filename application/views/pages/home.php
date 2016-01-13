@@ -158,17 +158,10 @@
 	<div class='middle-band'>
 		<div class='container'>
 			<div class='row'>
-				<div class='col-md-3 col-sm-3 col-xs-12'></div>
-				<div class='col-md-3 col-sm-3 col-xs-12'>
+				<div class='col-md-12 col-sm-12 col-xs-12'>
 					<P>FOR ONLY $ 125</P>
-					<p><b>DESIGN IT AND WE DELIVER</b></p>
+					<center><p><b>DESIGN IT AND WE DELIVER</b></p></center>
 				</div>
-				<div class='col-md-3 col-sm-3 col-xs-12'>
-					<a href='#'>
-						<img src='<?php echo $application_path; ?>/images/how-it-works.png'/>
-					</a>
-				</div>
-				<div class='col-md-3 col-sm-3 col-xs-12'></div>
 			</div>
 		</div>
 	</div>	
