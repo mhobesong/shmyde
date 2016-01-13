@@ -34,7 +34,7 @@ class Account extends MY_Controller
      */
     public function index()
     {
-        if( $this->require_role('admin') )
+        if($this->require_role('admin'))
         {
         
             //echo $this->load->view('pages/header', '', TRUE);
@@ -59,6 +59,8 @@ class Account extends MY_Controller
      */
     public function optional_login_test()
     {
+		
+
         if( $this->verify_min_level(1) )
         {
             $page_content = '<p>Although not required, you are logged in!</p>';
@@ -74,14 +76,16 @@ class Account extends MY_Controller
 
             $page_content = '<p>You are not logged in, but can still see this page.</p>';
 
-            $page_content .= $this->load->view('account/login_form', '', TRUE);
+            $page_content .= $this->load->view('account/login_form', $data, TRUE);
         }
+		
 
-        echo $this->load->view('account/page_header', '', TRUE);
+
+        echo $this->load->view('account/header', $data);
 
         echo $page_content;
 
-        echo $this->load->view('account/page_footer', '', TRUE);
+        echo $this->load->view('account/page_footer', $data, TRUE);
     }
     
     // -----------------------------------------------------------------------
@@ -226,6 +230,9 @@ class Account extends MY_Controller
      */
     public function login()
     {
+		
+		$data["application_path"] = base_url().'assets/';
+
         // Method should not be directly accessible
         if( $this->uri->uri_string() == 'account/login')
             show_404();
@@ -235,8 +242,8 @@ class Account extends MY_Controller
 
         $this->setup_login_form();
 
-        $html = $this->load->view('account/page_header', '', TRUE);
-        $html .= $this->load->view('account/login_form', '', TRUE);
+        $html = $this->load->view('account/header', $data, TRUE);
+        $html .= $this->load->view('account/login_form', $data, TRUE);
         $html .= $this->load->view('account/page_footer', '', TRUE);
 
         echo $html;
