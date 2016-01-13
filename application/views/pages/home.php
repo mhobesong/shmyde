@@ -214,7 +214,6 @@
 						<li><a href='#'>Custom 3PC Suits</a></li>
 						<li><a href='#'>Custom Jackets</a></li>
 						<li><a href='#'>Custom Blouses</a></li>
-						<li><a href='#'>Custom Jeans</a></li>
 					</ul>
 				</div>
 				<div class='col-md-4 col-sm-4'>
@@ -225,7 +224,6 @@
 						<li><a href='#'>Terms and Conditions</a></li>
 						<li><a href='#'>Privacy Policy</a></li>
 						<li><a href='#'>FAQ</a></li>
-						<li><a href='#'><p><img src='<?php echo $application_path; ?>/images/paypal.png' /></p></a></li>
 					</ul>
 
 				</div>
