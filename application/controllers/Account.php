@@ -36,7 +36,10 @@ class Account extends MY_Controller
     {
         if( $this->require_role('admin') )
         {
-            echo $this->load->view('account/page_header', '', TRUE);
+        
+            //echo $this->load->view('pages/header', '', TRUE);
+
+            //echo $this->load->view('account/page_header', '', TRUE);
 
             echo '<p>You are logged in!</p>';
 
@@ -190,7 +193,7 @@ class Account extends MY_Controller
 		if( $this->form_validation->run() )
 		{
             $user_data['passwd']     = $this->authentication->hash_passwd($user_data['passwd']);
-            $user_data['user_id']    = $this->examples_model->get_unused_id();
+            $user_data['user_id']    = $this->account_model->get_unused_id();
             $user_data['created_at'] = date('Y-m-d H:i:s');
 
             // If username is not used, it must be entered into the record as NULL
@@ -259,7 +262,7 @@ class Account extends MY_Controller
     public function recover()
     {
         // Load resources
-        $this->load->model('examples_model');
+        $this->load->model('account_model');
 
         /// If IP or posted email is on hold, display message
         if( $on_hold = $this->authentication->current_hold_status( TRUE ) )
@@ -271,7 +274,7 @@ class Account extends MY_Controller
             // If the form post looks good
             if( $this->tokens->match && $this->input->post('email') )
             {
-                if( $user_data = $this->examples_model->get_recovery_data( $this->input->post('email') ) )
+                if( $user_data = $this->account_model->get_recovery_data( $this->input->post('email') ) )
                 {
                     // Check if user is banned
                     if( $user_data->banned == '1' )
@@ -294,7 +297,7 @@ class Account extends MY_Controller
                         )->random_string(64)->show();
 
                         // Update user record with recovery code and time
-                        $this->examples_model->update_user_raw_data(
+                        $this->account_model->update_user_raw_data(
                             $user_data->user_id,
                             array(
                                 'passwd_recovery_code' => $this->authentication->hash_passwd($recovery_code),
@@ -366,7 +369,7 @@ class Account extends MY_Controller
                  * Try to get a hashed password recovery 
                  * code and user salt for the user.
                  */
-                $recovery_data = $this->examples_model->get_recovery_verification_data( $user_id ) )
+                $recovery_data = $this->account_model->get_recovery_verification_data( $user_id ) )
             {
                 /**
                  * Check that the recovery code from the 
@@ -403,7 +406,7 @@ class Account extends MY_Controller
              */
             if( $this->tokens->match )
             {
-                $this->examples_model->recovery_password_change();
+                $this->account_model->recovery_password_change();
             }
         }
 
