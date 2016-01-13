@@ -210,12 +210,10 @@
 					<ul>
 						<li><a href='#'>Custom Shrits</a></li>
 						<li><a href='#'>Custom T-Shirts</a></li>
-						<li><a href='#'>Custom Overcoats</a></li>
-						<li><a href='#'>Custom Blauses</a></li>
 						<li><a href='#'>Custom Suits</a></li>
 						<li><a href='#'>Custom 3PC Suits</a></li>
-						<li><a href='#'>Custom Vests</a></li>
-						<li><a href='#'>Custom Pants</a></li>
+						<li><a href='#'>Custom Jackets</a></li>
+						<li><a href='#'>Custom Blouses</a></li>
 						<li><a href='#'>Custom Jeans</a></li>
 					</ul>
 				</div>
