@@ -278,26 +278,5 @@
 			</div>
 		</div>
 	<!-- end footer section -->
-
-
-	<h2>Sadie</h2>
-				<div class="grid">
-					<figure class="effect-sadie">
-						<img src="<?php echo $application_path; ?>/img/2.jpg" alt="img02"/>
-						<figcaption>
-							<h2>Holy <span>Sadie</span></h2>
-							<p>Sadie never took her eyes off me. <br>She had a dark soul.</p>
-							<a href="#">View more</a>
-						</figcaption>			
-					</figure>
-					<figure class="effect-sadie">
-						<img src="<?php echo $application_path; ?>/img/14.jpg" alt="img14"/>
-						<figcaption>
-							<h2>Holy <span>Sadie</span></h2>
-							<p>Sadie never took her eyes off me. <br>She had a dark soul.</p>
-							<a href="#">View more</a>
-						</figcaption>			
-					</figure>
-				</div>
   </body>
 </html>
