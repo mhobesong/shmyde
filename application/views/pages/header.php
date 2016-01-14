@@ -10,6 +10,7 @@
     <!-- Bootstrap -->
     <link href="<?php echo $application_path; ?>frameworks/bootstrap-3.3.6-dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="<?php echo $application_path; ?>css/style.css" rel="stylesheet">
+    <link href="<?php echo $application_path; ?>css/set1.css" rel="stylesheet">
     <link href="<?php echo $application_path; ?>frameworks/ninja-slider/ninja-slider.css" rel="stylesheet">
     
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->

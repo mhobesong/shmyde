@@ -179,17 +179,47 @@
 
 		<div class='offers'>
 
-			<p>
-				<a href='#'><img src='<?php echo $application_path; ?>/images/models/men-suits.png' /></a>
-				<a href='#'><img src='<?php echo $application_path; ?>/images/models/women-suits.png' /></a>
-				<a href='#'><img src='<?php echo $application_path; ?>/images/models/jeans.png' /></a>
-				<a href='#'><img src='<?php echo $application_path; ?>/images/models/t-shirts.png' /></a>
-			</p>
+				<div class='grid'> 
+					<figure class="effect-sadie">
+						<img src="<?php echo $application_path; ?>/images/models/men-suits.png" alt="img02"/>
+						<figcaption>
+							<h2>Men <span>Suites</span></h2>
+							<a href="#">View more</a>
+						</figcaption>			
+					</figure> 
+					<figure class="effect-sadie">
+						<img src="<?php echo $application_path; ?>/images/models/women-suits.png" alt="img02"/>
+						<figcaption>
+							<h2>Women <span>Suites</span></h2>
+							<a href="#">View more</a>
+						</figcaption>			
+					</figure> 
+					<figure class="effect-sadie">
+						<img src="<?php echo $application_path; ?>/images/models/jeans.png" alt="img02"/>
+						<figcaption>
+							<h2><span>Jeans</span></h2>
+							<a href="#">View more</a>
+						</figcaption>			
+					</figure> 
+					<figure class="effect-sadie">
+						<img src="<?php echo $application_path; ?>/images/models/t-shirts.png" alt="img02"/>
+						<figcaption>
+							<h2>T-<span>Shirts</span></h2>
+							<a href="#">View more</a>
+						</figcaption>			
+					</figure>
+				</div>
 
-			<p>
 				
-				<a href='#'><img src='<?php echo $application_path; ?>/images/models/popular.png' /></a>
-			</p>
+				<div class='grid' style="z-index:30">
+					<figure class="effect-honey">
+						<img src="<?php echo $application_path; ?>/images/models/popular.png" alt="img05"/>
+						<figcaption>
+							<h2>POPULAR<span>MODELS</span></h2>
+							<a href="#">View more</a>
+						</figcaption>			
+					</figure>
+				</div>
 
 		</div>
 
@@ -248,5 +278,26 @@
 			</div>
 		</div>
 	<!-- end footer section -->
+
+
+	<h2>Sadie</h2>
+				<div class="grid">
+					<figure class="effect-sadie">
+						<img src="<?php echo $application_path; ?>/img/2.jpg" alt="img02"/>
+						<figcaption>
+							<h2>Holy <span>Sadie</span></h2>
+							<p>Sadie never took her eyes off me. <br>She had a dark soul.</p>
+							<a href="#">View more</a>
+						</figcaption>			
+					</figure>
+					<figure class="effect-sadie">
+						<img src="<?php echo $application_path; ?>/img/14.jpg" alt="img14"/>
+						<figcaption>
+							<h2>Holy <span>Sadie</span></h2>
+							<p>Sadie never took her eyes off me. <br>She had a dark soul.</p>
+							<a href="#">View more</a>
+						</figcaption>			
+					</figure>
+				</div>
   </body>
 </html>
