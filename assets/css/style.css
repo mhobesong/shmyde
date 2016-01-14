@@ -72,6 +72,34 @@ body
 	color:#a45a5a;
 }
 
+
+.login-link
+{
+		display:inline; 
+		text-align:right;
+		float:right;
+		padding-right:5%;
+		font-size:12px;
+		padding-top:1%;
+}
+
+
+.language-select
+{
+		display:inline; 
+		text-align:right;
+		float:right;
+		padding-right:5%;
+		font-size:12px;
+		padding-top:0.5%;
+}
+
+.login-link a
+{
+	font-size:12px;
+}
+
+
 .start-customizing
 {
 	position:absolute;

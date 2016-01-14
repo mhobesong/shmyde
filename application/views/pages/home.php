@@ -158,17 +158,10 @@
 	<div class='middle-band'>
 		<div class='container'>
 			<div class='row'>
-				<div class='col-md-3 col-sm-3 col-xs-12'></div>
-				<div class='col-md-3 col-sm-3 col-xs-12'>
+				<div class='col-md-12 col-sm-12 col-xs-12'>
 					<P>FOR ONLY $ 125</P>
-					<p><b>DESIGN IT AND WE DELIVER</b></p>
+					<center><p><b>DESIGN IT AND WE DELIVER</b></p></center>
 				</div>
-				<div class='col-md-3 col-sm-3 col-xs-12'>
-					<a href='#'>
-						<img src='<?php echo $application_path; ?>/images/how-it-works.png'/>
-					</a>
-				</div>
-				<div class='col-md-3 col-sm-3 col-xs-12'></div>
 			</div>
 		</div>
 	</div>	
@@ -186,17 +179,47 @@
 
 		<div class='offers'>
 
-			<p>
-				<a href='#'><img src='<?php echo $application_path; ?>/images/models/men-suits.png' /></a>
-				<a href='#'><img src='<?php echo $application_path; ?>/images/models/women-suits.png' /></a>
-				<a href='#'><img src='<?php echo $application_path; ?>/images/models/jeans.png' /></a>
-				<a href='#'><img src='<?php echo $application_path; ?>/images/models/t-shirts.png' /></a>
-			</p>
+				<div class='grid'> 
+					<figure class="effect-sadie">
+						<img src="<?php echo $application_path; ?>/images/models/men-suits.png" alt="img02"/>
+						<figcaption>
+							<h2>Men <span>Suites</span></h2>
+							<a href="#">View more</a>
+						</figcaption>			
+					</figure> 
+					<figure class="effect-sadie">
+						<img src="<?php echo $application_path; ?>/images/models/women-suits.png" alt="img02"/>
+						<figcaption>
+							<h2>Women <span>Suites</span></h2>
+							<a href="#">View more</a>
+						</figcaption>			
+					</figure> 
+					<figure class="effect-sadie">
+						<img src="<?php echo $application_path; ?>/images/models/jeans.png" alt="img02"/>
+						<figcaption>
+							<h2><span>Jeans</span></h2>
+							<a href="#">View more</a>
+						</figcaption>			
+					</figure> 
+					<figure class="effect-sadie">
+						<img src="<?php echo $application_path; ?>/images/models/t-shirts.png" alt="img02"/>
+						<figcaption>
+							<h2>T-<span>Shirts</span></h2>
+							<a href="#">View more</a>
+						</figcaption>			
+					</figure>
+				</div>
 
-			<p>
 				
-				<a href='#'><img src='<?php echo $application_path; ?>/images/models/popular.png' /></a>
-			</p>
+				<div class='grid' style="z-index:30">
+					<figure class="effect-honey">
+						<img src="<?php echo $application_path; ?>/images/models/popular.png" alt="img05"/>
+						<figcaption>
+							<h2>POPULAR<span>MODELS</span></h2>
+							<a href="#">View more</a>
+						</figcaption>			
+					</figure>
+				</div>
 
 		</div>
 
@@ -210,13 +233,10 @@
 					<ul>
 						<li><a href='#'>Custom Shrits</a></li>
 						<li><a href='#'>Custom T-Shirts</a></li>
-						<li><a href='#'>Custom Overcoats</a></li>
-						<li><a href='#'>Custom Blauses</a></li>
 						<li><a href='#'>Custom Suits</a></li>
 						<li><a href='#'>Custom 3PC Suits</a></li>
-						<li><a href='#'>Custom Vests</a></li>
-						<li><a href='#'>Custom Pants</a></li>
-						<li><a href='#'>Custom Jeans</a></li>
+						<li><a href='#'>Custom Jackets</a></li>
+						<li><a href='#'>Custom Blouses</a></li>
 					</ul>
 				</div>
 				<div class='col-md-4 col-sm-4'>
@@ -227,7 +247,6 @@
 						<li><a href='#'>Terms and Conditions</a></li>
 						<li><a href='#'>Privacy Policy</a></li>
 						<li><a href='#'>FAQ</a></li>
-						<li><a href='#'><p><img src='<?php echo $application_path; ?>/images/paypal.png' /></p></a></li>
 					</ul>
 
 				</div>

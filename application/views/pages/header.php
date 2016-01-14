@@ -10,6 +10,7 @@
     <!-- Bootstrap -->
     <link href="<?php echo $application_path; ?>frameworks/bootstrap-3.3.6-dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="<?php echo $application_path; ?>css/style.css" rel="stylesheet">
+    <link href="<?php echo $application_path; ?>css/set1.css" rel="stylesheet">
     <link href="<?php echo $application_path; ?>frameworks/ninja-slider/ninja-slider.css" rel="stylesheet">
     
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
@@ -29,13 +30,22 @@
 
 	<div class='top-menu'>
 	
-	<div class="logo-section">
-		<p>START DESIGN</p>
-		<a href="<?php echo site_url('pages/view/home'); ?>">
-		<img src="<?php echo $application_path; ?>images/logo_shmyde.png" class="logo-image">
-		</a>
-		<p>GET PRODUCT</p>
-	</div>
+		<div class="logo-section">
+			<p>START DESIGN</p>
+			<a href="<?php echo site_url('pages/view/home'); ?>">
+				<img src="<?php echo $application_path; ?>images/logo_shmyde.png" class="logo-image">
+			</a>
+			<p>GET PRODUCT</p>
+	
+			<div class='language-select'>
+				<a href='#'><img src="<?php echo $application_path; ?>images/en-flag.jpg"></a> | 
+				<a href='#'><img src="<?php echo $application_path; ?>images/fr-flag.png"></a>
+			</div>
+	
+			<div class='login-link'>
+				<i class='glyphicon glyphicon-user'></i> <a href='<?= base_url(); ?>index.php/login'>Login</a>
+			</div>
+		</div>
 	
 		<ul>
 			<li><a href='<?php echo site_url('pages/view/about-us'); ?>'><?php echo $this->lang->line('shmyde_about_us'); ?></a></li>
