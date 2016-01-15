@@ -72,6 +72,14 @@ body
 	color:#a45a5a;
 }
 
+.top-menu .logo-slogan
+{
+	display:inline;
+	width:auto;
+	text-align:right;
+	padding-left:20%;
+}
+
 
 .login-link
 {
