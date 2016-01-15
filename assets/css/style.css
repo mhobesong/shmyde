@@ -80,6 +80,11 @@ body
 	padding-left:20%;
 }
 
+.top-menu .logo-slogan a
+{
+	text-decoration:none;
+}
+
 
 .login-link
 {
