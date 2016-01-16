@@ -31,11 +31,13 @@
 	<div class='top-menu'>
 	
 		<div class="logo-section">
-			<p>START DESIGN</p>
-			<a href="<?php echo site_url('pages/view/home'); ?>">
-				<img src="<?php echo $application_path; ?>images/logo_shmyde.png" class="logo-image">
-			</a>
-			<p>GET PRODUCT</p>
+			<div class='logo-slogan'>
+					<p>START DESIGN</p>
+					<a href="<?php echo site_url('pages/view/home'); ?>">
+						<img src="<?php echo $application_path; ?>images/logo_shmyde.png" class="logo-image">
+					</a>
+					<p>GET PRODUCT</p>
+			</div>
 	
 			<div class='language-select'>
 				<a href='#'><img src="<?php echo $application_path; ?>images/en-flag.jpg"></a> | 

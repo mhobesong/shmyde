@@ -72,6 +72,14 @@ body
 	color:#a45a5a;
 }
 
+.top-menu .logo-slogan
+{
+	display:inline;
+	width:auto;
+	text-align:right;
+	padding-left:20%;
+}
+
 
 .login-link
 {
@@ -136,7 +144,7 @@ body
 .stat-section
 {
 	width:			100%;
-	height:			100vh;
+	height:			75vh;
 	background:		url(../images/black-skirt-suits-for-womencustom-tailored-womens-suits-and-dresses-afzurmsh.jpg);
 	background-size:cover;
 	padding-top:	15%;
@@ -166,7 +174,7 @@ body
 {
 	z-index:10;
 	position:absolute;
-	top:30%;
+	top:20%;
 	left:5%;
 	color:#ddd;
 	font-size:18px;
