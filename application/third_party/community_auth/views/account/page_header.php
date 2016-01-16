@@ -18,19 +18,19 @@
 	<ul>
 		<li><?php
 			if( isset( $auth_user_id ) ){
-				echo secure_anchor('examples/logout','Logout');
+				echo secure_anchor('account/logout','Logout');
 			}else{
 				echo secure_anchor( LOGIN_PAGE . '?redirect=examples','Login');
 			}
 		?></li>
 		<li>
-			<?php echo secure_anchor('examples/optional_login_test','Optional Login'); ?>
+			<?php echo secure_anchor('account/optional_login_test','Optional Login'); ?>
 		</li>
 		<li>
-			<?php echo secure_anchor('examples/simple_verification','Simple Verification'); ?>
+			<?php echo secure_anchor('account/simple_verification','Simple Verification'); ?>
 		</li>
 		<li>
-			<?php echo secure_anchor('examples/create_user','Create User'); ?>
+			<?php echo secure_anchor('account/create_user','Create User'); ?>
 		</li>
 	</ul>
 </div>
@@ -38,4 +38,4 @@
 <?php
 
 /* End of file page_header.php */
-/* Location: /views/examples/page_header.php */
+/* Location: /views/account/page_header.php */

@@ -154,7 +154,7 @@ class Account extends MY_Controller
         // Customize this array for your user
         $user_data = array(
             'username'   => 'besongsamuel',
-            'passwd'     => 'shaddy',
+            'passwd'     => 'Shaddy12',
             'email'      => 'besongsamuel@yahoo.com',
             'auth_level' => '1', // 9 if you want to login @ account/index.
         );
