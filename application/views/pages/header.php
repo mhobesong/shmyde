@@ -37,16 +37,18 @@
 						<img src="<?php echo $application_path; ?>images/logo_shmyde.png" class="logo-image">
 					</a>
 					<p>GET PRODUCT</p>
-			</div>
-	
-			<div class='language-select'>
+					
+					<div class='language-select'>
 				<a href='#'><img src="<?php echo $application_path; ?>images/en-flag.jpg"></a> | 
 				<a href='#'><img src="<?php echo $application_path; ?>images/fr-flag.png"></a>
 			</div>
 	
 			<div class='login-link'>
-				<i class='glyphicon glyphicon-user'></i> <a href='<?= base_url(); ?>index.php/login'>Login</a>
+				<i class='glyphicon glyphicon-user'></i> <a href='<?php echo site_url('login'); ?>'>Login</a>
 			</div>
+			</div>
+	
+			
 		</div>
 	
 		<ul>
