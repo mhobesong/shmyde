@@ -149,7 +149,7 @@ class Examples extends MY_Controller
             'username'   => $this->input->post('username'),
             'passwd'     => $this->input->post('password'),
             'email'      => $user = $this->input->post('email'),
-            'auth_level' => '9', // 9 if you want to login @ examples/index.
+            'auth_level' => '1', // 9 if you want to login @ examples/index.
         );
 
         $this->is_logged_in();
