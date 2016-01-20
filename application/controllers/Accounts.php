@@ -2,7 +2,7 @@
 defined('BASEPATH') or exit('No direct script access allowed');
 
 /**
- * Community Auth - account Controller
+ * Community Auth - Examples Controller
  *
  * Community Auth is an open source authentication application for CodeIgniter 3
  *
@@ -13,7 +13,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
  * @link        http://community-auth.com
  */
 
-class account extends MY_Controller
+class Account extends MY_Controller
 {
     public function __construct()
     {
@@ -34,9 +34,12 @@ class account extends MY_Controller
      */
     public function index()
     {
-        if( $this->require_role('admin') )
+        if($this->require_role('admin'))
         {
-            echo $this->load->view('account/page_header', '', TRUE);
+        
+            //echo $this->load->view('pages/header', '', TRUE);
+
+            //echo $this->load->view('account/page_header', '', TRUE);
 
             echo '<p>You are logged in!</p>';
 
@@ -56,6 +59,10 @@ class account extends MY_Controller
      */
     public function optional_login_test()
     {
+		
+		$data["application_path"] = base_url().'assets/';
+
+
         if( $this->verify_min_level(1) )
         {
             $page_content = '<p>Although not required, you are logged in!</p>';
@@ -71,14 +78,21 @@ class account extends MY_Controller
 
             $page_content = '<p>You are not logged in, but can still see this page.</p>';
 
-            $page_content .= $this->load->view('account/login_form', '', TRUE);
+            $page_content .= $this->load->view('account/login_form', $data, TRUE);
         }
+		
 
-        echo $this->load->view('account/page_header', '', TRUE);
+		$html = $this->load->view('account/header', $data, TRUE);
+        $html .= $this->load->view('account/login_form', $data, TRUE);
+        $html .= $this->load->view('account/page_footer', '', TRUE);
 
-        echo $page_content;
+        echo $html;
 
-        echo $this->load->view('account/page_footer', '', TRUE);
+        //echo $this->load->view('account/header', $data);
+
+        //echo $page_content;
+
+        //echo $this->load->view('account/page_footer', $data, TRUE);
     }
     
     // -----------------------------------------------------------------------
@@ -146,9 +160,9 @@ class account extends MY_Controller
     {
         // Customize this array for your user
         $user_data = array(
-            'username'   => 'skunkbot',
-            'passwd'     => 'PepeLePew7',
-            'email'      => 'skunkbot@example.com',
+            'username'   => 'besongsamuel',
+            'passwd'     => 'Shaddy12',
+            'email'      => 'besongsamuel@yahoo.com',
             'auth_level' => '1', // 9 if you want to login @ account/index.
         );
 
@@ -223,17 +237,25 @@ class account extends MY_Controller
      */
     public function login()
     {
+		
+		$data["application_path"] = base_url().'assets/';
+
         // Method should not be directly accessible
         if( $this->uri->uri_string() == 'account/login')
             show_404();
 
-        if( strtolower( $_SERVER['REQUEST_METHOD'] ) == 'post' )
+        if( strtolower( $_SERVER['REQUEST_METHOD'] ) == 'post' ){
+                	
+                	
             $this->require_min_level(1);
+            	
+            
+        }
 
         $this->setup_login_form();
 
-        $html = $this->load->view('account/page_header', '', TRUE);
-        $html .= $this->load->view('account/login_form', '', TRUE);
+        $html = $this->load->view('account/header', $data, TRUE);
+        $html .= $this->load->view('account/login_form', $data, TRUE);
         $html .= $this->load->view('account/page_footer', '', TRUE);
 
         echo $html;
@@ -417,5 +439,5 @@ class account extends MY_Controller
     // --------------------------------------------------------------
 }
 
-/* End of file account.php */
-/* Location: /application/controllers/account.php */
+/* End of file Examples.php */
+/* Location: /application/controllers/Examples.php */

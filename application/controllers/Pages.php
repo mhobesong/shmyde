@@ -1,5 +1,5 @@
 <?php
-class Pages extends CI_Controller {
+class Pages extends MY_Controller {
 
         public function view($page = 'home')
 		{
@@ -8,6 +8,9 @@ class Pages extends CI_Controller {
                 // Whoops, we don't have a page for that!
                 show_404();
         	}
+        	
+        	if( $this->require_role('admin') )
+        	{
         	
         	$this->load->helper('url');
         	
@@ -33,6 +36,8 @@ class Pages extends CI_Controller {
         	$this->load->view('pages/header', $data);
 
         	$this->load->view('pages/'.$page, $data);
+        	
+        	}
 		}
 		
 }

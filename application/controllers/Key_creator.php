@@ -74,10 +74,7 @@ class Key_creator extends CI_Controller{
 
 		$key = bin2hex( $this->encryption->create_key( $length ) );
 
-		echo hex2bin($key).'<br />';
-
 		echo '// ' . $cipher . '<br /> 
-		
 		$config[\'encryption_key\'] = hex2bin(\'' . $key . '\');';
 	}
 	

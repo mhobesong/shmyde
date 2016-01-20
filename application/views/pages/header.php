@@ -44,8 +44,21 @@
 				<a href='#'><img src="<?php echo $application_path; ?>images/fr-flag.png"></a>
 			</div>
 	
+			<?php 
+			
+				$account_login_url = $auth_level == 0 ?  site_url('login') :  site_url('examples');
+				$account_login_name = $auth_level == 0 ?  'Login' :  $auth_email;
+			
+			?>
 			<div class='login-link'>
-				<i class='glyphicon glyphicon-user'></i> <a href='<?php echo site_url('login'); ?>'>Login</a>
+				<i class='glyphicon glyphicon-user'></i> <a href='<?php echo $account_login_url; ?>'><?php echo $account_login_name; ?></a>
+				<?php
+					
+					if($auth_level > 0){
+						
+						echo '| <a href=\''.site_url('logout').'\'>Logout</a>';
+					}
+				?>
 			</div>
 			</div>
 	

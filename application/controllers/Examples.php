@@ -2,7 +2,7 @@
 defined('BASEPATH') or exit('No direct script access allowed');
 
 /**
- * Community Auth - account Controller
+ * Community Auth - Examples Controller
  *
  * Community Auth is an open source authentication application for CodeIgniter 3
  *
@@ -13,7 +13,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
  * @link        http://community-auth.com
  */
 
-class account extends MY_Controller
+class Examples extends MY_Controller
 {
     public function __construct()
     {
@@ -36,11 +36,11 @@ class account extends MY_Controller
     {
         if( $this->require_role('admin') )
         {
-            echo $this->load->view('account/page_header', '', TRUE);
+            echo $this->load->view('examples/page_header', '', TRUE);
 
             echo '<p>You are logged in!</p>';
 
-            echo $this->load->view('account/page_footer', '', TRUE);
+            echo $this->load->view('examples/page_footer', '', TRUE);
         }
     }
     
@@ -48,7 +48,7 @@ class account extends MY_Controller
 
     /**
      * Demonstrate an optional login.
-     * Remember to add "account/optional_login_test" to the
+     * Remember to add "examples/optional_login_test" to the
      * allowed_pages_for_login array in config/authentication.php.
      *
      * Notice that we are using verify_min_level to check if
@@ -71,14 +71,14 @@ class account extends MY_Controller
 
             $page_content = '<p>You are not logged in, but can still see this page.</p>';
 
-            $page_content .= $this->load->view('account/login_form', '', TRUE);
+            $page_content .= $this->load->view('examples/login_form', '', TRUE);
         }
 
-        echo $this->load->view('account/page_header', '', TRUE);
+        echo $this->load->view('examples/page_header', '', TRUE);
 
         echo $page_content;
 
-        echo $this->load->view('account/page_footer', '', TRUE);
+        echo $this->load->view('examples/page_footer', '', TRUE);
     }
     
     // -----------------------------------------------------------------------
@@ -94,7 +94,7 @@ class account extends MY_Controller
     {
         $this->is_logged_in();
 
-        echo $this->load->view('account/page_header', '', TRUE);
+        echo $this->load->view('examples/page_header', '', TRUE);
 
         echo '<p>';
         if( ! empty( $this->auth_role ) )
@@ -123,7 +123,7 @@ class account extends MY_Controller
 
         echo '</p>';
 
-        echo $this->load->view('account/page_footer', '', TRUE);
+        echo $this->load->view('examples/page_footer', '', TRUE);
     }
     
     // -----------------------------------------------------------------------
@@ -146,18 +146,18 @@ class account extends MY_Controller
     {
         // Customize this array for your user
         $user_data = array(
-            'username'   => 'skunkbot',
-            'passwd'     => 'PepeLePew7',
-            'email'      => 'skunkbot@example.com',
-            'auth_level' => '1', // 9 if you want to login @ account/index.
+            'username'   => $this->input->post('username'),
+            'passwd'     => $this->input->post('password'),
+            'email'      => $user = $this->input->post('email'),
+            'auth_level' => '9', // 9 if you want to login @ examples/index.
         );
 
         $this->is_logged_in();
 
-        echo $this->load->view('account/page_header', '', TRUE);
+        echo $this->load->view('examples/page_header', '', TRUE);
 
         // Load resources
-        $this->load->model('account_model');
+        $this->load->model('examples_model');
         $this->load->library('form_validation');
 
         $this->form_validation->set_data( $user_data );
@@ -190,7 +190,7 @@ class account extends MY_Controller
 		if( $this->form_validation->run() )
 		{
             $user_data['passwd']     = $this->authentication->hash_passwd($user_data['passwd']);
-            $user_data['user_id']    = $this->account_model->get_unused_id();
+            $user_data['user_id']    = $this->examples_model->get_unused_id();
             $user_data['created_at'] = date('Y-m-d H:i:s');
 
             // If username is not used, it must be entered into the record as NULL
@@ -210,7 +210,7 @@ class account extends MY_Controller
 			echo '<h1>User Creation Error(s)</h1>' . validation_errors();
 		}
 
-        echo $this->load->view('account/page_footer', '', TRUE);
+        echo $this->load->view('examples/page_footer', '', TRUE);
     }
     
     // -----------------------------------------------------------------------
@@ -223,8 +223,12 @@ class account extends MY_Controller
      */
     public function login()
     {
+    
+    	$data["application_path"] = base_url().'assets/';
+
+    
         // Method should not be directly accessible
-        if( $this->uri->uri_string() == 'account/login')
+        if( $this->uri->uri_string() == 'examples/login')
             show_404();
 
         if( strtolower( $_SERVER['REQUEST_METHOD'] ) == 'post' )
@@ -232,9 +236,9 @@ class account extends MY_Controller
 
         $this->setup_login_form();
 
-        $html = $this->load->view('account/page_header', '', TRUE);
-        $html .= $this->load->view('account/login_form', '', TRUE);
-        $html .= $this->load->view('account/page_footer', '', TRUE);
+        //$html = $this->load->view('examples/page_header', $data, TRUE);
+        $html = $this->load->view('examples/login_form', $data, TRUE);
+        $html .= $this->load->view('examples/page_footer', $data, TRUE);
 
         echo $html;
     }
@@ -259,7 +263,7 @@ class account extends MY_Controller
     public function recover()
     {
         // Load resources
-        $this->load->model('account_model');
+        $this->load->model('examples_model');
 
         /// If IP or posted email is on hold, display message
         if( $on_hold = $this->authentication->current_hold_status( TRUE ) )
@@ -271,7 +275,7 @@ class account extends MY_Controller
             // If the form post looks good
             if( $this->tokens->match && $this->input->post('email') )
             {
-                if( $user_data = $this->account_model->get_recovery_data( $this->input->post('email') ) )
+                if( $user_data = $this->examples_model->get_recovery_data( $this->input->post('email') ) )
                 {
                     // Check if user is banned
                     if( $user_data->banned == '1' )
@@ -294,7 +298,7 @@ class account extends MY_Controller
                         )->random_string(64)->show();
 
                         // Update user record with recovery code and time
-                        $this->account_model->update_user_raw_data(
+                        $this->examples_model->update_user_raw_data(
                             $user_data->user_id,
                             array(
                                 'passwd_recovery_code' => $this->authentication->hash_passwd($recovery_code),
@@ -303,8 +307,8 @@ class account extends MY_Controller
                         );
 
                         $view_data['special_link'] = secure_anchor( 
-                            'account/recovery_verification/' . $user_data->user_id . '/' . $recovery_code, 
-                            secure_site_url( 'account/recovery_verification/' . $user_data->user_id . '/' . $recovery_code ), 
+                            'examples/recovery_verification/' . $user_data->user_id . '/' . $recovery_code, 
+                            secure_site_url( 'examples/recovery_verification/' . $user_data->user_id . '/' . $recovery_code ), 
                             'target ="_blank"' 
                         );
 
@@ -323,11 +327,11 @@ class account extends MY_Controller
             }
         }
 
-        echo $this->load->view('account/page_header', '', TRUE);
+        echo $this->load->view('examples/page_header', '', TRUE);
 
-        echo $this->load->view('account/recover_form', ( isset( $view_data ) ) ? $view_data : '', TRUE );
+        echo $this->load->view('examples/recover_form', ( isset( $view_data ) ) ? $view_data : '', TRUE );
 
-        echo $this->load->view('account/page_footer', '', TRUE);
+        echo $this->load->view('examples/page_footer', '', TRUE);
     }
 
     // --------------------------------------------------------------
@@ -348,7 +352,7 @@ class account extends MY_Controller
         else
         {
             // Load resources
-            $this->load->model('account_model');
+            $this->load->model('examples_model');
 
             if( 
                 /**
@@ -366,7 +370,7 @@ class account extends MY_Controller
                  * Try to get a hashed password recovery 
                  * code and user salt for the user.
                  */
-                $recovery_data = $this->account_model->get_recovery_verification_data( $user_id ) )
+                $recovery_data = $this->examples_model->get_recovery_verification_data( $user_id ) )
             {
                 /**
                  * Check that the recovery code from the 
@@ -403,19 +407,19 @@ class account extends MY_Controller
              */
             if( $this->tokens->match )
             {
-                $this->account_model->recovery_password_change();
+                $this->examples_model->recovery_password_change();
             }
         }
 
-        echo $this->load->view('account/page_header', '', TRUE);
+        echo $this->load->view('examples/page_header', '', TRUE);
 
-        echo $this->load->view( 'account/choose_password_form', $view_data, TRUE );
+        echo $this->load->view( 'examples/choose_password_form', $view_data, TRUE );
 
-        echo $this->load->view('account/page_footer', '', TRUE);
+        echo $this->load->view('examples/page_footer', '', TRUE);
     }
 
     // --------------------------------------------------------------
 }
 
-/* End of file account.php */
-/* Location: /application/controllers/account.php */
+/* End of file Examples.php */
+/* Location: /application/controllers/Examples.php */

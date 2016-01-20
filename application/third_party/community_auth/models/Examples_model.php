@@ -2,7 +2,7 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 /**
- * Community Auth - account Model
+ * Community Auth - Examples Model
  *
  * Community Auth is an open source authentication application for CodeIgniter 3
  *
@@ -13,7 +13,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @link        http://community-auth.com
  */
 
-class Account_model extends MY_Model {
+class Examples_model extends MY_Model {
 
 	/**
 	 * Class Constructor
@@ -93,7 +93,7 @@ class Account_model extends MY_Model {
 	public function recovery_password_change()
 	{
 		// Load form validation rules
-		$this->config->load( 'form_validation/account/recovery_verification' );
+		$this->config->load( 'form_validation/examples/recovery_verification' );
 		$this->validation_rules = config_item('recovery_verification');
 
 		if( $this->validate() )
@@ -173,5 +173,5 @@ class Account_model extends MY_Model {
 
 }
 
-/* End of file account_model.php */
-/* Location: /models/account_model.php */
+/* End of file examples_model.php */
+/* Location: /models/examples_model.php */
