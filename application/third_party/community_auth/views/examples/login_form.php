@@ -86,9 +86,9 @@ if(!isset( $on_hold_message ) )
 			</div>
 			<div class="logo-bottom">
 				<section class="sky-form">									
-					<label class="radio"><input type="radio" name="radio" checked=""><i></i>Ut mattis mattis bibendum</label>
-					<label class="radio"><input type="radio" name="radio"><i></i>Nullam rutrum sagittis interdum</label>										
-					<label class="radio"><input type="radio" name="radio"><i></i>Nam cursus eros sed elit</label>
+					<label class="radio"><input type="text" name="radio"><i></i>IMAGINE</label>
+					<label class="radio"><input type="text" name="radio"><i></i>DESIGN</label>										
+					<label class="radio"><input type="text" name="radio"><i></i>WEAR</label>
 				</section>
 			</div>
 		</div>		
@@ -152,8 +152,7 @@ if(!isset( $on_hold_message ) )
 	</div>	
 	<div class="account">
 			<ul>
-				<li><p>Don't have an <a href="#">account?</a></p></li><span>/</span>
-				<li><p>Forgot <a href="#">password?</a></p></li>
+				<li><p>Forgot <a href="<?php echo site_url('recover'); ?>">password?</a></p></li>
 				<div class="clear"></div>
 			</ul>
 		</div>
