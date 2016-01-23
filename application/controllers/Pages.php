@@ -3,6 +3,34 @@ class Pages extends CI_Controller {
 
 
 
+		public function __construct()
+		{
+			parent::__construct();
+
+			
+        	$this->load->helper('url');
+
+			if( $this->require_role('admin') )
+        	{
+        	
+					$lang = substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2);
+					switch ($lang){
+						case "fr":
+						$current_language = "french";
+						break;
+						case "en":
+						$current_language = "english";
+						break;
+					default:
+						$current_language = "english";
+						break;
+					}
+			}
+			
+        	$this->lang->load('shmyde', $current_language);
+
+		}
+
         public function view($page = 'home')
 		{
         	if ( ! file_exists(APPPATH.'/views/pages/'.$page.'.php'))
@@ -19,6 +47,26 @@ class Pages extends CI_Controller {
         	$this->load->view('pages/'.$page);
         	
         	
+        	$data["application_path"] = base_url().'assets/';
+
+        	$data['title'] = ucfirst($page); // Capitalize the first letter
+
+        	$this->load->view('pages/header', $data);
+        	$this->load->view('pages/'.$page, $data);
+			$this->load->view('pages/footer', $data);
+		}
+
+
+		public function about()
+		{
+			$data["application_path"] = base_url().'assets/';
+
+        	$data['title'] = "About Us - Shmyde";
+
+        	$this->load->view('pages/header', $data);
+			$this->load->view('pages/about', $data);
+        	$this->load->view('pages/footer', $data);
+
 		}
 		
 }
