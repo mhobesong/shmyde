@@ -55,5 +55,7 @@ $route['translate_uri_dashes'] = FALSE;
 $route[LOGIN_PAGE] = 'examples/login';
 $route[REGISTRATION_PAGE] = 'examples/create_user';
 $route['logout'] = 'examples/logout';
+$route['recover'] = 'examples/recover';
+
 
 
