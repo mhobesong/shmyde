@@ -13,7 +13,7 @@
 
                 <li>
 
-                    <a class="ns-img" href="<?php echo $application_path; ?>frameworks/ninja-slider/img/6.jpg"></a>
+                    <a class="ns-img" href="<?php echo ASSETS_PATH; ?>frameworks/ninja-slider/img/6.jpg"></a>
 
                     <div class="caption">
 						<b>Laborum ipsum senectus</b>
@@ -24,7 +24,7 @@
 
                 <li>
 
-                    <a class="ns-img" href="<?php echo $application_path; ?>frameworks/ninja-slider/img/1.png"></a>
+                    <a class="ns-img" href="<?php echo ASSETS_PATH; ?>frameworks/ninja-slider/img/1.png"></a>
 
                     <div class="caption">
 						<b>Laborum ipsum senectus</b>
@@ -35,7 +35,7 @@
 
                 <li>
 
-                    <a class="ns-img" href="<?php echo $application_path; ?>frameworks/ninja-slider/img/1.jpg"></a>
+                    <a class="ns-img" href="<?php echo ASSETS_PATH; ?>frameworks/ninja-slider/img/1.jpg"></a>
 
                     <div class="caption">
 						<b>Laborum ipsum senectus</b>
@@ -46,7 +46,7 @@
 
                 <li>
 
-                    <a class="ns-img" href="<?php echo $application_path; ?>frameworks/ninja-slider/img/5.jpg"></a>
+                    <a class="ns-img" href="<?php echo ASSETS_PATH; ?>frameworks/ninja-slider/img/5.jpg"></a>
 
                     <div class="caption">
 						<b>Laborum ipsum senectus</b>
@@ -57,7 +57,7 @@
 
                 <li>
 
-                    <a class="ns-img" href="<?php echo $application_path; ?>frameworks/ninja-slider/img/3.jpg"></a>
+                    <a class="ns-img" href="<?php echo ASSETS_PATH; ?>frameworks/ninja-slider/img/3.jpg"></a>
 
                     <div class="caption">
 						<b>Laborum ipsum senectus</b>
@@ -83,7 +83,7 @@
     <!--end ninja slider-->	
 	
 	<div class='start-customizing'>
-		<a href='#'><img src='<?php echo $application_path; ?>images/start-customizing.png'></a>
+		<a href='#'><img src='<?php echo ASSETS_PATH; ?>images/start-customizing.png'></a>
 	</div>
 
 	<!-- first band -->
@@ -103,20 +103,20 @@
 				
 					<div class='col-md-2 col-sm-3'>
 						<p>Tailors</p>
-						<img src='<?php echo $application_path; ?>/images/tailors-stat.png'/>
+						<img src='<?php echo ASSETS_PATH; ?>/images/tailors-stat.png'/>
 						<p><b>43</b><p>
 					</div>
 					
 					<div class='col-md-2 col-sm-3'>
 						<p>Testimonials</p>
-						<img src='<?php echo $application_path; ?>/images/testimonials.png'/>
+						<img src='<?php echo ASSETS_PATH; ?>/images/testimonials.png'/>
 						<p><b>175</b><p>
 					</div>
 					
 					
 					<div class='col-md-2 col-sm-3'>
 						<p>Deliveries</p>
-						<img src='<?php echo $application_path; ?>/images/deliveries.png'/>
+						<img src='<?php echo ASSETS_PATH; ?>/images/deliveries.png'/>
 						<p><b>358</b><p>
 					</div>
 					
@@ -129,13 +129,13 @@
 				
 					<div class='col-md-2 col-sm-3'>
 						<p>Tweeter</p>
-						<img src='<?php echo $application_path; ?>/images/tweeter.png'/>
+						<img src='<?php echo ASSETS_PATH; ?>/images/tweeter.png'/>
 						<p><b>43</b><p>
 					</div>
 					
 					<div class='col-md-2 col-sm-3'>
 						<p>Facebook</p>
-						<img src='<?php echo $application_path; ?>/images/facebook.png'/>
+						<img src='<?php echo ASSETS_PATH; ?>/images/facebook.png'/>
 						<p><b>175</b><p>
 					</div>
 					
@@ -171,8 +171,8 @@
 	<div class='models'>
 		<div class='bg-video'>
 				<video muted loop autoplay>
-				  <source src="<?php echo $application_path; ?>/videos/Model Tailor WorkShop.mp4" type="video/mp4">
-				  <source src="<?php echo $application_path; ?>/videos/Model Tailor WorkShop.ogg" type="video/ogg">
+				  <source src="<?php echo ASSETS_PATH; ?>/videos/Model Tailor WorkShop.mp4" type="video/mp4">
+				  <source src="<?php echo ASSETS_PATH; ?>/videos/Model Tailor WorkShop.ogg" type="video/ogg">
 				  Your browser does not support the video tag.
 				</video>	
 		</div>
@@ -181,28 +181,28 @@
 
 				<div class='grid'> 
 					<figure class="effect-sadie">
-						<img src="<?php echo $application_path; ?>/images/models/men-suits.png" alt="img02"/>
+						<img src="<?php echo ASSETS_PATH; ?>/images/models/men-suits.png" alt="img02"/>
 						<figcaption>
 							<h2>Men <span>Suites</span></h2>
 							<a href="#">View more</a>
 						</figcaption>			
 					</figure> 
 					<figure class="effect-sadie">
-						<img src="<?php echo $application_path; ?>/images/models/women-suits.png" alt="img02"/>
+						<img src="<?php echo ASSETS_PATH; ?>/images/models/women-suits.png" alt="img02"/>
 						<figcaption>
 							<h2>Women <span>Suites</span></h2>
 							<a href="#">View more</a>
 						</figcaption>			
 					</figure> 
 					<figure class="effect-sadie">
-						<img src="<?php echo $application_path; ?>/images/models/jeans.png" alt="img02"/>
+						<img src="<?php echo ASSETS_PATH; ?>/images/models/jeans.png" alt="img02"/>
 						<figcaption>
 							<h2><span>Jeans</span></h2>
 							<a href="#">View more</a>
 						</figcaption>			
 					</figure> 
 					<figure class="effect-sadie">
-						<img src="<?php echo $application_path; ?>/images/models/t-shirts.png" alt="img02"/>
+						<img src="<?php echo ASSETS_PATH; ?>/images/models/t-shirts.png" alt="img02"/>
 						<figcaption>
 							<h2>T-<span>Shirts</span></h2>
 							<a href="#">View more</a>
@@ -213,7 +213,7 @@
 				
 				<div class='grid' style="z-index:30">
 					<figure class="effect-honey">
-						<img src="<?php echo $application_path; ?>/images/models/popular.png" alt="img05"/>
+						<img src="<?php echo ASSETS_PATH; ?>/images/models/popular.png" alt="img05"/>
 						<figcaption>
 							<h2>POPULAR<span>MODELS</span></h2>
 							<a href="#">View more</a>

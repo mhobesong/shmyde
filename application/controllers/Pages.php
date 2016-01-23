@@ -1,5 +1,7 @@
 <?php
-class Pages extends MY_Controller {
+class Pages extends CI_Controller {
+
+
 
         public function view($page = 'home')
 		{
@@ -9,35 +11,14 @@ class Pages extends MY_Controller {
                 show_404();
         	}
         	
-        	if( $this->require_role('admin') )
-        	{
-        	
-        	$this->load->helper('url');
-        	
-        	$lang = substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2);
-			switch ($lang){
-    			case "fr":
-        		$current_language = "french";
-        		break;
-        		case "en":
-        		$current_language = "english";
-        		break;
-    		default:
-        		$current_language = "english";
-       			break;
-			}
-			
-			$data["application_path"] = base_url().'assets/';
-        	        	
-        	$this->lang->load('shmyde', $current_language);
+        	        	    		        	        	
+        	$this->lang->load('shmyde', CURRENT_LANGUAGE);
 
-        	$data['title'] = ucfirst($page); // Capitalize the first letter
-
-        	$this->load->view('pages/header', $data);
-
-        	$this->load->view('pages/'.$page, $data);
+        	$this->load->view('pages/header');
         	
-        	}
+        	$this->load->view('pages/'.$page);
+        	
+        	
 		}
 		
 }

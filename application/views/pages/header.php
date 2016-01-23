@@ -1,5 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
+
+	<?php 
+		
+		if ($this->ion_auth->logged_in())
+		{
+			$user = $this->ion_auth->user()->row();
+		}
+	?>
+
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,16 +17,16 @@
     <title><?php echo $title; ?></title>
     
     <!-- Bootstrap -->
-    <link href="<?php echo $application_path; ?>frameworks/bootstrap-3.3.6-dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="<?php echo $application_path; ?>css/set1.css" rel="stylesheet">
-    <link href="<?php echo $application_path; ?>frameworks/ninja-slider/ninja-slider.css" rel="stylesheet">
+    <link href="<?php echo ASSETS_PATH; ?>frameworks/bootstrap-3.3.6-dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="<?php echo ASSETS_PATH; ?>css/set1.css" rel="stylesheet">
+    <link href="<?php echo ASSETS_PATH; ?>frameworks/ninja-slider/ninja-slider.css" rel="stylesheet">
 
-    <link href="<?php echo $application_path; ?>css/style.css" rel="stylesheet">
+    <link href="<?php echo ASSETS_PATH; ?>css/style.css" rel="stylesheet">
     
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="<?php echo $application_path; ?>frameworks/jquery/jquery-1.11.3.min.js"></script>
-    <script src="<?php echo $application_path; ?>frameworks/bootstrap-3.3.6-dist/js/bootstrap.min.js"></script>
-    <script src="<?php echo $application_path; ?>frameworks/ninja-slider/ninja-slider.js"></script>
+    <script src="<?php echo ASSETS_PATH; ?>frameworks/jquery/jquery-1.11.3.min.js"></script>
+    <script src="<?php echo ASSETS_PATH; ?>frameworks/bootstrap-3.3.6-dist/js/bootstrap.min.js"></script>
+    <script src="<?php echo ASSETS_PATH; ?>frameworks/ninja-slider/ninja-slider.js"></script>
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -27,36 +36,38 @@
     <![endif]-->
   </head>
 
-  <body>
-
 	<div class='top-menu'>
 	
 		<div class="logo-section">
 			<div class='logo-slogan'>
 					<p>START DESIGN</p>
 					<a href="<?php echo site_url('pages/view/home'); ?>">
-						<img src="<?php echo $application_path; ?>images/logo_shmyde.png" class="logo-image">
+						<img src="<?php echo ASSETS_PATH; ?>images/logo_shmyde.png" class="logo-image">
 					</a>
 					<p>GET PRODUCT</p>
 					
 					<div class='language-select'>
-				<a href='#'><img src="<?php echo $application_path; ?>images/en-flag.jpg"></a> | 
-				<a href='#'><img src="<?php echo $application_path; ?>images/fr-flag.png"></a>
+				<a href='#'><img src="<?php echo ASSETS_PATH; ?>images/en-flag.jpg"></a> | 
+				<a href='#'><img src="<?php echo ASSETS_PATH; ?>images/fr-flag.png"></a>
 			</div>
 	
 			<?php 
 			
-				$account_login_url = $auth_level == 0 ?  site_url('login') :  site_url('examples');
-				$account_login_name = $auth_level == 0 ?  'Login' :  $auth_email;
+				$redirect = site_url('auth/login?redirect=').urlencode( $this->uri->uri_string());
+							
+				$account_login_url = !isset($user) ?  $redirect :  site_url('examples');
+				
+				$account_login_name = !isset($user) ?  'Login' :  $user->email;
+				
 			
 			?>
 			<div class='login-link'>
 				<i class='glyphicon glyphicon-user'></i> <a href='<?php echo $account_login_url; ?>'><?php echo $account_login_name; ?></a>
 				<?php
 					
-					if($auth_level > 0){
+					if(isset($user)){
 						
-						echo '| <a href=\''.site_url('logout').'\'>Logout</a>';
+						echo '| <a href=\''.site_url('auth/logout').'\'>Logout</a>';
 					}
 				?>
 			</div>
@@ -73,8 +84,3 @@
 
 		</ul>
 	</div> 
-
-
-
-  </body>
-</html>
