@@ -53,7 +53,7 @@ class Auth extends CI_Controller {
 		$this->form_validation->set_rules('username', 'Identity', 'required');
 		$this->form_validation->set_rules('password', 'Password', 'required');
 		
-		$redirect = '/';
+		$redirect = 'pages/view/home';
 				
 		if(isset($_GET['redirect'])) {
 				

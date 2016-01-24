@@ -83,7 +83,23 @@
     <!--end ninja slider-->	
 	
 	<div class='start-customizing'>
-		<a href='#'><img src='<?php echo ASSETS_PATH; ?>images/start-customizing.png'></a>
+  		
+		<a href="#">
+  <div class="button-fill grey">
+    <div class="button-text">MEN</div>
+    <div class="button-inside">
+      <div class="inside-text">MEN</div>
+    </div>
+  </div></a>
+  
+  <a href="#">
+  <div class="button-fill orange">
+    <div class="button-text">WOMEN</div>
+    <div class="button-inside">
+      <div class="inside-text">WOMEN</div>
+    </div>
+  </div></a>
+
 	</div>
 
 	<!-- first band -->

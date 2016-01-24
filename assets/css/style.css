@@ -115,10 +115,9 @@ body
 .start-customizing
 {
 	position:absolute;
-	top:50%;
-	right:10%;
+	top:35%;
+	right:3%;
 	z-index:20;
-	box-shadow:10px 10px 15px #222 ;
 }
 
 .middle-band p

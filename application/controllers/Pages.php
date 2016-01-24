@@ -9,11 +9,8 @@ class Pages extends CI_Controller {
 
 			
         	$this->load->helper('url');
-
-			if( $this->require_role('admin') )
-        	{
         	
-					$lang = substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2);
+        	$lang = substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2);
 					switch ($lang){
 						case "fr":
 						$current_language = "french";
@@ -25,8 +22,7 @@ class Pages extends CI_Controller {
 						$current_language = "english";
 						break;
 					}
-			}
-			
+
         	$this->lang->load('shmyde', $current_language);
 
 		}
@@ -46,9 +42,6 @@ class Pages extends CI_Controller {
         	
         	$this->load->view('pages/'.$page);
         	
-        	
-        	$data["application_path"] = base_url().'assets/';
-
         	$data['title'] = ucfirst($page); // Capitalize the first letter
 
         	$this->load->view('pages/header', $data);

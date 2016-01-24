@@ -19,14 +19,17 @@
     <!-- Bootstrap -->
     <link href="<?php echo ASSETS_PATH; ?>frameworks/bootstrap-3.3.6-dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="<?php echo ASSETS_PATH; ?>css/set1.css" rel="stylesheet">
+    <link href="<?php echo ASSETS_PATH; ?>css/design_button_style.css" rel="stylesheet">
+
     <link href="<?php echo ASSETS_PATH; ?>frameworks/ninja-slider/ninja-slider.css" rel="stylesheet">
 
-    <link href="<?php echo ASSETS_PATH; ?>css/style.css" rel="stylesheet">
+    <link href="<?php echo ASSETS_PATH; ?>css/style.css" rel="stylesheet"> 
     
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="<?php echo ASSETS_PATH; ?>frameworks/jquery/jquery-1.11.3.min.js"></script>
     <script src="<?php echo ASSETS_PATH; ?>frameworks/bootstrap-3.3.6-dist/js/bootstrap.min.js"></script>
     <script src="<?php echo ASSETS_PATH; ?>frameworks/ninja-slider/ninja-slider.js"></script>
+    <script src="<?php echo ASSETS_PATH; ?>js/button_script.js"></script>
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -40,11 +43,11 @@
 	
 		<div class="logo-section">
 			<div class='logo-slogan'>
-					<p>START DESIGN</p>
+					<i>Where what you design</i>
 					<a href="<?php echo site_url('pages/view/home'); ?>">
 						<img src="<?php echo ASSETS_PATH; ?>images/logo_shmyde.png" class="logo-image">
 					</a>
-					<p>GET PRODUCT</p>
+					<i>Design what you wear</i>
 					
 					<div class='language-select'>
 				<a href='#'><img src="<?php echo ASSETS_PATH; ?>images/en-flag.jpg"></a> | 
