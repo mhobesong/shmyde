@@ -20,6 +20,11 @@
     box-sizing:border-box;
 }
 
+div.slider-inner ul
+{
+	margin:0;
+}
+
 #ninja-slider ul {
     position:relative;
     list-style:none;
