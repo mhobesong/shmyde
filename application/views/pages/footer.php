@@ -4,7 +4,6 @@
  				<div class='col-md-4 col-sm-4'>
  					<ul>
  						<li><a href='#'>Custom Shrits</a></li>
- 						<li><a href='#'>Custom T-Shirts</a></li>
  						<li><a href='#'>Custom Suits</a></li>
  						<li><a href='#'>Custom 3PC Suits</a></li>
  						<li><a href='#'>Custom Jackets</a></li>
@@ -22,6 +21,9 @@
  					</ul>
  
  				</div>
+                 
+                 
+                 
  				<div class='col-md-4 col-sm-4'>
  					<ul>
  						<li>Tieocom ajder saerset  sworuf Street, Yaounde Cameroon</li>
