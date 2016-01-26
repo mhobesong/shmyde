@@ -7,7 +7,7 @@ body
 .top-menu
 {
 	width:100%;
-	height:46px;
+	height:90px;
 	background:url(../images/top-menu-bg.png);
 	background-size:100% 100%;
 	position:absolute;
@@ -24,7 +24,7 @@ body
 	
 	float:inline-block;
 	font-family: 'Raleway', sans-serif;
-	color:#339a99;
+	color:#fbd80a;
 	font-size:18px;
 }
 
@@ -35,8 +35,8 @@ body
 .logo-image{
 	
 	padding:2px;
-	width:44px;
-	height:44px;
+	width:88px;
+	height:88px;
 
 	
 }
@@ -58,7 +58,7 @@ body
 .top-menu a
 {
 	font-family: 'Raleway', sans-serif;
-	color:#ffffff;
+	color: #fbd80a;
 	font-size:18px;
 	font-weight: bold;
 }

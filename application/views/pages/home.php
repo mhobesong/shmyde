@@ -1,5 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
+    
+    
+ <link href="<?php echo ASSETS_PATH; ?>css/design_button_style.css" rel="stylesheet">
+ <link href="<?php echo ASSETS_PATH; ?>frameworks/ninja-slider/ninja-slider.css" rel="stylesheet">
+ <script src="<?php echo ASSETS_PATH; ?>frameworks/ninja-slider/ninja-slider.js"></script>
+ <script src="<?php echo ASSETS_PATH; ?>js/button_script.js"></script>
 
   <body>
 

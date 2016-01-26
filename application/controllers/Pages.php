@@ -35,18 +35,18 @@ class Pages extends CI_Controller {
                 show_404();
         	}
         	
-        	        	    		        	        	
+        	$data['title'] = ucfirst($page); // Capitalize the first letter
+
         	$this->lang->load('shmyde', CURRENT_LANGUAGE);
 
         	$this->load->view('pages/header');
         	
         	$this->load->view('pages/'.$page);
         	
-        	$data['title'] = ucfirst($page); // Capitalize the first letter
+        	$this->load->view('pages/footer', $data);
 
-        	$this->load->view('pages/header', $data);
-        	$this->load->view('pages/'.$page, $data);
-			$this->load->view('pages/footer', $data);
+        	
+
 		}
 
 
