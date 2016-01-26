@@ -3,7 +3,7 @@
  			<div class='row'>
  				<div class='col-md-3 col-sm-3'>
  					<ul>
- 						<li><a href='#'>World of SHMYDE Section</a></li>
+ 						<li><p class='footer-heading'>World of SHMYDE Section</p></li>
  						<li><a href='#'>Custom Shrits</a></li>
  						<li><a href='#'>Custom Suits</a></li>
  						<li><a href='#'>Custom 3PC Suits</a></li>
@@ -13,7 +13,7 @@
  				</div>
  				<div class='col-md-3 col-sm-3'>
  					<ul>
- 						<li><a href='#'>Why SHMYDE</a></li>
+ 						<li><p class='footer-heading'>Why SHMYDE</p></li>
  						<li><a href='#'>SHMYDE Shirts</a></li>
  						<li><a href='#'>SHMYDE Suits</a></li>
  						<li><a href='#'>SHMYDE Blouses</a></li>
@@ -25,7 +25,7 @@
                  
 				 <div class='col-md-3 col-sm-3'>
  					<ul>
- 						<li><a href='#'>Customer Care</a></li>
+ 						<li><p class='footer-heading'>Customer Care</p></li>
  						<li><a href='#'>FAQ</a></li>
  						<li><a href='#'>Contact Us</a></li>
  						<li><a href='#'>Delivery</a></li>
@@ -35,7 +35,7 @@
 
  				<div class='col-md-3 col-sm-3'>
  					<ul>
- 						<li><a href='#'>About Us</a></li>
+ 						<li><p class='footer-heading'>About Us</p></li>
  						<li><a href='#'>Mission</a></li>
  						<li><a href='#'>Terms and Conditions</a></li>
  						<li><a href='#'>Terms and Conditions</a></li>
