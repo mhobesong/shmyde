@@ -110,8 +110,8 @@
 
 	<!-- first band -->
 	<div class='middle-band'>
-		<p><?php echo $this->lang->line('shmyde_247_customer_service'); ?></P>
-		<p><b>info @ shmyde.com</b></P>
+		<!-- <p><?php echo $this->lang->line('shmyde_247_customer_service'); ?></P>
+		<p><b>info @ shmyde.com</b></P> -->
 	</div>	
 	<!-- end first band -->	
 
