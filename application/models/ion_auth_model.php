@@ -26,7 +26,7 @@
 *
 */
 
-class ion_auth_model extends CI_Model
+class Ion_auth_model extends CI_Model
 {
 	/**
 	 * Holds an array of tables used
