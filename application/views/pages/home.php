@@ -92,17 +92,17 @@
   		
 		<a href="#">
   <div class="button-fill grey">
-    <div class="button-text">MEN</div>
+    <div class="button-text"><?php echo $this->lang->line('shmyde_men_button_text'); ?></div>
     <div class="button-inside">
-      <div class="inside-text">MEN</div>
+      <div class="inside-text"><?php echo $this->lang->line('shmyde_men_button_text'); ?></div>
     </div>
   </div></a>
   
   <a href="#">
   <div class="button-fill orange">
-    <div class="button-text">WOMEN</div>
+    <div class="button-text"><?php echo $this->lang->line('shmyde_women_button_text'); ?></div>
     <div class="button-inside">
-      <div class="inside-text">WOMEN</div>
+      <div class="inside-text"><?php echo $this->lang->line('shmyde_women_button_text'); ?></div>
     </div>
   </div></a>
 
@@ -110,7 +110,7 @@
 
 	<!-- first band -->
 	<div class='middle-band'>
-		<p>CUSTOMER SERVICE 24 / 7</P>
+		<p><?php echo $this->lang->line('shmyde_247_customer_service'); ?></P>
 		<p><b>info @ shmyde.com</b></P>
 	</div>	
 	<!-- end first band -->	
@@ -124,20 +124,20 @@
 				<div class='row'>
 				
 					<div class='col-md-2 col-sm-3'>
-						<p>Tailors</p>
+						<p><?php echo $this->lang->line('shmyde_tailors'); ?></p>
 						<img src='<?php echo ASSETS_PATH; ?>/images/tailors-stat.png'/>
 						<p><b>43</b><p>
 					</div>
 					
 					<div class='col-md-2 col-sm-3'>
-						<p>Testimonials</p>
+						<p><?php echo $this->lang->line('shmyde_testimonials'); ?></p>
 						<img src='<?php echo ASSETS_PATH; ?>/images/testimonials.png'/>
 						<p><b>175</b><p>
 					</div>
 					
 					
 					<div class='col-md-2 col-sm-3'>
-						<p>Deliveries</p>
+						<p><?php echo $this->lang->line('shmyde_deliveries'); ?></p>
 						<img src='<?php echo ASSETS_PATH; ?>/images/deliveries.png'/>
 						<p><b>358</b><p>
 					</div>
@@ -150,13 +150,13 @@
 				<div class='row'>
 				
 					<div class='col-md-2 col-sm-3'>
-						<p>Tweeter</p>
+						<p><?php echo $this->lang->line('shmyde_tweeter'); ?></p>
 						<img src='<?php echo ASSETS_PATH; ?>/images/tweeter.png'/>
 						<p><b>43</b><p>
 					</div>
 					
 					<div class='col-md-2 col-sm-3'>
-						<p>Facebook</p>
+						<p><?php echo $this->lang->line('shmyde_facebook'); ?></p>
 						<img src='<?php echo ASSETS_PATH; ?>/images/facebook.png'/>
 						<p><b>175</b><p>
 					</div>
@@ -181,8 +181,8 @@
 		<div class='container'>
 			<div class='row'>
 				<div class='col-md-12 col-sm-12 col-xs-12'>
-					<P>FOR ONLY $ 125</P>
-					<center><p><b>DESIGN IT AND WE DELIVER</b></p></center>
+					<P><?php echo $this->lang->line('shmyde_teaser_line_01'); ?></P>
+					<center><p><b><?php echo $this->lang->line('shmyde_teaser_line_02'); ?></b></p></center>
 				</div>
 			</div>
 		</div>
@@ -195,7 +195,7 @@
 				<video muted loop autoplay>
 				  <source src="<?php echo ASSETS_PATH; ?>/videos/Model Tailor WorkShop.mp4" type="video/mp4">
 				  <source src="<?php echo ASSETS_PATH; ?>/videos/Model Tailor WorkShop.ogg" type="video/ogg">
-				  Your browser does not support the video tag.
+				  <?php echo $this->lang->line('shmyde_video_tag_not_supported'); ?>
 				</video>	
 		</div>
 
@@ -205,29 +205,29 @@
 					<figure class="effect-sadie">
 						<img src="<?php echo ASSETS_PATH; ?>/images/models/men-suits.png" alt="img02"/>
 						<figcaption>
-							<h2>Men <span>Suites</span></h2>
-							<a href="#">View more</a>
+							<h2><?php echo $this->lang->line('shmyde_men_button_test'); ?><span><?php echo $this->lang->line('shmyde_suits'); ?></span></h2>
+							<a href="#"><?php echo $this->lang->line('shmyde_view_more'); ?></a>
 						</figcaption>			
 					</figure> 
 					<figure class="effect-sadie">
 						<img src="<?php echo ASSETS_PATH; ?>/images/models/women-suits.png" alt="img02"/>
 						<figcaption>
-							<h2>Women <span>Suites</span></h2>
-							<a href="#">View more</a>
+							<h2><?php echo $this->lang->line('shmyde_women_button_test'); ?> <span><?php echo $this->lang->line('shmyde_suits'); ?></span></h2>
+							<a href="#"><?php echo $this->lang->line('shmyde_view_more'); ?></a>
 						</figcaption>			
 					</figure> 
 					<figure class="effect-sadie">
 						<img src="<?php echo ASSETS_PATH; ?>/images/models/jeans.png" alt="img02"/>
 						<figcaption>
-							<h2><span>Jeans</span></h2>
-							<a href="#">View more</a>
+							<h2><span><?php echo $this->lang->line('shmyde_jeans'); ?></span></h2>
+							<a href="#"><?php echo $this->lang->line('shmyde_view_more'); ?></a>
 						</figcaption>			
 					</figure> 
 					<figure class="effect-sadie">
 						<img src="<?php echo ASSETS_PATH; ?>/images/models/t-shirts.png" alt="img02"/>
 						<figcaption>
-							<h2>T-<span>Shirts</span></h2>
-							<a href="#">View more</a>
+							<h2>T-<span><?php echo $this->lang->line('shmyde_shirts'); ?></span></h2>
+							<a href="#"><?php echo $this->lang->line('shmyde_view_more'); ?></a>
 						</figcaption>			
 					</figure>
 				</div>
@@ -238,7 +238,7 @@
 						<img src="<?php echo ASSETS_PATH; ?>/images/models/popular.png" alt="img05"/>
 						<figcaption>
 							<h2>POPULAR<span>MODELS</span></h2>
-							<a href="#">View more</a>
+							<a href="#"><?php echo $this->lang->line('shmyde_view_more'); ?></a>
 						</figcaption>			
 					</figure>
 				</div>

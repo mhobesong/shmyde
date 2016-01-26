@@ -41,6 +41,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 
 /* HEADER SECTION */
+
 $lang['shmyde_left_logo_text'] = 'Wear what you design';
 $lang['shmyde_right_logo_text'] = 'Design what you wear';
 $lang['shmyde_login'] = 'Login';
@@ -52,4 +53,34 @@ $lang['shmyde_review'] = 'REVIEW';
 $lang['shmyde_faq'] = 'FAQ';
 
 /* HEADER SECTION END */
+
+/* -------------------------------------------------------------------------------------------------------------------------------------------- */
+
+/* HOME PAGE SECTION */
+
+$lang['shmyde_men_button_text'] = 'MEN';
+$lang['shmyde_women_button_text'] = 'WOMEN';
+
+$lang['shmyde_tailors'] = 'TAILORS';
+$lang['shmyde_testimonials'] = 'TESTIMONIALS';
+$lang['shmyde_deliveries'] = 'DELIVERIES';
+$lang['shmyde_tweeter'] = 'TWEETER';
+$lang['shmyde_facebook'] = 'FACEBOOK';
+
+$lang['shmyde_247_customer_service'] = 'CUSTOMER SERVICE 24 / 7';
+$lang['shmyde_teaser_line_01'] = 'FOR ONLY $ 125';
+$lang['shmyde_teaser_line_02'] = 'DESIGN IT AND WE DELIVER';
+$lang['shmyde_video_tag_not_supported'] = 'Your browser does not support the video tag.';
+$lang['shmyde_view_more'] = 'View More';
+
+$lang['shmyde_suits'] = 'Suits';
+$lang['shmyde_shirts'] = 'Shirts';
+$lang['shmyde_blouse'] = 'Blouse';
+$lang['shmyde_jeans'] = 'Jeans';
+$lang['shmyde_jackets'] = 'Jackets';
+$lang['shmyde_popular'] = 'POPULAR';
+$lang['shmyde_models'] = 'MODELS';
+
+
+/* HOME PAGE SECTION END*/
 
