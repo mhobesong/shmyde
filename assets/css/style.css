@@ -91,6 +91,7 @@ body
 		display:inline; 
 		text-align:right;
 		float:right;
+		clear:right;
 		padding-right:5%;
 		font-size:12px;
 		padding-top:1%;
