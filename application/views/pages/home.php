@@ -9,84 +9,66 @@
 
   <body>
 
-	 <!--start ninja slider-->
+	 <!--start slider-->
+<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+  <!-- Indicators -->
+  <ol class="carousel-indicators">
+    <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+    <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+    <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+    <li data-target="#carousel-example-generic" data-slide-to="3"></li>
+    <li data-target="#carousel-example-generic" data-slide-to="4"></li>
+  </ol>
 
-    <div id="ninja-slider">
-
-        <div class="slider-inner">
-
-            <ul>
-
-                <li>
-
-                    <a class="ns-img" href="<?php echo ASSETS_PATH; ?>frameworks/ninja-slider/img/6.jpg"></a>
-
-                    <div class="caption">
-						<b>Laborum ipsum senectus</b>
-						<div>Fugiat voluptatem Fugiat voluptatem in harum nam</div>
-					</div>
-
-                </li>
-
-                <li>
-
-                    <a class="ns-img" href="<?php echo ASSETS_PATH; ?>frameworks/ninja-slider/img/1.png"></a>
-
-                    <div class="caption">
-						<b>Laborum ipsum senectus</b>
-						<div>Fugiat voluptatem Fugiat voluptatem in harum nam</div>
-					</div>
-
-                </li>
-
-                <li>
-
-                    <a class="ns-img" href="<?php echo ASSETS_PATH; ?>frameworks/ninja-slider/img/1.jpg"></a>
-
-                    <div class="caption">
-						<b>Laborum ipsum senectus</b>
-						<div>Fugiat voluptatem Fugiat voluptatem in harum nam</div>
-					</div>
-
-                </li>
-
-                <li>
-
-                    <a class="ns-img" href="<?php echo ASSETS_PATH; ?>frameworks/ninja-slider/img/5.jpg"></a>
-
-                    <div class="caption">
-						<b>Laborum ipsum senectus</b>
-						<div>Fugiat voluptatem Fugiat voluptatem in harum nam</div>
-					</div>
-
-                </li>
-
-                <li>
-
-                    <a class="ns-img" href="<?php echo ASSETS_PATH; ?>frameworks/ninja-slider/img/3.jpg"></a>
-
-                    <div class="caption">
-						<b>Laborum ipsum senectus</b>
-						<div>Fugiat voluptatem Fugiat voluptatem in harum nam</div>
-					</div>
-
-                </li>
-
-            </ul>
-
-            <div class="navsWrapper">
-
-                <div id="ninja-slider-prev"></div>
-
-                <div id="ninja-slider-next"></div>
-
-            </div>
-
-        </div>
-
+  <!-- Wrapper for slides -->
+  <div class="carousel-inner" role="listbox">
+    <div class="item active">
+      <img src="<?php echo ASSETS_PATH; ?>frameworks/ninja-slider/img/1.png" alt="...">
+      <div class="carousel-caption">
+        <a href='#'><h3>Design Cool Gouns</h3></a>
+	<h2>In minutes, not hours</h2>
+      </div>
     </div>
+    <div class="item">
+      <img src="<?php echo ASSETS_PATH; ?>frameworks/ninja-slider/img/1.jpg" alt="...">
+      <div class="carousel-caption">
+        ...
+      </div>
+    </div>
+    <div class="item">
+      <img src="<?php echo ASSETS_PATH; ?>frameworks/ninja-slider/img/3.jpg" alt="...">
+      <div class="carousel-caption">
+        ...
+      </div>
+    </div>
+     <div class="item">
+      <img src="<?php echo ASSETS_PATH; ?>frameworks/ninja-slider/img/5.jpg" alt="...">
+      <div class="carousel-caption">
+        ...
+      </div>
+    </div>
+     <div class="item">
+      <img src="<?php echo ASSETS_PATH; ?>frameworks/ninja-slider/img/6.jpg" alt="...">
+      <div class="carousel-caption">
+        ...
+      </div>
+    </div>
+ 
+    ...
+  </div>
 
-    <!--end ninja slider-->	
+  <!-- Controls -->
+  <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+    <span class="sr-only">Previous</span>
+  </a>
+  <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+    <span class="sr-only">Next</span>
+  </a>
+</div>
+
+    <!--end slider-->	
 	
 	<div class='start-customizing'>
   		
