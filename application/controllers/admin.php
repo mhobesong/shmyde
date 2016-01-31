@@ -55,6 +55,7 @@ class admin extends CI_Controller {
 
         	$this->lang->load('shmyde', CURRENT_LANGUAGE);
 
+			$this->load->view('admin/header');
         	$this->load->view('admin/'.$page, $data);
 
 
@@ -133,6 +134,7 @@ class admin extends CI_Controller {
 
         	$this->lang->load('shmyde', CURRENT_LANGUAGE);
 
+			$this->load->view('admin/header');
         	$this->load->view('admin/create_'.$page, $data);
 
 
@@ -220,6 +222,8 @@ class admin extends CI_Controller {
         	$data['title'] = 'CREATE'; 
 
         	$this->lang->load('shmyde', CURRENT_LANGUAGE);
+        	
+        	$this->load->view('admin/header');
 
         	$this->load->view('admin/create_'.$page, $data);
 
