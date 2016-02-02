@@ -381,9 +381,9 @@ class Admin_model extends CI_Model {
     
     private function get_table_next_id($table_name){
     	
-    	$count_sql = "SELECT max(id) FROM ".$table_name;	
+    	$count_sql = "SELECT max(id) as max_id FROM ".$table_name;	
 
-		$count = $this->db->query($count_sql)->num_rows() + 1;
+		$count = $this->db->query($count_sql)->row()->max_id + 1;
 		
 		return $count;
     }
