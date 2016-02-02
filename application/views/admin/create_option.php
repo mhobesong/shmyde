@@ -119,6 +119,7 @@ $(document).ready(function() {
   		<label for="type">Option Type:</label>
   		<select class="form-control" id="type" name="type">
     		<option value="0">Image</option>
+    		<option value="0">Blend Image</option>
 		    <option value="1">CheckBox</option>
   		</select>
 	</div>

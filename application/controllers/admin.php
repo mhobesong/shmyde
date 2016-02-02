@@ -67,7 +67,7 @@ class admin extends CI_Controller {
 				{
 					$options[$row->id]['id'] = $row->id;
 					$options[$row->id]['name'] = $row->name;
-					$options[$row->id]['type'] = $row->type == 0 ? 'Visual' : 'Checkbox';
+					$options[$row->id]['type'] = $row->type == 0 ? 'Visual' : $row->type == 1 ? 'Blend Image' : 'Checkbox';
 					$options[$row->id]['description'] = $row->description;
 					$options[$row->id]['price'] = $row->price;
 					$options[$row->id]['product_name'] = $row->product_name;
