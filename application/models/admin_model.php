@@ -34,10 +34,56 @@ class admin_model extends CI_Model {
 	
 		$query = $this->db->query($sql);
 		  
-		  
-		
 		return $query;
 	
+	}
+	
+	public function get_all_submenus_simple(){
+	
+		$sql = "SELECT * from shmyde_design_sub_menu";
+	
+		$query = $this->db->query($sql);
+		  
+		return $query;
+	
+	}
+	
+	public function get_all_options_extended(){
+		
+		$sql = "SELECT 
+		shmyde_design_option.*, 
+		shmyde_product.id as product_id, shmyde_product.name as product_name,
+		shmyde_design_main_menu.id as menu_id, shmyde_design_main_menu.name as menu_name,
+		shmyde_design_sub_menu.id as submenu_id, shmyde_design_sub_menu.name as submenu_name 
+		FROM
+		shmyde_design_option, shmyde_product, shmyde_design_main_menu, shmyde_design_sub_menu
+		WHERE
+		shmyde_design_option.shmyde_design_sub_menu_id = shmyde_design_sub_menu.id AND 
+		shmyde_design_sub_menu.shmyde_product_id = shmyde_product.id AND
+		shmyde_design_sub_menu.shmyde_design_main_menu_id = shmyde_design_main_menu.id";
+		
+		$query = $this->db->query($sql);
+		  
+		return $query;
+	}
+	
+	public function get_option($id){
+		
+		$sql = "SELECT 
+		shmyde_design_option.*, 
+		shmyde_product.id as product_id, shmyde_product.name as product_name,
+		shmyde_design_main_menu.id as menu_id, shmyde_design_main_menu.name as menu_name,
+		shmyde_design_sub_menu.id as submenu_id, shmyde_design_sub_menu.name as submenu_name 
+		FROM
+		shmyde_design_option, shmyde_product, shmyde_design_main_menu, shmyde_design_sub_menu
+		WHERE
+		shmyde_design_option.shmyde_design_sub_menu_id = shmyde_design_sub_menu.id AND 
+		shmyde_design_sub_menu.shmyde_product_id = shmyde_product.id AND
+		shmyde_design_sub_menu.shmyde_design_main_menu_id = shmyde_design_main_menu.id AND shmyde_design_option.id = ".$id;
+		
+		$query = $this->db->query($sql);
+		  
+		return $query->row();
 	}
 	
 	public function get_product($id){
@@ -84,9 +130,22 @@ class admin_model extends CI_Model {
 		return $images;
 	}
 	
+	public function get_option_image($id){
+		
+		$image_query = $this->db->query('SELECT * from shmyde_images where shmyde_design_options_id = '.$id);
+		
+		if($image_query->num_rows() > 0)
+			return $image_query->row();
+	}
+	
 	public function delete_product($id){
 		
 		$this->db->query('DELETE from shmyde_product where id = '.$id);
+	}
+	
+	public function delete_option($id){
+		
+		$this->db->query('DELETE from shmyde_design_option where id = '.$id);
 	}
 	
 	public function delete_menu($id){
@@ -143,6 +202,29 @@ class admin_model extends CI_Model {
 		$this->db->query($sql);
 		
 		return true;
+    }
+    
+    public function create_option($name, $shmyde_design_sub_menu_id, $type, $price, $description, $zindex, $image_name){
+    	
+    	$insert_id = $this->get_table_next_id("shmyde_design_option");
+		
+		$sql = "INSERT INTO shmyde_design_option (id, name, shmyde_design_sub_menu_id, type, price, description) 
+
+        VALUES (".$insert_id." , ".$this->db->escape($name).", ".$this->db->escape($shmyde_design_sub_menu_id).", ".$type.", ".$price.", '".$description."')";
+
+		$this->db->query($sql);
+		
+		if($image_name != ''){
+		
+			$sql = "INSERT INTO shmyde_images (id, shmyde_design_options_id, name, z_index) 
+
+        	VALUES (".$this->get_table_next_id("shmyde_images")." , ".$insert_id.", ".$this->db->escape($image_name).", ".$this->db->escape($zindex).")";
+        
+        	$this->db->query($sql);
+        
+        }
+        
+        return true;
     }
     
     public function create_submenu($name, $type, $menu, $product){
@@ -231,6 +313,40 @@ class admin_model extends CI_Model {
         return true;
     }
     
+    public function edit_option($id, $name, $shmyde_design_sub_menu_id, $type, $price, $description, $zindex, $image_name){
+    
+    	$sql = "UPDATE shmyde_design_option 
+    	SET name = ".$this->db->escape($name).", shmyde_design_sub_menu_id = ".$this->db->escape($shmyde_design_sub_menu_id).", type = ".$this->db->escape($type).", price = ".$this->db->escape($price).", description = ".$this->db->escape($description)." 
+    	WHERE id = ".$id;
+
+		$this->db->query($sql);
+		
+		if($image_name != ''){
+		
+			if($this->check_option_image_exist($id)){
+			
+				
+				$sql = "UPDATE shmyde_images set name = '".$image_name."', z_index = ".$zindex." WHERE shmyde_design_options_id = ".$id;
+				
+				$this->db->query($sql);
+			
+			}
+			else{
+			
+				$sql = "INSERT INTO shmyde_images (id, shmyde_design_options_id, name, z_index) 
+
+        		VALUES (".$this->get_table_next_id("shmyde_images")." , ".$id.", ".$this->db->escape($image_name).", ".$zindex.")";
+        
+        		$this->db->query($sql);
+        	}
+        
+        }
+        
+        return true;
+		
+		
+    }
+    
     private function check_image_exist($view_type, $product_id){
     	
     	$count_sql = "SELECT * FROM shmyde_product_image where view_type = ".$view_type." AND shmyde_product_id = ".$product_id;
@@ -247,9 +363,25 @@ class admin_model extends CI_Model {
     	}
     }
     
+    private function check_option_image_exist($option_id){
+    	
+    	$count_sql = "SELECT * FROM shmyde_images where shmyde_design_options_id = ".$option_id;
+    	
+    	$count = $this->db->query($count_sql)->num_rows();
+    	
+    	if($count > 0){
+    		
+    		return true;
+    	}
+    	else{
+    		
+    		return false;
+    	}
+    }
+    
     private function get_table_next_id($table_name){
     	
-    	$count_sql = "SELECT * FROM ".$table_name;	
+    	$count_sql = "SELECT max(id) FROM ".$table_name;	
 
 		$count = $this->db->query($count_sql)->num_rows() + 1;
 		

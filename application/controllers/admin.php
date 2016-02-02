@@ -51,6 +51,50 @@ class admin extends CI_Controller {
         		$data['submenus'] = $this->admin_model->get_all_submenus();
         	}
         	
+        	if($page == 'option'){
+        		
+        		$data['menus'] = $this->admin_model->get_all_menus();
+        		
+        		$data['products'] = $this->admin_model->get_all_products();
+        		
+        		$query_options = $this->admin_model->get_all_options_extended();
+        		
+        		$options = Array();
+        		
+        		
+        		
+        		foreach ($query_options->result() as $row)
+				{
+					$options[$row->id]['id'] = $row->id;
+					$options[$row->id]['name'] = $row->name;
+					$options[$row->id]['type'] = $row->type == 0 ? 'Visual' : 'Checkbox';
+					$options[$row->id]['description'] = $row->description;
+					$options[$row->id]['price'] = $row->price;
+					$options[$row->id]['product_name'] = $row->product_name;
+					$options[$row->id]['menu_name'] = $row->menu_name;
+					$options[$row->id]['submenu_name'] = $row->submenu_name;
+					
+					$options[$row->id]['product_id'] = $row->product_id;
+					$options[$row->id]['menu_id'] = $row->menu_id;
+					$options[$row->id]['submenu_id'] = $row->submenu_id;
+    				
+				}
+				
+				$query_submenu = $this->admin_model->get_all_submenus_simple();
+        		
+        		$submenus = Array();
+        		
+        		foreach ($query_submenu->result() as $row)
+				{
+					$submenus[$row->shmyde_product_id][$row->shmyde_design_main_menu_id][$row->id]['name'] = $row->name;
+					$submenus[$row->shmyde_product_id][$row->shmyde_design_main_menu_id][$row->id]['id'] = $row->id;
+    				
+				}
+				
+				$data['submenus'] = $submenus;
+				$data['options'] = $options;
+        	}
+        	
         	$data['title'] = ucfirst($page); 
 
         	$this->lang->load('shmyde', CURRENT_LANGUAGE);
@@ -99,6 +143,20 @@ class admin extends CI_Controller {
         			}
         		}
         		
+        		if($page == 'option'){
+        							
+        			$image_name = $this->input->post('name').'_'.$this->input->post('product').'_'.$this->input->post('menu').'_'.$this->input->post('submenu').'_option_image.png';
+        							
+					$image_upload = $this->do_upload('option_image', $image_name);
+
+        			if($this->admin_model->edit_option($id, $this->input->post('name'), $this->input->post('submenu'), $this->input->post('type'), $this->input->post('price'), $this->input->post('description'), $this->input->post('depth'), $image_upload ? $image_name : '' )){
+
+						redirect('/admin/view/option', 'refresh');
+        			}
+        		}
+        		
+        		
+        		
         		return;
         	}
         	
@@ -128,6 +186,35 @@ class admin extends CI_Controller {
         		$data['products'] = $this->admin_model->get_all_products();
         		
         		$data['submenu'] = $this->admin_model->get_submenu($id);
+        	}
+        	
+        	if($page == 'option'){
+        		
+        		$data['menus'] = $this->admin_model->get_all_menus();
+        		
+        		$data['products'] = $this->admin_model->get_all_products();
+        		
+        		$query_submenu = $this->admin_model->get_all_submenus_simple();
+        		
+        		$submenus = Array();
+        		
+        		foreach ($query_submenu->result() as $row)
+				{
+					$submenus[$row->shmyde_product_id][$row->shmyde_design_main_menu_id][$row->id]['name'] = $row->name;
+					$submenus[$row->shmyde_product_id][$row->shmyde_design_main_menu_id][$row->id]['id'] = $row->id;
+    				
+				}
+				
+				$data['submenus'] = $submenus;
+				
+				$option_image = $this->admin_model->get_option_image($id);
+				
+				if(isset($option_image)){
+				
+					$data['option_image'] = $option_image;
+				}
+				
+				$data['option'] = $this->admin_model->get_option($id);
         	}
         	        	        	
         	$data['title'] = 'EDIT';  // Capitalize the first letter
@@ -209,15 +296,49 @@ class admin extends CI_Controller {
         			}
         		}
         		
+        		if($page == 'option'){
+        							
+        			$image_name = $this->input->post('name').'_'.$this->input->post('product').'_'.$this->input->post('menu').'_'.$this->input->post('submenu').'_option_image.png';
+        							
+					$image_upload = $this->do_upload('option_image', $image_name);
+
+        			if($this->admin_model->create_option($this->input->post('name'), $this->input->post('submenu'), $this->input->post('type'), $this->input->post('price'), $this->input->post('description'), $this->input->post('depth'), $image_upload ? $image_name : '' )){
+
+						redirect('/admin/view/option', 'refresh');
+        			}
+        		}
+        		
         		return;
         	}
         	
-        	if($page == 'submenu'){
+        	$this->admin_model->get_all_options_extended();
+        	
+        	if($page == 'submenu' || $page == 'option'){
         		
         		$data['menus'] = $this->admin_model->get_all_menus();
         		
         		$data['products'] = $this->admin_model->get_all_products();
+        		
+        		
         	}
+        	
+        	if($page == 'option'){
+        		
+        		$query_submenu = $this->admin_model->get_all_submenus_simple();
+        		
+        		$submenus = Array();
+        		
+        		foreach ($query_submenu->result() as $row)
+				{
+					$submenus[$row->shmyde_product_id][$row->shmyde_design_main_menu_id][$row->id]['name'] = $row->name;
+					$submenus[$row->shmyde_product_id][$row->shmyde_design_main_menu_id][$row->id]['id'] = $row->id;
+    				
+				}
+				
+				$data['submenus'] = $submenus;
+        	}
+        	
+        	
         	
         	$data['title'] = 'CREATE'; 
 
@@ -229,14 +350,6 @@ class admin extends CI_Controller {
 
 
 		}
-
-
-
-
-
-
-
-
 
 		private function do_upload($form_file_name, $file_name)
     	{

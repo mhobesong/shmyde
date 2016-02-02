@@ -14,7 +14,8 @@
 	<span>
 		<a href="<?php echo site_url('admin/view/product'); ?>">PRODUCTS</a> |
  		<a href="<?php echo site_url('admin/view/menu'); ?>">MENUS</a> |
-  		<a href="<?php echo site_url('admin/view/submenu'); ?>">SUBMENUS</a>  
+  		<a href="<?php echo site_url('admin/view/submenu'); ?>">SUBMENUS</a> |
+  		<a href="<?php echo site_url('admin/view/option'); ?>">OPTIONS</a>  
   	</span>
 </div>
 

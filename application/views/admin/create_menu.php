@@ -7,8 +7,6 @@
 <span><a href="<?php echo site_url('admin/view/menu'); ?>">View All</a> </span>
 </div>
 
-
-
 <div class="container">
   <h2><?php echo $title; ?> MENU</h2>
 
