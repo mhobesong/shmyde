@@ -20,6 +20,18 @@
     <link href="<?php echo ASSETS_PATH; ?>frameworks/bootstrap-3.3.6-dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="<?php echo ASSETS_PATH; ?>css/set1.css" rel="stylesheet">
     <link href="<?php echo ASSETS_PATH; ?>css/style.css" rel="stylesheet"> 
+    <!-- additional css files -->
+    <?php
+    //Just to permit dynamic load of other css files to this header
+    //$cssLinks is a array of css file names to load parsed by the controller to this view
+    if(isset($cssLinks))
+    {
+    	foreach($cssLinks as $link)
+	{
+		echo "<link href='".ASSETS_PATH."css/{$link}.css' rel='stylesheet' type='text/css'>";
+	}
+    }
+    ?>
     
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="<?php echo ASSETS_PATH; ?>frameworks/jquery/jquery-1.11.3.min.js"></script>
