@@ -1,0 +1,47 @@
+.design-page{
+	background:url('../images/designpage/bg.png');
+	background-size:cover;
+	padding-top: 6%;
+}
+
+.design-page .design-menu
+{
+	background:url('../images/designpage/design menu/bg.png');
+	width:159px;
+	height:732px;
+	padding:0;
+}
+
+.design-page .design-menu .design-menu-header
+{
+	background:url('../images/designpage/design menu/header.png');
+	background-size:cover;
+	width:159px;
+	height:65px;
+	margin:0px;
+}
+
+.design-page .design-sub-menu
+{
+	background:url('../images/designpage/sub menu/bg.png');
+	width:163px;
+	height:383px;
+	margin-top:30%;
+}
+
+.design-page .design-preview
+{
+	background:url('../images/designpage/preview screen/bg.png');
+	width:597px;
+	height:434px;
+	margin-top:3%;
+
+}
+
+.design-page .design-fabrique
+{
+	background:url('../images/designpage/chose fabrique/bg.png');
+	width:841px;
+	height:124px;
+	margin-top:10px;
+}
