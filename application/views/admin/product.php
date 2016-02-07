@@ -14,6 +14,7 @@
       <tr>
         <th>Product Name</th>
         <th>Target</th>
+		<th>Price (FCFA)</th>
         <th>Links</th>
       </tr>
     </thead>
@@ -38,6 +39,7 @@
     				break;
     		}    		
     		?></td>
+			<td><?php echo $row->base_price." FCFA"; ?></td>
     		<td>
     			<a href="<?php echo site_url('admin/edit/product/'.$row->id); ?>">Edit</a> | 
     			<a href="<?php echo site_url('admin/delete/product/'.$row->id); ?>">Delete</a>

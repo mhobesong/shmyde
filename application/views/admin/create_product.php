@@ -57,6 +57,10 @@ $(document).ready(function() {
       <label for="name">Name:</label>
       <input type="text" class="form-control" id="name" name="name" value="<?php  if(isset($product)) echo $product->name; ?>">
     </div>
+	<div class="form-group">
+      <label for="name">Price (FCFA):</label>
+      <input type="text" class="form-control" id="price" name="price" value="<?php  if(isset($product)) echo $product->base_price; ?>">
+    </div>
     <div class="form-group">
   		<label for="target">Target:</label>
   		<select class="form-control" id="target" name="target">
