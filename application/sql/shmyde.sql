@@ -1,9 +1,9 @@
 -- phpMyAdmin SQL Dump
--- version 4.5.2
+-- version 4.5.1
 -- http://www.phpmyadmin.net
 --
--- Host: localhost
--- Generation Time: Jan 31, 2016 at 03:05 AM
+-- Host: 127.0.0.1
+-- Generation Time: Feb 10, 2016 at 01:27 AM
 -- Server version: 10.1.9-MariaDB
 -- PHP Version: 5.5.30
 
@@ -23,6 +23,82 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `auth_sessions`
+--
+
+CREATE TABLE `auth_sessions` (
+  `id` varchar(40) NOT NULL,
+  `user_id` int(10) UNSIGNED NOT NULL,
+  `login_time` datetime DEFAULT NULL,
+  `modified_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `ip_address` varchar(45) NOT NULL,
+  `user_agent` varchar(60) DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `auth_sessions`
+--
+
+INSERT INTO `auth_sessions` (`id`, `user_id`, `login_time`, `modified_at`, `ip_address`, `user_agent`) VALUES
+('2435ae8cd905e3f625699639148b9c24ec088938', 3576232344, '2016-01-07 17:17:31', '2016-01-07 16:17:31', '::1', 'Chrome 46.0.2490.80 on Mac OS X'),
+('abb6def416e145c8bf31d3fe2c1c35d457d9de5a', 3576232344, '2016-01-07 17:18:12', '2016-01-07 16:18:13', '::1', 'Chrome 46.0.2490.80 on Mac OS X'),
+('1794fdcd6adbe560044bb404a52b27338d9f7371', 3576232344, '2016-01-07 17:18:57', '2016-01-07 16:18:57', '::1', 'Chrome 46.0.2490.80 on Mac OS X'),
+('52cb23eba031fe426896dfb4be723aac96b1be32', 3576232344, '2016-01-07 17:37:47', '2016-01-07 16:37:47', '::1', 'Chrome 46.0.2490.80 on Mac OS X');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `ci_sessions`
+--
+
+CREATE TABLE `ci_sessions` (
+  `id` varchar(40) NOT NULL,
+  `ip_address` varchar(45) NOT NULL,
+  `timestamp` int(10) UNSIGNED NOT NULL DEFAULT '0',
+  `data` blob NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `denied_access`
+--
+
+CREATE TABLE `denied_access` (
+  `ai` int(10) UNSIGNED NOT NULL,
+  `ip_address` varchar(45) NOT NULL,
+  `time` datetime NOT NULL,
+  `reason_code` tinyint(2) DEFAULT '0'
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `ips_on_hold`
+--
+
+CREATE TABLE `ips_on_hold` (
+  `ai` int(10) UNSIGNED NOT NULL,
+  `ip_address` varchar(45) NOT NULL,
+  `time` datetime NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `login_errors`
+--
+
+CREATE TABLE `login_errors` (
+  `ai` int(10) UNSIGNED NOT NULL,
+  `username_or_email` varchar(255) NOT NULL,
+  `ip_address` varchar(45) NOT NULL,
+  `time` datetime NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `shmyde_design_main_menu`
 --
 
@@ -36,7 +112,10 @@ CREATE TABLE `shmyde_design_main_menu` (
 --
 
 INSERT INTO `shmyde_design_main_menu` (`id`, `name`) VALUES
-(1, 'Style');
+(1, 'FABRIC'),
+(2, 'STYLE'),
+(3, 'COLOR CONTRAST'),
+(4, 'MEASURMENTS');
 
 -- --------------------------------------------------------
 
@@ -52,6 +131,16 @@ CREATE TABLE `shmyde_design_option` (
   `price` decimal(10,0) DEFAULT '0' COMMENT 'This is an additional price required to add this attribute to a design. ',
   `description` longtext COMMENT 'A short description of the attribute to be displayed on the application. '
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `shmyde_design_option`
+--
+
+INSERT INTO `shmyde_design_option` (`id`, `shmyde_design_sub_menu_id`, `type`, `name`, `price`, `description`) VALUES
+(1, 1, 0, 'LongSleeve', '0', 'This is the long sleeve of the selected shirt. '),
+(2, 1, 0, 'ShortSleeve', '0', 'This represents a short sleeve option. '),
+(3, 2, 0, 'Coller01', '0', 'Simple Collar'),
+(4, 2, 0, 'Coller02', '0', 'Complex Collar');
 
 -- --------------------------------------------------------
 
@@ -72,8 +161,8 @@ CREATE TABLE `shmyde_design_sub_menu` (
 --
 
 INSERT INTO `shmyde_design_sub_menu` (`id`, `shmyde_design_main_menu_id`, `shmyde_product_id`, `name`, `type`) VALUES
-(1, 1, 4, 'Collar', NULL),
-(3, 1, 1, 'Collars', 0);
+(1, 2, 1, 'Sleeve', 0),
+(2, 2, 1, 'Collar', 0);
 
 -- --------------------------------------------------------
 
@@ -88,6 +177,16 @@ CREATE TABLE `shmyde_images` (
   `z_index` int(11) DEFAULT NULL,
   `values` longtext
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `shmyde_images`
+--
+
+INSERT INTO `shmyde_images` (`id`, `name`, `shmyde_design_options_id`, `z_index`, `values`) VALUES
+(1, 'LongSleeve_1_2_1_option_image.png', 1, 4, NULL),
+(2, 'ShortSleeve_1_2_1_option_image.png', 2, 4, NULL),
+(3, 'Coller01_1_2_2_option_image.png', 3, 2, NULL),
+(4, 'Coller02_1_2_2_option_image.png', 4, 4, NULL);
 
 -- --------------------------------------------------------
 
@@ -110,17 +209,16 @@ CREATE TABLE `shmyde_measurment` (
 CREATE TABLE `shmyde_product` (
   `id` int(11) NOT NULL,
   `name` varchar(45) DEFAULT NULL COMMENT 'The name of the product. e.g. shirt, suit etc',
-  `target` int(11) DEFAULT NULL COMMENT 'This represents the target of this product. '
+  `target` int(11) DEFAULT NULL COMMENT 'This represents the target of this product. ',
+  `base_price` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `shmyde_product`
 --
 
-INSERT INTO `shmyde_product` (`id`, `name`, `target`) VALUES
-(1, 'Jeans', 2),
-(3, 'Shirt', 0),
-(4, 'Shirt', 2);
+INSERT INTO `shmyde_product` (`id`, `name`, `target`, `base_price`) VALUES
+(1, 'Shirts', 0, 10000);
 
 -- --------------------------------------------------------
 
@@ -141,8 +239,7 @@ CREATE TABLE `shmyde_product_image` (
 --
 
 INSERT INTO `shmyde_product_image` (`id`, `shmyde_product_id`, `name`, `view_type`, `z_index`) VALUES
-(1, 1, 'Jeans_front_view.png', 1, NULL),
-(2, 1, 'Jeans_back_view.png', 0, NULL);
+(1, 1, 'Shirts_front_view.png', 1, NULL);
 
 -- --------------------------------------------------------
 
@@ -183,9 +280,79 @@ CREATE TABLE `shyme_template` (
   `shmyde_product_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `username_or_email_on_hold`
+--
+
+CREATE TABLE `username_or_email_on_hold` (
+  `ai` int(10) UNSIGNED NOT NULL,
+  `username_or_email` varchar(255) NOT NULL,
+  `time` datetime NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `users`
+--
+
+CREATE TABLE `users` (
+  `user_id` int(10) UNSIGNED NOT NULL,
+  `username` varchar(12) DEFAULT NULL,
+  `email` varchar(255) NOT NULL,
+  `passwd` varchar(60) NOT NULL,
+  `last_login` datetime DEFAULT NULL,
+  `auth_level` tinyint(2) UNSIGNED NOT NULL,
+  `banned` enum('0','1') NOT NULL DEFAULT '0',
+  `passwd_recovery_code` varchar(60) DEFAULT NULL,
+  `passwd_recovery_date` datetime DEFAULT NULL,
+  `created_at` datetime NOT NULL,
+  `modified_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`user_id`, `username`, `email`, `passwd`, `last_login`, `auth_level`, `banned`, `passwd_recovery_code`, `passwd_recovery_date`, `created_at`, `modified_at`) VALUES
+(3576232344, 'skunkbot', 'skunkbot@example.com', '$2y$11$zm0MweRiDhcFWYsRcbgzg.jfdtRdHzqlBvyDw1xHCquVzh6TgYf1W', '2016-01-07 17:38:56', 1, '0', NULL, NULL, '2016-01-07 17:10:04', '2016-01-07 16:38:56');
+
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `auth_sessions`
+--
+ALTER TABLE `auth_sessions`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `ci_sessions`
+--
+ALTER TABLE `ci_sessions`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `ci_sessions_timestamp` (`timestamp`);
+
+--
+-- Indexes for table `denied_access`
+--
+ALTER TABLE `denied_access`
+  ADD PRIMARY KEY (`ai`);
+
+--
+-- Indexes for table `ips_on_hold`
+--
+ALTER TABLE `ips_on_hold`
+  ADD PRIMARY KEY (`ai`);
+
+--
+-- Indexes for table `login_errors`
+--
+ALTER TABLE `login_errors`
+  ADD PRIMARY KEY (`ai`);
 
 --
 -- Indexes for table `shmyde_design_main_menu`
@@ -257,34 +424,68 @@ ALTER TABLE `shyme_template`
   ADD KEY `shmyde_measurment_product_fk_idx` (`shmyde_product_id`);
 
 --
+-- Indexes for table `username_or_email_on_hold`
+--
+ALTER TABLE `username_or_email_on_hold`
+  ADD PRIMARY KEY (`ai`);
+
+--
+-- Indexes for table `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`user_id`),
+  ADD UNIQUE KEY `email` (`email`),
+  ADD UNIQUE KEY `username` (`username`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
 --
+-- AUTO_INCREMENT for table `denied_access`
+--
+ALTER TABLE `denied_access`
+  MODIFY `ai` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `ips_on_hold`
+--
+ALTER TABLE `ips_on_hold`
+  MODIFY `ai` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `login_errors`
+--
+ALTER TABLE `login_errors`
+  MODIFY `ai` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+--
 -- AUTO_INCREMENT for table `shmyde_design_main_menu`
 --
 ALTER TABLE `shmyde_design_main_menu`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `shmyde_design_sub_menu`
 --
 ALTER TABLE `shmyde_design_sub_menu`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `shmyde_images`
 --
 ALTER TABLE `shmyde_images`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `shmyde_product_image`
 --
 ALTER TABLE `shmyde_product_image`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `shmyde_user`
 --
 ALTER TABLE `shmyde_user`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `username_or_email_on_hold`
+--
+ALTER TABLE `username_or_email_on_hold`
+  MODIFY `ai` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 --
 -- Constraints for dumped tables
 --
