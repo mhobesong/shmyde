@@ -36,12 +36,11 @@ $(document).ready(function() {
     
     function create_table_body(options_array){
     	
-    	
+    	//alert(JSON.stringify(options_array));
+		
     	var table = document.getElementById("options_table");
     	
-    	var product = document.getElementById("product");
-    	var menu = document.getElementById("menu");
-    	var submenu = document.getElementById("submenu");
+    	
     	
     	while(table.rows.length > 1){
     		
@@ -50,14 +49,18 @@ $(document).ready(function() {
     	
     	
     	var tablebody = document.getElementById("tablebody");
+		
 
     				
     	for (var key in options_array) {
-  		   			
-  		   	
-  		   	if(options_array[key]['product_id'] === product.value 
-  		   	&& options_array[key]['menu_id'] === menu.value
-  		   	&& options_array[key]['submenu_id'] === submenu.value){
+  		   		
+			var product = document.getElementById("product");
+			var menu = document.getElementById("menu");
+			var submenu = document.getElementById("submenu");
+				
+  		   	if(options_array[key]['product_id'] == product.value 
+  		   	&& options_array[key]['menu_id'] == menu.value
+  		   	&& options_array[key]['submenu_id'] == submenu.value){
   		   	
   		   		var tr = document.createElement('TR');
     		

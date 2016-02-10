@@ -73,7 +73,6 @@ class admin extends CI_Controller {
 					$options[$row->id]['product_name'] = $row->product_name;
 					$options[$row->id]['menu_name'] = $row->menu_name;
 					$options[$row->id]['submenu_name'] = $row->submenu_name;
-					
 					$options[$row->id]['product_id'] = $row->product_id;
 					$options[$row->id]['menu_id'] = $row->menu_id;
 					$options[$row->id]['submenu_id'] = $row->submenu_id;
@@ -251,6 +250,14 @@ class admin extends CI_Controller {
         		$this->admin_model->delete_submenu($id);
         	
         		redirect('/admin/view/submenu', 'refresh');
+        	
+        	}
+			
+			if($page == 'option'){
+        	
+        		$this->admin_model->delete_option($id);
+        	
+        		redirect('/admin/view/option', 'refresh');
         	
         	}
 
