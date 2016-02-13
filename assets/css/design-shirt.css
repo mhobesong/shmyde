@@ -10,7 +10,33 @@
 	width:159px;
 	height:732px;
 	padding:0;
+	color:#ddd;
 }
+
+.design-page .design-menu ol
+{
+	padding-left:20%;
+}
+
+.design-page .design-menu ol a
+{
+	display:block;
+	color:#ddd;
+	font-size:14px;
+	width:100%;
+	text-decoration:none;
+}
+
+.design-page .design-menu ol a:hover
+{
+	background-image:url('../images/designpage/design menu/selected.png');
+}
+
+.design-page .design-menu ol a:active
+{
+	background-image:url('../images/designpage/design menu/selected.png');
+}
+
 
 .design-page .design-menu .design-menu-header
 {
@@ -21,13 +47,43 @@
 	margin:0px;
 }
 
+
+.design-page .design-menu .design-menu-header
+{
+	font-size:18px;
+	color:#ddd;
+	text-align:center;
+	padding-right:7%;
+	padding-top:5%;
+}
+
 .design-page .design-sub-menu
 {
 	background:url('../images/designpage/sub menu/bg.png');
 	width:163px;
 	height:383px;
 	margin-top:30%;
+	margin-right:0;
+	padding-top:20px;
 }
+
+.design-page .design-sub-menu ul
+{
+	list-style-type:none;
+}
+
+.design-page .design-sub-menu ul a
+{
+	color:#fff;
+	font-size:15px;
+	text-decoration:none;
+}
+
+.design-page .design-sub-menu ul a:active
+{
+	text-decoration:underline;
+}
+
 
 .design-page .design-preview
 {
@@ -35,7 +91,16 @@
 	width:597px;
 	height:434px;
 	margin-top:3%;
+	margin-left:-20px;
+	text-align:center;
+}
 
+.fabrique-heading
+{
+	color:#000;
+	font-size:16px;
+	font-weight:300;
+	text-decoration:underline;
 }
 
 .design-page .design-fabrique
@@ -44,4 +109,51 @@
 	width:841px;
 	height:124px;
 	margin-top:10px;
+	padding:10px;
+}
+
+.design-page .design-fabrique a img
+{
+	margin:2px;
+}
+
+.design-page .design-side
+{
+	background:#000;
+	height:350px;
+	margin-top:5%;
+}
+
+.design-page .design-side h4
+{
+	color:white;
+	border-bottom:1px solid grey;
+	text-align:center;
+}
+
+.design-page .design-side ul 
+{
+	list-style-type:none;
+	padding-left:18%;
+}
+
+.design-page .design-side ul li
+{
+	margin-top:10px;
+}
+
+.design-page .design-side img
+{
+	height:85px;
+}
+
+.design-page .design-side h5
+{
+	text-align:center;
+}
+
+.design-page .design-side .active img:before
+{
+	content:'Some content';
+	display:block;
 }
