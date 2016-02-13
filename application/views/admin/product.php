@@ -13,6 +13,7 @@
     <thead>
       <tr>
         <th>Product Name</th>
+		<th>URL Name</th>
         <th>Target</th>
 		<th>Price (FCFA)</th>
         <th>Links</th>
@@ -24,6 +25,7 @@
     	
     	<tr>
     		<td><?php echo $row->name; ?></td>
+			<td><?php echo $row->url_name; ?></td>
     		<td><?php 
     		
     		switch($row->target){

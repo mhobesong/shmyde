@@ -58,6 +58,10 @@ $(document).ready(function() {
       <input type="text" class="form-control" id="name" name="name" value="<?php  if(isset($product)) echo $product->name; ?>">
     </div>
 	<div class="form-group">
+      <label for="name">URL Name:</label>
+      <input type="text" class="form-control" id="url_name" name="url_name" value="<?php  if(isset($product)) echo $product->url_name; ?>">
+    </div>
+	<div class="form-group">
       <label for="name">Price (FCFA):</label>
       <input type="text" class="form-control" id="price" name="price" value="<?php  if(isset($product)) echo $product->base_price; ?>">
     </div>

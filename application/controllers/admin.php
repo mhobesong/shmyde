@@ -120,7 +120,7 @@ class admin extends CI_Controller {
 				
 					$back_view_upload = $this->do_upload('back_view', $this->input->post('name').'_back_view.png');
 				
-        			if($this->admin_model->edit_product($id, $this->input->post('name'), $this->input->post('target'), $front_view_upload ? $this->input->post('name').'_front_view.png' : '', $back_view_upload ? $this->input->post('name').'_back_view.png' : '' )){
+        			if($this->admin_model->edit_product($id, $this->input->post('name'),  $this->input->post('url_name'), $this->input->post('target'), $front_view_upload ? $this->input->post('name').'_front_view.png' : '', $back_view_upload ? $this->input->post('name').'_back_view.png' : '' )){
 
 						redirect('/admin/view/product', 'refresh');
         			}
@@ -385,6 +385,26 @@ class admin extends CI_Controller {
 
         return $config;
     }
-
+		
+		public function get_submenus($product_id, $selected_menu){
+			
+			$result = $this->admin_model->get_json_product_sub_menus($product_id, $selected_menu);
+			
+			if(isset($result)){
+				
+				echo $result;
+			}
+			
+		}
+		
+		public function get_options($submenu_id){
+			
+			$result = $this->admin_model->get_json_submenu_options($submenu_id);
+			
+			if(isset($result)){
+				
+				echo $result;
+			}
+		}
 }
 ?>

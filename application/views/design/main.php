@@ -1,29 +1,123 @@
+
+<head>
+<script>
+
+function LoadOptions(submenu_id){
+	
+	var xmlhttp = new XMLHttpRequest();
+
+	xmlhttp.onreadystatechange = function() {
+		
+		if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+			
+			var json_array =  JSON.parse(xmlhttp.responseText);
+			
+			document.getElementById('design_options').innerHTML = "";
+			
+			for (var key in json_array) {
+				
+				var image_path = '<?php echo ASSETS_PATH; ?>'.concat('images/products/').concat(json_array[key]['image_name']);
+				
+				var image_element = document.createElement("img");
+				image_element.setAttribute("src", image_path);
+				image_element.setAttribute("height", "30");
+				image_element.setAttribute("width", "30");
+				
+				var link_element = document.createElement("a");
+				link_element.setAttribute('href', '#');
+				link_element.appendChild(image_element);
+				
+				document.getElementById("design_options").appendChild(link_element);
+				
+				
+			}
+		}
+	};
+	
+	var site_url = "<?php echo site_url('admin/get_options') ?>";
+	
+	site_url = site_url.concat("/").concat(submenu_id);
+		
+	xmlhttp.open("GET", site_url, true);
+	
+	xmlhttp.send();
+}
+
+function LoadSubMenus(selected_menu) {
+	
+	var xmlhttp = new XMLHttpRequest();
+	
+	xmlhttp.onreadystatechange = function() {
+		
+		if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+			
+			var json_array =  JSON.parse(xmlhttp.responseText);
+			
+			$('#sub_menu ul').empty();
+			
+			for (var key in json_array) {
+				
+				$('#sub_menu ul').append(
+					$('<li>').attr('value', json_array[key]['id']).attr('onclick', 'LoadOptions(this.value)').append(
+						$('<a>').attr('href','#').append(
+							$('<span>').attr('class', 'tab').append(json_array[key]['name'])
+				))); 
+			}
+							
+		}
+	};
+	
+	var site_url = "<?php echo site_url('admin/get_submenus') ?>";
+	
+	site_url = site_url.concat("/").concat(<?php if(isset($product_id)) echo $product_id; else echo "-1" ?>).concat("/").concat(selected_menu);
+		
+	xmlhttp.open("GET", site_url, true);
+	
+	xmlhttp.send();
+    
+}
+
+</script>
+</head>
+
 <!-- Desing Page -->
 <div class='design-page'>
 	<div id='' class='container'>
 		<div id='' class='row'>
+		
+			<!-- MAIN MENUS  -->
+			
 			<div id='' class='col-md-2 col-sm-2 design-menu'>
-				<div id='' class='design-menu-header'>Design Menu</div>
-
+				<div id='main_menu' class='design-menu-header'>Design Menu</div>
 				<ol>
-					<li><a href="#">Fabric</a></li>
-					<li><a href="#">Fabric</a></li>
-					<li><a href="#">Color</a></li>
-					<li><a href="#">Measurements</a></li>
+				<?php foreach ($menus->result() as $row) {?>
+					<li value="<?php echo $row->id; ?>" onclick="LoadSubMenus(<?php echo $row->id; ?>)"><a href="#"><?php echo $row->name; ?></a></li>				
+				<?php }?>				
 				</ol>
-				
 			</div>
+			
+			<!-- END MAIN MENUS  -->
+			
 			<div id='' class='col-md-10 col-sm-10'>
 				<div id='' class='row'>
+				
+					<!-- SUB MENUS  -->
+					
 					<div id='' class='col-md-2 col-sm-2' style='padding:0;'>
-						<div id='' class='design-sub-menu'>
+						<div id='sub_menu' class='design-sub-menu'>
 							<ul>
-								<li><a href="#">Contrast</a></li>
-								<li><a href="#">Button</a></li>
-								<li><a href="#">Monogram</a></li>
+								<?php if(isset($product_submenus)) foreach($product_submenus->result() as $submenu) {?>
+								
+								<li value="<?php echo $submenu->id; ?>"><a href="#"><?php echo $submenu->name; ?></a></li>
+								
+								<?php } ?>
 							</u>
 						</div>
 					</div>
+					
+					<!-- END SUB MENUS  -->
+					
+					
 					<div id='' class='col-md-8 col-sm-8' style='padding:0'>
 						<div id='' class='design-preview'><img src="<?= base_url("assets/images/design/shirt/base_shirt.png") ?>" /></div>
 					</div>
@@ -48,7 +142,9 @@
 					<div class="col-sm-2 col-md-2 design-part">
 						<img src="<?= base_url("assets/images/design/shirt/part-preview/collar-button.png"); ?>">
 					</div>
-					<div class="col-sm-8 col-md-8">
+					<div class="col-sm-8 col-md-8" id="design_options">
+						
+						<!--
 						<a href="#"><img src="<?= base_url("assets/images/design/fabriques/default-white.png"); ?>"></a>
 						<a href="#"><img src="<?= base_url("assets/images/design/fabriques/1.png"); ?>"></a>
 						<a href="#"><img src="<?= base_url("assets/images/design/fabriques/2.png"); ?>"></a>
@@ -71,6 +167,9 @@
 						<a href="#"><img src="<?= base_url("assets/images/design/fabriques/19.png"); ?>"></a>
 						<a href="#"><img src="<?= base_url("assets/images/design/fabriques/20.png"); ?>"></a>
 						<a href="#"><img src="<?= base_url("assets/images/design/fabriques/21.png"); ?>"></a>
+						
+						-->
+						
 					</div>
 					<div class="col-sm-2 col-md-2"></div>
 				</div>

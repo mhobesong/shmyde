@@ -18,6 +18,33 @@ class Admin_model extends CI_Model {
 	
 	}
 	
+	public function get_product_id($target_name, $product_url_name){
+		
+		$target_id = -1;
+		
+		switch($target_name){
+			
+			case 'men':
+				$target_id = 0;
+				break;
+			case 'women':
+				$target_id = 1;
+				break;
+			case 'both':
+				$target_id = 2;
+				break;
+				
+		}
+		
+		$query = $this->db->query("SELECT * from shmyde_product where target = ".$target_id." and url_name = '".$product_url_name."'");
+
+		if($query->num_rows() > 0){
+			
+			return $query->row()->id;
+		}
+		
+	}
+	
 	public function get_all_menus(){
 	
 		$query = $this->db->query("SELECT * from shmyde_design_main_menu");
@@ -36,6 +63,68 @@ class Admin_model extends CI_Model {
 		  
 		return $query;
 	
+	}
+	
+	public function get_product_sub_menus($product_id, $menu_id){
+		
+		
+		$sql = "SELECT * from shmyde_design_sub_menu where shmyde_product_id=".$product_id." and shmyde_design_main_menu_id = ".$menu_id."";
+	
+		$query = $this->db->query($sql);
+		  
+		return $query;
+	}
+	
+	public function get_json_product_sub_menus($product_id, $menu_id){
+		
+		
+		$sql = "SELECT * from shmyde_design_sub_menu where shmyde_product_id=".$product_id." and shmyde_design_main_menu_id = ".$menu_id."";
+	
+		$query = $this->db->query($sql);
+		
+		$submenu_array = Array();
+		
+		foreach($query->result() as $row){
+			
+			$submenu_array[$row->id]['id'] = $row->id;
+			$submenu_array[$row->id]['name'] = $row->name;
+			$submenu_array[$row->id]['type'] = $row->type;
+		}
+		 		  
+		return json_encode($submenu_array);
+	}
+	
+	public function get_json_submenu_options($submenu_id){
+		
+		
+		$sql = "SELECT * from shmyde_design_option where shmyde_design_sub_menu_id = ".$submenu_id;
+	
+		$query = $this->db->query($sql);
+		
+		$options_array = Array();
+		
+		foreach($query->result() as $row){
+			
+			$options_array[$row->id]['name'] = $row->name;
+			$options_array[$row->id]['type'] = $row->type;
+			$options_array[$row->id]['price'] = $row->price;
+			$options_array[$row->id]['description'] = $row->description;
+			
+			$image_sql = "SELECT * from shmyde_images where shmyde_design_options_id =".$row->id;
+			
+			$image_query = $this->db->query($image_sql);
+			
+			if($image_query->num_rows() > 0){
+				
+				$options_array[$row->id]['image_name'] = $image_query->row()->name;
+				
+				$options_array[$row->id]['z_index'] = $image_query->row()->z_index;
+			}
+			
+			
+		}
+		 		  
+		return json_encode($options_array);
 	}
 	
 	public function get_all_submenus_simple(){
@@ -158,13 +247,13 @@ class Admin_model extends CI_Model {
 		$this->db->query('DELETE from shmyde_design_sub_menu where id = '.$id);
 	}
 	
-    public function create_product($name, $target, $front_view_image, $back_view_image){
+    public function create_product($name, $url_name, $target, $front_view_image, $back_view_image){
 
 		$insert_id = $this->get_table_next_id("shmyde_product");
 		
-		$sql = "INSERT INTO shmyde_product (id, name, target) 
+		$sql = "INSERT INTO shmyde_product (id, url_name, name, target) 
 
-        VALUES (".$insert_id." , ".$this->db->escape($name).", ".$this->db->escape($target).")";
+        VALUES (".$insert_id." , ".$this->db->escape($name).", ".$this->db->escape($url_name).", ".$this->db->escape($target).")";
 
 		$this->db->query($sql);
 		
@@ -262,9 +351,9 @@ class Admin_model extends CI_Model {
 		
 	}
     
-    public function edit_product($id, $name, $target, $front_view_image, $back_view_image){
+    public function edit_product($id, $name, $url_name, $target, $front_view_image, $back_view_image){
     	
-    	$sql = "UPDATE shmyde_product SET name = ".$this->db->escape($name).", target = ".$this->db->escape($target)." WHERE id = ".$id;
+    	$sql = "UPDATE shmyde_product SET name = ".$this->db->escape($name).", url_name = ".$this->db->escape($url_name).", target = ".$this->db->escape($target)." WHERE id = ".$id;
 
 		$this->db->query($sql);
 		
