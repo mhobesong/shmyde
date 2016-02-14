@@ -118,6 +118,8 @@ class Admin_model extends CI_Model {
 				
 				$options_array[$row->id]['image_name'] = $image_query->row()->name;
 				
+				$options_array[$row->id]['caption'] = $image_query->row()->caption;
+				
 				$options_array[$row->id]['z_index'] = $image_query->row()->z_index;
 			}
 			
@@ -293,7 +295,7 @@ class Admin_model extends CI_Model {
 		return true;
     }
     
-    public function create_option($name, $shmyde_design_sub_menu_id, $type, $price, $description, $zindex, $image_name){
+    public function create_option($name, $shmyde_design_sub_menu_id, $type, $price, $description, $zindex, $image_name, $caption_name, $is_default){
     	
     	$insert_id = $this->get_table_next_id("shmyde_design_option");
 		
@@ -303,11 +305,24 @@ class Admin_model extends CI_Model {
 
 		$this->db->query($sql);
 		
-		if($image_name != ''){
+		$sql = "UPDATE shmyde_design_option SET is_default = false where shmyde_design_sub_menu_id = ".$shmyde_design_sub_menu_id;
 		
-			$sql = "INSERT INTO shmyde_images (id, shmyde_design_options_id, name, z_index) 
+		$this->db->query($sql);
+		
+		if($is_default)
+			$sql = "UPDATE shmyde_design_option SET is_default = true where id = ".$insert_id;
+		else
+			$sql = "UPDATE shmyde_design_option SET is_default = false where id = ".$insert_id;
+		
+		$this->db->query($sql);
+		
+		
+		
+		if($image_name != '' || $caption_name != ''){
+		
+			$sql = "INSERT INTO shmyde_images (id, shmyde_design_options_id, name, caption, z_index) 
 
-        	VALUES (".$this->get_table_next_id("shmyde_images")." , ".$insert_id.", ".$this->db->escape($image_name).", ".$this->db->escape($zindex).")";
+        	VALUES (".$this->get_table_next_id("shmyde_images")." , ".$insert_id.", ".$this->db->escape($image_name).", ".$this->db->escape($caption_name).", ".$this->db->escape($zindex).")";
         
         	$this->db->query($sql);
         
@@ -402,7 +417,7 @@ class Admin_model extends CI_Model {
         return true;
     }
     
-    public function edit_option($id, $name, $shmyde_design_sub_menu_id, $type, $price, $description, $zindex, $image_name){
+    public function edit_option($id, $name, $shmyde_design_sub_menu_id, $type, $price, $description, $zindex, $image_name, $caption_name, $is_default){
     
     	$sql = "UPDATE shmyde_design_option 
     	SET name = ".$this->db->escape($name).", shmyde_design_sub_menu_id = ".$this->db->escape($shmyde_design_sub_menu_id).", type = ".$this->db->escape($type).", price = ".$this->db->escape($price).", description = ".$this->db->escape($description)." 
@@ -410,21 +425,32 @@ class Admin_model extends CI_Model {
 
 		$this->db->query($sql);
 		
-		if($image_name != ''){
+		$sql = "UPDATE shmyde_design_option SET is_default = false where shmyde_design_sub_menu_id = ".$shmyde_design_sub_menu_id;
+		
+		$this->db->query($sql);
+		
+		if($is_default)
+			$sql = "UPDATE shmyde_design_option SET is_default = true where id = ".$id;
+		else
+			$sql = "UPDATE shmyde_design_option SET is_default = false where id = ".$id;
+			
+		
+		$this->db->query($sql);
+		
+		if($image_name != '' || $caption_name != ''){
 		
 			if($this->check_option_image_exist($id)){
 			
-				
-				$sql = "UPDATE shmyde_images set name = '".$image_name."', z_index = ".$zindex." WHERE shmyde_design_options_id = ".$id;
+				$sql = "UPDATE shmyde_images set name = '".$image_name."', z_index = ".$zindex.", caption = '".$caption_name."' WHERE shmyde_design_options_id = ".$id;
 				
 				$this->db->query($sql);
 			
 			}
 			else{
 			
-				$sql = "INSERT INTO shmyde_images (id, shmyde_design_options_id, name, z_index) 
+				$sql = "INSERT INTO shmyde_images (id, shmyde_design_options_id, name, caption, z_index) 
 
-        		VALUES (".$this->get_table_next_id("shmyde_images")." , ".$id.", ".$this->db->escape($image_name).", ".$zindex.")";
+        		VALUES (".$this->get_table_next_id("shmyde_images")." , ".$id.", ".$this->db->escape($image_name).", ".$this->db->escape($caption_name).", ".$zindex.")";
         
         		$this->db->query($sql);
         	}

@@ -16,7 +16,9 @@ function LoadOptions(submenu_id){
 			
 			for (var key in json_array) {
 				
-				var image_path = '<?php echo ASSETS_PATH; ?>'.concat('images/products/').concat(json_array[key]['image_name']);
+				var dir_name = json_array[key]['caption'].split("_")[0];
+								
+				var image_path = '<?php echo ASSETS_PATH; ?>'.concat('images/').concat(dir_name).concat('/').concat(json_array[key]['caption']);
 				
 				var image_element = document.createElement("img");
 				image_element.setAttribute("src", image_path);

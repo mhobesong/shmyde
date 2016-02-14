@@ -92,6 +92,10 @@ $(document).ready(function() {
     			var description = document.createElement('TD');
         		description.appendChild(document.createTextNode(options_array[key]['description']));
         		tr.appendChild(description);
+				
+				var is_default = document.createElement('TD');
+        		is_default.appendChild(document.createTextNode(options_array[key]['is_default']));
+        		tr.appendChild(is_default);
         		
         		var links = document.createElement('TD');
         		
@@ -208,6 +212,7 @@ $(document).ready(function() {
         <th>Type</th>
         <th>Price</th>
         <th>Description</th>
+		<th>Is Default</th>
         <th>Links</th>
       </tr>
     </thead>

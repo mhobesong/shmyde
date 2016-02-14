@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 10, 2016 at 01:27 AM
+-- Generation Time: Feb 14, 2016 at 01:23 AM
 -- Server version: 10.1.9-MariaDB
 -- PHP Version: 5.5.30
 
@@ -129,18 +129,21 @@ CREATE TABLE `shmyde_design_option` (
   `type` int(11) DEFAULT NULL COMMENT 'This represents an int value that determines what type of value this is. e.g. visual, checkbox etc. ',
   `name` varchar(45) DEFAULT NULL COMMENT 'This represents an optional name associated with this value. ',
   `price` decimal(10,0) DEFAULT '0' COMMENT 'This is an additional price required to add this attribute to a design. ',
-  `description` longtext COMMENT 'A short description of the attribute to be displayed on the application. '
+  `description` longtext COMMENT 'A short description of the attribute to be displayed on the application. ',
+  `is_default` tinyint(1) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `shmyde_design_option`
 --
 
-INSERT INTO `shmyde_design_option` (`id`, `shmyde_design_sub_menu_id`, `type`, `name`, `price`, `description`) VALUES
-(1, 1, 0, 'LongSleeve', '0', 'This is the long sleeve of the selected shirt. '),
-(2, 1, 0, 'ShortSleeve', '0', 'This represents a short sleeve option. '),
-(3, 2, 0, 'Coller01', '0', 'Simple Collar'),
-(4, 2, 0, 'Coller02', '0', 'Complex Collar');
+INSERT INTO `shmyde_design_option` (`id`, `shmyde_design_sub_menu_id`, `type`, `name`, `price`, `description`, `is_default`) VALUES
+(1, 1, 0, 'LongSleeve', '0', 'This is the long sleeve of the selected shirt. ', 0),
+(2, 1, 0, 'ShortSleeve', '0', 'This represents a short sleeve option. ', 0),
+(3, 2, 0, 'Coller01', '0', 'Simple Collar', 0),
+(4, 2, 0, 'Coller02', '0', 'Complex Collar', 0),
+(6, 2, 0, 'shiny_collar', '0', 'no description', 1),
+(7, 3, 1, 'vertical_colors', '0', '', 0);
 
 -- --------------------------------------------------------
 
@@ -162,7 +165,9 @@ CREATE TABLE `shmyde_design_sub_menu` (
 
 INSERT INTO `shmyde_design_sub_menu` (`id`, `shmyde_design_main_menu_id`, `shmyde_product_id`, `name`, `type`) VALUES
 (1, 2, 1, 'Sleeve', 0),
-(2, 2, 1, 'Collar', 0);
+(2, 2, 1, 'Collar', 0),
+(3, 1, 1, 'Pattern', 0),
+(4, 1, 1, 'Solid', 0);
 
 -- --------------------------------------------------------
 
@@ -173,6 +178,7 @@ INSERT INTO `shmyde_design_sub_menu` (`id`, `shmyde_design_main_menu_id`, `shmyd
 CREATE TABLE `shmyde_images` (
   `id` int(11) NOT NULL,
   `name` longtext,
+  `caption` text NOT NULL,
   `shmyde_design_options_id` int(11) DEFAULT NULL,
   `z_index` int(11) DEFAULT NULL,
   `values` longtext
@@ -182,11 +188,13 @@ CREATE TABLE `shmyde_images` (
 -- Dumping data for table `shmyde_images`
 --
 
-INSERT INTO `shmyde_images` (`id`, `name`, `shmyde_design_options_id`, `z_index`, `values`) VALUES
-(1, 'LongSleeve_1_2_1_option_image.png', 1, 4, NULL),
-(2, 'ShortSleeve_1_2_1_option_image.png', 2, 4, NULL),
-(3, 'Coller01_1_2_2_option_image.png', 3, 2, NULL),
-(4, 'Coller02_1_2_2_option_image.png', 4, 4, NULL);
+INSERT INTO `shmyde_images` (`id`, `name`, `caption`, `shmyde_design_options_id`, `z_index`, `values`) VALUES
+(1, 'LongSleeve_1_2_1_option_image.png', '', 1, 4, NULL),
+(2, 'ShortSleeve_1_2_1_option_image.png', '', 2, 4, NULL),
+(3, 'Coller01_1_2_2_option_image.png', '', 3, 2, NULL),
+(4, 'Coller02_1_2_2_option_image.png', '', 4, 4, NULL),
+(5, 'style_1_2_2_option_image.png', 'style_1_2_2_caption_image.png', 6, 0, NULL),
+(6, 'fabric_1_1_3_option_image.png', 'fabric_1_1_3_caption_image.png', 7, 0, NULL);
 
 -- --------------------------------------------------------
 
@@ -209,6 +217,7 @@ CREATE TABLE `shmyde_measurment` (
 CREATE TABLE `shmyde_product` (
   `id` int(11) NOT NULL,
   `name` varchar(45) DEFAULT NULL COMMENT 'The name of the product. e.g. shirt, suit etc',
+  `url_name` varchar(32) NOT NULL,
   `target` int(11) DEFAULT NULL COMMENT 'This represents the target of this product. ',
   `base_price` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -217,8 +226,8 @@ CREATE TABLE `shmyde_product` (
 -- Dumping data for table `shmyde_product`
 --
 
-INSERT INTO `shmyde_product` (`id`, `name`, `target`, `base_price`) VALUES
-(1, 'Shirts', 0, 10000);
+INSERT INTO `shmyde_product` (`id`, `name`, `url_name`, `target`, `base_price`) VALUES
+(1, 'Shirts', 'shirt', 0, 10000);
 
 -- --------------------------------------------------------
 
@@ -465,12 +474,12 @@ ALTER TABLE `shmyde_design_main_menu`
 -- AUTO_INCREMENT for table `shmyde_design_sub_menu`
 --
 ALTER TABLE `shmyde_design_sub_menu`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `shmyde_images`
 --
 ALTER TABLE `shmyde_images`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT for table `shmyde_product_image`
 --

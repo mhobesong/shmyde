@@ -67,7 +67,7 @@ class admin extends CI_Controller {
 				{
 					$options[$row->id]['id'] = $row->id;
 					$options[$row->id]['name'] = $row->name;
-					$options[$row->id]['type'] = $row->type == 0 ? 'Visual' : $row->type == 1 ? 'Blend Image' : 'Checkbox';
+					$options[$row->id]['type'] = $row->type == 0 ? 'Style' : $row->type == 1 ? 'Fabric' : 'Checkbox';
 					$options[$row->id]['description'] = $row->description;
 					$options[$row->id]['price'] = $row->price;
 					$options[$row->id]['product_name'] = $row->product_name;
@@ -76,6 +76,7 @@ class admin extends CI_Controller {
 					$options[$row->id]['product_id'] = $row->product_id;
 					$options[$row->id]['menu_id'] = $row->menu_id;
 					$options[$row->id]['submenu_id'] = $row->submenu_id;
+					$options[$row->id]['is_default'] = $row->is_default;
     				
 				}
 				
@@ -144,11 +145,37 @@ class admin extends CI_Controller {
         		
         		if($page == 'option'){
         							
-        			$image_name = $this->input->post('name').'_'.$this->input->post('product').'_'.$this->input->post('menu').'_'.$this->input->post('submenu').'_option_image.png';
+        			if($this->input->post('type') == 0){
+						
+						$dir_name = 'style';
+					}
+					
+					if($this->input->post('type') == 1){
+						
+						$dir_name = 'fabric';
+					}
+					
+					if(isset($dir_name)){
+						
+						$image_name = $dir_name.'_'.$this->input->post('product').'_'.$this->input->post('menu').'_'.$this->input->post('submenu').'_option_image.png';
         							
-					$image_upload = $this->do_upload('option_image', $image_name);
+						$image_upload = $this->do_upload('option_image', $image_name, $dir_name);
+						
+						$caption_name = $dir_name.'_'.$this->input->post('product').'_'.$this->input->post('menu').'_'.$this->input->post('submenu').'_caption_image.png';
+        							
+						$caption_upload = $this->do_upload('caption', $caption_name, $dir_name);
+					}
 
-        			if($this->admin_model->edit_option($id, $this->input->post('name'), $this->input->post('submenu'), $this->input->post('type'), $this->input->post('price'), $this->input->post('description'), $this->input->post('depth'), $image_upload ? $image_name : '' )){
+        			if($this->admin_model->edit_option(
+					$id, $this->input->post('name'), 
+					$this->input->post('submenu'), 
+					$this->input->post('type'), 
+					$this->input->post('price'), 
+					$this->input->post('description'), 
+					$this->input->post('depth'), 
+					$image_upload ? $image_name : '',
+					$caption_upload ? $caption_name : '',
+					$this->input->post('is_default'))){
 
 						redirect('/admin/view/option', 'refresh');
         			}
@@ -304,12 +331,40 @@ class admin extends CI_Controller {
         		}
         		
         		if($page == 'option'){
+        			
+					if($this->input->post('type') == 0){
+						
+						$dir_name = 'style';
+					}
+					
+					if($this->input->post('type') == 1){
+						
+						$dir_name = 'fabric';
+					}
+					
+					if(isset($dir_name)){
+						
+						$image_name = $dir_name.'_'.$this->input->post('product').'_'.$this->input->post('menu').'_'.$this->input->post('submenu').'_option_image.png';
         							
-        			$image_name = $this->input->post('name').'_'.$this->input->post('product').'_'.$this->input->post('menu').'_'.$this->input->post('submenu').'_option_image.png';
+						$image_upload = $this->do_upload('option_image', $image_name, $dir_name);
+						
+						$caption_name = $dir_name.'_'.$this->input->post('product').'_'.$this->input->post('menu').'_'.$this->input->post('submenu').'_caption_image.png';
         							
-					$image_upload = $this->do_upload('option_image', $image_name);
-
-        			if($this->admin_model->create_option($this->input->post('name'), $this->input->post('submenu'), $this->input->post('type'), $this->input->post('price'), $this->input->post('description'), $this->input->post('depth'), $image_upload ? $image_name : '' )){
+						$caption_upload = $this->do_upload('caption', $caption_name, $dir_name);
+					}
+					
+        			
+        			if($this->admin_model->create_option(
+					$this->input->post('name'), 
+					$this->input->post('submenu'), 
+					$this->input->post('type'), 
+					$this->input->post('price'), 
+					$this->input->post('description'), 
+					$this->input->post('depth'), 
+					$image_upload ? $image_name : '',
+					$caption_upload ? $caption_name : '',
+					$this->input->post('is_default')
+					)){
 
 						redirect('/admin/view/option', 'refresh');
         			}
@@ -358,33 +413,33 @@ class admin extends CI_Controller {
 
 		}
 
-		private function do_upload($form_file_name, $file_name)
+		private function do_upload($form_file_name, $file_name, $image_directory='products')
     	{
-    	$this->load->library('upload');
+			$this->load->library('upload');
     	
-    	$this->upload->initialize($this->set_upload_options($file_name)); 
+			$this->upload->initialize($this->set_upload_options($file_name, $image_directory)); 
 
-		if($this->upload->do_upload($form_file_name)){
-    		
-    		return true;
-		}
-		else{
-			
-			//echo $this->upload->display_errors();
-			return false;
-		}
+			if($this->upload->do_upload($form_file_name)){
+				
+				return true;
+			}
+			else{
+				
+				//echo $this->upload->display_errors();
+				return false;
+			}
 		
     }
 
-    	private function set_upload_options($file_name)
+    	private function set_upload_options($file_name, $image_directory)
     	{   
-        $config['upload_path'] = $_SERVER['DOCUMENT_ROOT'].'/shmyde/assets/images/products/';
-		$config['allowed_types'] = 'gif|jpg|png|jpeg';
-		$config['file_name']  = $file_name;
-		$config['overwrite']  = true;
+			$config['upload_path'] = $_SERVER['DOCUMENT_ROOT'].'/shmyde/assets/images/'.$image_directory.'/';
+			$config['allowed_types'] = 'gif|jpg|png|jpeg';
+			$config['file_name']  = $file_name;
+			$config['overwrite']  = true;
 
-        return $config;
-    }
+			return $config;
+		}
 		
 		public function get_submenus($product_id, $selected_menu){
 			

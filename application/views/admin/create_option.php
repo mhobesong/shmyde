@@ -27,6 +27,16 @@ $(document).on('change', 'input', function() {
                         	.height(236);
                 	};
                 }
+				
+				if(this.id == "caption"){
+				
+                	reader.onload = function (e) {
+                    	$('#caption_image')
+                        	.attr('src', e.target.result)
+                        	.width(100)
+                        	.height(100);
+                	};
+                }
                 
 
                 reader.readAsDataURL(this.files[0]);
@@ -118,16 +128,38 @@ $(document).ready(function() {
     <div class="form-group">
   		<label for="type">Option Type:</label>
   		<select class="form-control" id="type" name="type">
-    		<option value="0">Image</option>
-    		<option value="0">Blend Image</option>
-		    <option value="1">CheckBox</option>
+    		<option value="0">Style</option>
+    		<option value="1">Fabric</option>
+		    <option value="2">CheckBox</option>
   		</select>
 	</div>
     
+	<?php 
+		
+		if(isset($option)) {
+			
+			if($option->type == 0){
+				
+				$product_dir = 'style';
+			}
+			else{
+				
+				$product_dir = 'fabric';
+			}
+		}
+			
+	?>
+		
 	<div class="form-group">
-    	<label for="image">Image (If Applicable): </label>
+    	<label for="option_image">Image (If Applicable): </label>
     	<input type="file" id="option_image" name="option_image" >
-    	<img id="image" src="<?php if(isset($option_image)) echo ASSETS_PATH.'images/products/'.$option_image->name; ?>" class="img-responsive" alt="" width="304" height="236"> 
+    	<img id="image" src="<?php if(isset($option_image)) echo ASSETS_PATH.'images/'.$product_dir.'/'.$option_image->name; ?>" class="img-responsive" alt="" width="304" height="236"> 
+  	</div>
+	
+	<div class="form-group">
+    	<label for="caption">Caption (If Applicable): </label>
+    	<input type="file" id="caption" name="caption" >
+    	<img id="caption_image" src="<?php if(isset($option_image)) echo ASSETS_PATH.'images/'.$product_dir.'/'.$option_image->caption; ?>" class="img-responsive" alt="" width="100" height="100"> 
   	</div>
   	
   	<div class="form-group">
@@ -137,12 +169,16 @@ $(document).ready(function() {
   	
   	<div class="form-group">
       <label for="price">Price:</label>
-      <input type="text" class="form-control" id="price" name="price" value="<?php  if(isset($option)) echo $option->price; ?>">
+      <input type="number" class="form-control" id="price" name="price" value="<?php  if(isset($option)) echo $option->price; else echo '0'; ?>">
     </div>
     
      <div class="form-group">
   		<label for="description">Description:</label>
   		<textarea class="form-control" rows="5" id="description" name="description"><?php  if(isset($option)) echo $option->description; ?></textarea>
+	</div>
+	
+	<div class="form-group">
+  		<label><input type="checkbox" class="form-control" id="is_default" name="is_default" <?php if(isset($option) && $option->is_default) echo 'checked'; ?>>Is Default Value</label>
 	</div>
 
 	<button type="submit" class="btn btn-primary btn-block"><?php echo $title; ?></button>
