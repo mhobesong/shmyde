@@ -1,5 +1,3 @@
-
-<head>
 <script>
 
 function LoadOptions(submenu_id){
@@ -80,7 +78,6 @@ function LoadSubMenus(selected_menu) {
 }
 
 </script>
-</head>
 
 <!-- Desing Page -->
 <div class='design-page'>
