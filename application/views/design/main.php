@@ -141,9 +141,11 @@ function LoadSubMenus(selected_menu) {
 					<div class="col-sm-2 col-md-2 design-part">
 						<img src="<?= base_url("assets/images/design/shirt/part-preview/collar-button.png"); ?>">
 					</div>
+					
 					<div class="col-sm-8 col-md-8" id="design_options">
+
+						<div class="slidee">
 						
-						<!--
 						<a href="#"><img src="<?= base_url("assets/images/design/fabriques/default-white.png"); ?>"></a>
 						<a href="#"><img src="<?= base_url("assets/images/design/fabriques/1.png"); ?>"></a>
 						<a href="#"><img src="<?= base_url("assets/images/design/fabriques/2.png"); ?>"></a>
@@ -167,7 +169,7 @@ function LoadSubMenus(selected_menu) {
 						<a href="#"><img src="<?= base_url("assets/images/design/fabriques/20.png"); ?>"></a>
 						<a href="#"><img src="<?= base_url("assets/images/design/fabriques/21.png"); ?>"></a>
 						
-						-->
+						</div>
 						
 					</div>
 					<div class="col-sm-2 col-md-2"></div>
@@ -176,3 +178,15 @@ function LoadSubMenus(selected_menu) {
 		</div>
 	</div>
 </div>
+<script src='<?= base_url("assets/js/sly.min.js"); ?>'></script>
+<script>
+var options = {
+    horizontal: 1,
+    itemNav: 'basic',
+    speed: 300,
+    mouseDragging: 1,
+    touchDragging: 1,
+};
+var frame = new Sly('#design_options', options).init();
+</script>
+
