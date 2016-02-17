@@ -272,7 +272,7 @@ var options = {
     speed: 300,
     mouseDragging: 1,
     touchDragging: 1,
-    scrollBar:'.mousearea',
+    scrollBar:'scrollbar',
     nextPage:'.next',
     prevPage:'.prev',
 };
