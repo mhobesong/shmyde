@@ -35,6 +35,9 @@
     
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="<?php echo ASSETS_PATH; ?>frameworks/jquery/jquery-1.11.3.min.js"></script>
+    <script src='http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.5/jquery-ui.min.js'></scr‌​ipt>
+    <script src="<?php echo ASSETS_PATH; ?>js/modernizr.js"></script>
+    <script src="<?php echo ASSETS_PATH; ?>sly-master/dist/sly.js"></script>
     <script src="<?php echo ASSETS_PATH; ?>frameworks/bootstrap-3.3.6-dist/js/bootstrap.min.js"></script>
 
 

@@ -109,6 +109,9 @@ class Admin_model extends CI_Model {
 			$options_array[$row->id]['type'] = $row->type;
 			$options_array[$row->id]['price'] = $row->price;
 			$options_array[$row->id]['description'] = $row->description;
+                        
+                        $options_array[$row->id]['is_default'] = $row->is_default;
+			$options_array[$row->id]['applied_to'] = $row->applied_to;
 			
 			$image_sql = "SELECT * from shmyde_images where shmyde_design_options_id =".$row->id;
 			
@@ -295,13 +298,13 @@ class Admin_model extends CI_Model {
 		return true;
     }
     
-    public function create_option($name, $shmyde_design_sub_menu_id, $type, $price, $description, $zindex, $image_name, $caption_name, $is_default){
+    public function create_option($name, $shmyde_design_sub_menu_id, $type, $applied_to, $price, $description, $zindex, $image_name, $caption_name, $is_default){
     	
     	$insert_id = $this->get_table_next_id("shmyde_design_option");
 		
-		$sql = "INSERT INTO shmyde_design_option (id, name, shmyde_design_sub_menu_id, type, price, description) 
+		$sql = "INSERT INTO shmyde_design_option (id, name, shmyde_design_sub_menu_id, type, applied_to, price, description) 
 
-        VALUES (".$insert_id." , ".$this->db->escape($name).", ".$this->db->escape($shmyde_design_sub_menu_id).", ".$type.", ".$price.", '".$description."')";
+        VALUES (".$insert_id." , ".$this->db->escape($name).", ".$this->db->escape($shmyde_design_sub_menu_id).", ".$type.", ".$applied_to.", ".$price.", '".$description."')";
 
 		$this->db->query($sql);
 		
@@ -417,10 +420,10 @@ class Admin_model extends CI_Model {
         return true;
     }
     
-    public function edit_option($id, $name, $shmyde_design_sub_menu_id, $type, $price, $description, $zindex, $image_name, $caption_name, $is_default){
+    public function edit_option($id, $name, $shmyde_design_sub_menu_id, $type, $applied_to, $price, $description, $zindex, $image_name, $caption_name, $is_default){
     
     	$sql = "UPDATE shmyde_design_option 
-    	SET name = ".$this->db->escape($name).", shmyde_design_sub_menu_id = ".$this->db->escape($shmyde_design_sub_menu_id).", type = ".$this->db->escape($type).", price = ".$this->db->escape($price).", description = ".$this->db->escape($description)." 
+    	SET name = ".$this->db->escape($name).", shmyde_design_sub_menu_id = ".$this->db->escape($shmyde_design_sub_menu_id).", type = ".$this->db->escape($type).", applied_to = ".$this->db->escape($applied_to).", price = ".$this->db->escape($price).", description = ".$this->db->escape($description)." 
     	WHERE id = ".$id;
 
 		$this->db->query($sql);
