@@ -211,12 +211,16 @@ function LoadSubMenus(selected_menu) {
                             
                                 
 				<div class='fabrique-heading'>Chose Your Fabrique</div>
-<<<<<<< HEAD
+
 				<div id='' class='row design-fabrique'>
 					<div class="col-sm-2 col-md-2 design-part">
 						<img src="<?= base_url("assets/images/design/shirt/part-preview/collar-button.png"); ?>">
 					</div>
-					
+					<div class="scrollbar">
+                                                <div class="handle">
+                                                        <div class="mousearea"></div>
+                                                </div>
+                                        </div>
 					<div class="col-sm-8 col-md-8" id="design_options">
 
 						<div class="slidee">
@@ -247,43 +251,15 @@ function LoadSubMenus(selected_menu) {
 						</div>
 						
 					</div>
-					<div class="col-sm-2 col-md-2"></div>
-				</div>
-=======
-                                    
-                                <div class="wrap">  
-                                        <div class="scrollbar">
-                                                <div class="handle">
-                                                        <div class="mousearea"></div>
-                                                </div>
-                                        </div>
-
-                                        <div class="frame" id="design_options">
-                                                <ul class="clearfix">
-                                                        <li><a ><img src="<?= base_url("assets/images/design/fabriques/1.png"); ?>" width="96%" height="100%"></a></li>
-                                                        <li><a ><img src="<?= base_url("assets/images/design/fabriques/2.png"); ?>" width="96%" height="100%"></a></li>
-                                                        <li><a ><img src="<?= base_url("assets/images/design/fabriques/3.png"); ?>" width="96%" height="100%"></a></li>
-                                                        <li><a ><img src="<?= base_url("assets/images/design/fabriques/4.png"); ?>" width="96%" height="100%"></a></li>
-                                                        <li><a ><img src="<?= base_url("assets/images/design/fabriques/5.png"); ?>" width="96%" height="100%"></a></li>
-                                                        <li><a ><img src="<?= base_url("assets/images/design/fabriques/6.png"); ?>" width="96%" height="100%"></a></li>
-                                                        <li><a ><img src="<?= base_url("assets/images/design/fabriques/7.png"); ?>" width="96%" height="100%"></a></li>
-                                                        <li><a ><img src="<?= base_url("assets/images/design/fabriques/8.png"); ?>" width="96%" height="100%"></a></li>
-                                                        <li><a ><img src="<?= base_url("assets/images/design/fabriques/9.png"); ?>" width="96%" height="100%"></a></li>
-                                                        <li><a ><img src="<?= base_url("assets/images/design/fabriques/10.png"); ?>" width="96%" height="100%"></a></li>
-                                                        <li><a ><img src="<?= base_url("assets/images/design/fabriques/11.png"); ?>" width="96%" height="100%"></a></li>
-                                                        <li><a ><img src="<?= base_url("assets/images/design/fabriques/12.png"); ?>" width="96%" height="100%"></a></li>
-                                                </ul>
-                                        </div>
-
-                                        <div class="controls center">
-                                                <button class="btn prev"><i class="icon-chevron-left"></i> prev</button>
-                                                <button class="btn next">next <i class="icon-chevron-right"></i></button>
-                                        </div>
-                                </div>
-
-                                    
 					
->>>>>>> bb19e344a1991c72e71b8d3e4540190c43370ff9
+					<div class="col-sm-2 col-md-2"></div>
+					<div class="controls center">
+	                                        <button class="btn prev"><i class="icon-chevron-left"></i> prev</button>
+	                                        <button class="btn next">next <i class="icon-chevron-right"></i></button>
+                                	</div>
+				</div>
+				
+
 			</div>
 		</div>
 	</div>
@@ -296,6 +272,9 @@ var options = {
     speed: 300,
     mouseDragging: 1,
     touchDragging: 1,
+    scrollBar:'.mousearea',
+    nextPage:'.next',
+    prevPage:'.prev',
 };
 var frame = new Sly('#design_options', options).init();
 </script>
