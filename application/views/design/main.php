@@ -1,4 +1,43 @@
 <script>
+  
+jQuery(function($){
+	'use strict';
+
+
+	// -------------------------------------------------------------
+	//   Centered Navigation
+	// -------------------------------------------------------------
+	(function () {
+		var $frame = $('#design_options');
+		var $wrap  = $frame.parent();
+
+		// Call Sly on frame
+		 $frame.sly({
+			horizontal: true,
+			itemNav: 'centered',
+			smart: true,
+			activateOn: 'click',
+			mouseDragging: 1,
+			touchDragging: 1,
+			releaseSwing: 1,
+			startAt: 0,
+			scrollBar: $wrap.find('.scrollbar'),
+			scrollBy: 1,
+			speed: 300,
+			elasticBounds: 1,
+			easing: 'easeOutExpo',
+			dragHandle: 1,
+			dynamicHandle: 1,
+			clickBar: 1,
+
+			// Buttons
+			prev: $wrap.find('.prev'),
+			next: $wrap.find('.next')
+		});
+	}());
+
+});
+    
 
 function LoadOptions(submenu_id){
 	
@@ -20,17 +59,50 @@ function LoadOptions(submenu_id){
 				
 				var image_element = document.createElement("img");
 				image_element.setAttribute("src", image_path);
-				image_element.setAttribute("height", "30");
-				image_element.setAttribute("width", "30");
+				image_element.setAttribute("height", "100");
+				image_element.setAttribute("width", "96");
 				
 				var link_element = document.createElement("a");
-				link_element.setAttribute('href', '#');
 				link_element.appendChild(image_element);
+                                
+                                var list_element = document.createElement("li");
+                                list_element.appendChild(link_element);
 				
-				document.getElementById("design_options").appendChild(link_element);
+				document.getElementById("design_options").appendChild(list_element);
 				
 				
 			}
+                        
+                        if(json_array.lenght > 0){
+                            
+                            var $frame = $('#design_options');
+                            var $wrap  = $frame.parent();
+
+                            // Call Sly on frame
+                             $frame.sly({
+                                    horizontal: 1,
+                                    itemNav: 'centered',
+                                    smart: 1,
+                                    activateOn: 'click',
+                                    mouseDragging: 1,
+                                    touchDragging: 1,
+                                    releaseSwing: 1,
+                                    startAt: 0,
+                                    scrollBar: $wrap.find('.scrollbar'),
+                                    scrollBy: 1,
+                                    speed: 300,
+                                    elasticBounds: 1,
+                                    easing: 'easeOutExpo',
+                                    dragHandle: 1,
+                                    dynamicHandle: 1,
+                                    clickBar: 1,
+
+                                    // Buttons
+                                    prev: $wrap.find('.prev'),
+                                    next: $wrap.find('.next')
+                            });
+                        }
+                        
 		}
 	};
 	
@@ -136,42 +208,42 @@ function LoadSubMenus(selected_menu) {
 						</ul>
 					</div>
 				</div>
+                            
+                                
 				<div class='fabrique-heading'>Chose Your Fabrique</div>
-				<div id='' class='row design-fabrique'>
-					<div class="col-sm-2 col-md-2 design-part">
-						<img src="<?= base_url("assets/images/design/shirt/part-preview/collar-button.png"); ?>">
-					</div>
-					<div class="col-sm-8 col-md-8" id="design_options">
-						
-						<!--
-						<a href="#"><img src="<?= base_url("assets/images/design/fabriques/default-white.png"); ?>"></a>
-						<a href="#"><img src="<?= base_url("assets/images/design/fabriques/1.png"); ?>"></a>
-						<a href="#"><img src="<?= base_url("assets/images/design/fabriques/2.png"); ?>"></a>
-						<a href="#"><img src="<?= base_url("assets/images/design/fabriques/3.png"); ?>"></a>
-						<a href="#"><img src="<?= base_url("assets/images/design/fabriques/4.png"); ?>"></a>
-						<a href="#"><img src="<?= base_url("assets/images/design/fabriques/5.png"); ?>"></a>
-						<a href="#"><img src="<?= base_url("assets/images/design/fabriques/6.png"); ?>"></a>
-						<a href="#"><img src="<?= base_url("assets/images/design/fabriques/7.png"); ?>"></a>
-						<a href="#"><img src="<?= base_url("assets/images/design/fabriques/8.png"); ?>"></a>
-						<a href="#"><img src="<?= base_url("assets/images/design/fabriques/9.png"); ?>"></a>
-						<a href="#"><img src="<?= base_url("assets/images/design/fabriques/10.png"); ?>"></a>
-						<a href="#"><img src="<?= base_url("assets/images/design/fabriques/11.png"); ?>"></a>
-						<a href="#"><img class='active' src="<?= base_url("assets/images/design/fabriques/12.png"); ?>"></a>
-						<a href="#"><img src="<?= base_url("assets/images/design/fabriques/13.png"); ?>"></a>
-						<a href="#"><img src="<?= base_url("assets/images/design/fabriques/14.png"); ?>"></a>
-						<a href="#"><img src="<?= base_url("assets/images/design/fabriques/15.png"); ?>"></a>
-						<a href="#"><img src="<?= base_url("assets/images/design/fabriques/16.png"); ?>"></a>
-						<a href="#"><img src="<?= base_url("assets/images/design/fabriques/17.png"); ?>"></a>
-						<a href="#"><img src="<?= base_url("assets/images/design/fabriques/18.png"); ?>"></a>
-						<a href="#"><img src="<?= base_url("assets/images/design/fabriques/19.png"); ?>"></a>
-						<a href="#"><img src="<?= base_url("assets/images/design/fabriques/20.png"); ?>"></a>
-						<a href="#"><img src="<?= base_url("assets/images/design/fabriques/21.png"); ?>"></a>
-						
-						-->
-						
-					</div>
-					<div class="col-sm-2 col-md-2"></div>
-				</div>
+                                    
+                                <div class="wrap">  
+                                        <div class="scrollbar">
+                                                <div class="handle">
+                                                        <div class="mousearea"></div>
+                                                </div>
+                                        </div>
+
+                                        <div class="frame" id="design_options">
+                                                <ul class="clearfix">
+                                                        <li><a ><img src="<?= base_url("assets/images/design/fabriques/1.png"); ?>" width="96%" height="100%"></a></li>
+                                                        <li><a ><img src="<?= base_url("assets/images/design/fabriques/2.png"); ?>" width="96%" height="100%"></a></li>
+                                                        <li><a ><img src="<?= base_url("assets/images/design/fabriques/3.png"); ?>" width="96%" height="100%"></a></li>
+                                                        <li><a ><img src="<?= base_url("assets/images/design/fabriques/4.png"); ?>" width="96%" height="100%"></a></li>
+                                                        <li><a ><img src="<?= base_url("assets/images/design/fabriques/5.png"); ?>" width="96%" height="100%"></a></li>
+                                                        <li><a ><img src="<?= base_url("assets/images/design/fabriques/6.png"); ?>" width="96%" height="100%"></a></li>
+                                                        <li><a ><img src="<?= base_url("assets/images/design/fabriques/7.png"); ?>" width="96%" height="100%"></a></li>
+                                                        <li><a ><img src="<?= base_url("assets/images/design/fabriques/8.png"); ?>" width="96%" height="100%"></a></li>
+                                                        <li><a ><img src="<?= base_url("assets/images/design/fabriques/9.png"); ?>" width="96%" height="100%"></a></li>
+                                                        <li><a ><img src="<?= base_url("assets/images/design/fabriques/10.png"); ?>" width="96%" height="100%"></a></li>
+                                                        <li><a ><img src="<?= base_url("assets/images/design/fabriques/11.png"); ?>" width="96%" height="100%"></a></li>
+                                                        <li><a ><img src="<?= base_url("assets/images/design/fabriques/12.png"); ?>" width="96%" height="100%"></a></li>
+                                                </ul>
+                                        </div>
+
+                                        <div class="controls center">
+                                                <button class="btn prev"><i class="icon-chevron-left"></i> prev</button>
+                                                <button class="btn next">next <i class="icon-chevron-right"></i></button>
+                                        </div>
+                                </div>
+
+                                    
+					
 			</div>
 		</div>
 	</div>
