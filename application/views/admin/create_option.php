@@ -11,6 +11,42 @@
   <h2><?php echo $title; ?> OPTION</h2>
 
 <script type="text/javascript">
+    
+    function MenuChanged(){
+	
+	var xmlhttp = new XMLHttpRequest();
+
+	xmlhttp.onreadystatechange = function() {
+		
+                
+                
+		if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+			                      
+                        $("#submenu").empty();
+                        
+			var json_array =  JSON.parse(xmlhttp.responseText);
+						
+			for (var key in json_array) {
+                            
+                            $('#submenu').append($("<option/>", {
+        			value: json_array[key]['id'],
+        			text:  json_array[key]['name']
+                            }));
+				
+			}
+                                                                       
+		}
+	};
+	
+	var site_url = "<?php echo site_url('admin/get_submenus') ?>";
+	
+	site_url = site_url.concat("/").concat($( "#product" ).val()).concat("/").concat($( "#menu" ).val());
+		
+	xmlhttp.open("GET", site_url, true);
+	
+	xmlhttp.send();
+}  
+
 
 $(document).on('change', 'input', function() {
   
@@ -49,41 +85,16 @@ $(document).on('change', 'input', function() {
 
 $(document).ready(function() {
 
-	$("#product option[value='<?php if(isset($option)) echo $option->product_id; else echo 0; ?>']").prop('selected', true);
+    $("#product option[value='<?php if(isset($option)) echo $option->product_id; else echo 0; ?>']").prop('selected', true);
     $("#menu option[value='<?php if(isset($option)) echo $option->menu_id; else echo 0; ?>']").prop('selected', true);
     $("#submenu option[value='<?php if(isset($option)) echo $option->submenu_id; else echo 0; ?>']").prop('selected', true);
     
+    $("#type option[value='<?php if(isset($option)) echo $option->type; else echo 0; ?>']").prop('selected', true);
+    $("#applied_to option[value='<?php if(isset($option)) echo $option->applied_to; else echo 0; ?>']").prop('selected', true);
     
+        
+    MenuChanged();
     
-    update_submenu_combobox();
-    
-    function update_submenu_combobox(){
-    	
-    	$("#submenu").empty();
-  		
-  		var data = <?php echo json_encode($submenus)?>[$( "#product" ).val()][$( "#menu" ).val()];
-  		
-  		for (var key in data) {
-  		   			
-   			$('#submenu').append($("<option/>", {
-        		value: data[key]['id'],
-        		text:  data[key]['name']
-    		}));
-		}
-    }
-    
-    $( "#product" ).change(function() {
-  		
-  		update_submenu_combobox();  		
-  		
-	});
-	
-	$( "#menu" ).change(function() {
-  		
-  		update_submenu_combobox(); 
-  		
-  		
-	});
 });
 
 
@@ -97,7 +108,7 @@ $(document).ready(function() {
     
     <div class="form-group">
   		<label for="product">Product:</label>
-  		<select class="form-control" id="product" name="product">
+                <select class="form-control" id="product" name="product" onchange="MenuChanged();">
     		<?php foreach ($products->result() as $row) {?>
     		<option value="<?php echo $row->id; ?>"><?php echo $row->name; ?></option>
 		    <?php } ?>
@@ -106,7 +117,7 @@ $(document).ready(function() {
 	
 	<div class="form-group">
   		<label for="menu">Menu:</label>
-  		<select class="form-control" id="menu" name="menu">
+  		<select class="form-control" id="menu" name="menu" onchange="MenuChanged();">
     		<?php foreach ($menus->result() as $row) {?>
     		<option value="<?php echo $row->id; ?>"><?php echo $row->name; ?></option>
 		    <?php } ?>
@@ -132,7 +143,16 @@ $(document).ready(function() {
     		<option value="1">Fabric</option>
 		    <option value="2">CheckBox</option>
   		</select>
-	</div>
+    </div>
+      
+    <div class="form-group">
+  		<label for="applied_to">Option Type:</label>
+  		<select class="form-control" id="applied_to" name="applied_to">
+                    <option value="0">Applied to Front</option>
+                    <option value="1">Applied to Back</option>
+                    <option value="2">Doesn't Matter</option>
+  		</select>
+    </div>
     
 	<?php 
 		
