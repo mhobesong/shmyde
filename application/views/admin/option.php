@@ -160,6 +160,12 @@ $(document).ready(function() {
 
     $("#target option[value='<?php if(isset($option)) echo $option->target; else echo 0; ?>']").prop('selected', true);
     
+    $("#product option[value='<?php if($default_product_id > -1) echo $default_product_id; else echo 0; ?>']").prop('selected', true);
+    
+    $("#menu option[value='<?php if($default_menu_id > -1) echo $default_menu_id; else echo 0; ?>']").prop('selected', true);
+    
+    $("#submenu option[value='<?php if($default_submenu_id > -1) echo $default_submenu_id; else echo 0; ?>']").prop('selected', true);
+    
     MenuChanged();
       
 	
@@ -196,8 +202,8 @@ $(document).ready(function() {
 	</div>
 	
 	<div class="form-group">
-  		<label for="submenu" onchange="SubMenuChanged();">Sub Menu:</label>
-  		<select class="form-control" id="submenu" name="submenu">
+  		<label for="submenu" >Sub Menu:</label>
+  		<select class="form-control" id="submenu" name="submenu" onchange="SubMenuChanged();">
     		
   		</select>
 	</div>

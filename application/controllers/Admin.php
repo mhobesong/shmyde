@@ -27,73 +27,77 @@ class Admin extends CI_Controller {
 
         }
 
-        public function view($page = 'product')
+        public function view($page = 'product_id', $product_id = -1, $menu_id = -1, $submenu_id = -1)
 	{
-        	if ( ! file_exists(APPPATH.'/views/admin/'.$page.'.php'))
-        	{
-                // Whoops, we don't have a page for that!
-                show_404();
-        	}
-        	
-        	if($page == 'product'){
-        	
-        		$data['products'] = $this->admin_model->get_all_products();
-        	
-        	}
-        	
-        	if($page == 'menu'){
-        		
-        		$data['menus'] = $this->admin_model->get_all_menus();
-        	}
-        	
-        	if($page == 'submenu'){
-        		
-        		$data['submenus'] = $this->admin_model->get_all_submenus();
-        	}
-        	
-        	if($page == 'option'){
-        		
-        		$data['menus'] = $this->admin_model->get_all_menus();
-        		
-        		$data['products'] = $this->admin_model->get_all_products();
-        		
-        		$query_options = $this->admin_model->get_all_options_extended();
-        		
-        		$options = Array();
-        		
-        		
-        		
-        		foreach ($query_options->result() as $row)
-				{
-					$options[$row->id]['id'] = $row->id;
-					$options[$row->id]['name'] = $row->name;
-					$options[$row->id]['type'] = $row->type == 0 ? 'Style' : $row->type == 1 ? 'Fabric' : 'Checkbox';
-                                        $options[$row->id]['applied_to'] = $row->applied_to == 0 ? 'Front' : $row->applied_to == 1 ? 'Back' : 'N/A';
-					$options[$row->id]['description'] = $row->description;
-					$options[$row->id]['price'] = $row->price;
-					$options[$row->id]['product_name'] = $row->product_name;
-					$options[$row->id]['menu_name'] = $row->menu_name;
-					$options[$row->id]['submenu_name'] = $row->submenu_name;
-					$options[$row->id]['product_id'] = $row->product_id;
-					$options[$row->id]['menu_id'] = $row->menu_id;
-					$options[$row->id]['submenu_id'] = $row->submenu_id;
-					$options[$row->id]['is_default'] = $row->is_default;
-    				
-				}
-				
-				$query_submenu = $this->admin_model->get_all_submenus_simple();
-        		
-        		$submenus = Array();
-        		
-        		foreach ($query_submenu->result() as $row)
-				{
-					$submenus[$row->shmyde_product_id][$row->shmyde_design_main_menu_id][$row->id]['name'] = $row->name;
-					$submenus[$row->shmyde_product_id][$row->shmyde_design_main_menu_id][$row->id]['id'] = $row->id;
-    				
-				}
-				
-				$data['submenus'] = $submenus;
-				$data['options'] = $options;
+            if ( ! file_exists(APPPATH.'/views/admin/'.$page.'.php'))
+            {
+            // Whoops, we don't have a page for that!
+            show_404();
+            }
+
+            if($page == 'product'){
+
+                    $data['products'] = $this->admin_model->get_all_products();
+
+            }
+
+            if($page == 'menu'){
+
+                    $data['menus'] = $this->admin_model->get_all_menus();
+            }
+
+            if($page == 'submenu'){
+
+                    $data['submenus'] = $this->admin_model->get_all_submenus();
+            }
+
+            if($page == 'option'){
+
+                    $data['menus'] = $this->admin_model->get_all_menus();
+
+                    $data['products'] = $this->admin_model->get_all_products();
+                                                            
+                    $data['default_product_id'] = $product_id;
+                    
+                    $data['default_menu_id'] = $menu_id;
+                    
+                    $data['default_submenu_id'] = $submenu_id;
+
+                    $query_options = $this->admin_model->get_all_options_extended();
+
+                    $options = Array();
+
+                    foreach ($query_options->result() as $row)
+                    {
+                            $options[$row->id]['id'] = $row->id;
+                            $options[$row->id]['name'] = $row->name;
+                            $options[$row->id]['type'] = $row->type == 0 ? 'Style' : $row->type == 1 ? 'Fabric' : 'Checkbox';
+                            $options[$row->id]['applied_to'] = $row->applied_to == 0 ? 'Front' : $row->applied_to == 1 ? 'Back' : 'N/A';
+                            $options[$row->id]['description'] = $row->description;
+                            $options[$row->id]['price'] = $row->price;
+                            $options[$row->id]['product_name'] = $row->product_name;
+                            $options[$row->id]['menu_name'] = $row->menu_name;
+                            $options[$row->id]['submenu_name'] = $row->submenu_name;
+                            $options[$row->id]['product_id'] = $row->product_id;
+                            $options[$row->id]['menu_id'] = $row->menu_id;
+                            $options[$row->id]['submenu_id'] = $row->submenu_id;
+                            $options[$row->id]['is_default'] = $row->is_default;
+
+                    }
+
+                    $query_submenu = $this->admin_model->get_all_submenus_simple();
+
+                    $submenus = Array();
+
+                    foreach ($query_submenu->result() as $row)
+                    {
+                            $submenus[$row->shmyde_product_id][$row->shmyde_design_main_menu_id][$row->id]['name'] = $row->name;
+                            $submenus[$row->shmyde_product_id][$row->shmyde_design_main_menu_id][$row->id]['id'] = $row->id;
+
+                    }
+
+                    $data['submenus'] = $submenus;
+                    $data['options'] = $options;
         	}
         	
         	$data['title'] = ucfirst($page); 
@@ -104,7 +108,7 @@ class Admin extends CI_Controller {
         	$this->load->view('admin/'.$page, $data);
 
 
-		}
+        }
 		
         public function edit($page = 'product', $id)
         {
@@ -179,7 +183,7 @@ class Admin extends CI_Controller {
                                 $caption_upload ? $caption_name : '',
                                 $this->input->post('is_default'))){
 
-                                        redirect('/admin/view/option', 'refresh');
+                                        redirect('/admin/view/option/'.$this->input->post('product').'/'. $this->input->post('menu').'/'.$this->input->post('submenu'), 'refresh');
                         }
                 }
 
@@ -369,7 +373,7 @@ class Admin extends CI_Controller {
                             $this->input->post('is_default')
                             )){
 
-                                redirect('/admin/view/option', 'refresh');
+                                redirect('/admin/view/option/'.$this->input->post('product').'/'. $this->input->post('menu').'/'.$this->input->post('submenu'), 'refresh');
                     }
                 }
 

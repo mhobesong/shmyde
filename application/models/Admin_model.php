@@ -105,6 +105,7 @@ class Admin_model extends CI_Model {
 		
 		foreach($query->result() as $row){
 			
+                    $options_array[$row->id]['id'] = $row->id;
 			$options_array[$row->id]['name'] = $row->name;
 			$options_array[$row->id]['type'] = $row->type;
 			$options_array[$row->id]['price'] = $row->price;
