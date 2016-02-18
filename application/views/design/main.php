@@ -211,71 +211,40 @@ function LoadSubMenus(selected_menu) {
                             
                                 
 				<div class='fabrique-heading'>Chose Your Fabrique</div>
-
-				<div id='' class='row design-fabrique'>
-					<div class="col-sm-2 col-md-2 design-part">
-						<img src="<?= base_url("assets/images/design/shirt/part-preview/collar-button.png"); ?>">
-					</div>
-					<div class="scrollbar">
+                                    
+                                <div class="wrap">  
+                                        <div class="scrollbar">
                                                 <div class="handle">
                                                         <div class="mousearea"></div>
                                                 </div>
                                         </div>
-					<div class="col-sm-8 col-md-8" id="design_options">
 
-						<div class="slidee">
-						
-						<a href="#"><img src="<?= base_url("assets/images/design/fabriques/default-white.png"); ?>"></a>
-						<a href="#"><img src="<?= base_url("assets/images/design/fabriques/1.png"); ?>"></a>
-						<a href="#"><img src="<?= base_url("assets/images/design/fabriques/2.png"); ?>"></a>
-						<a href="#"><img src="<?= base_url("assets/images/design/fabriques/3.png"); ?>"></a>
-						<a href="#"><img src="<?= base_url("assets/images/design/fabriques/4.png"); ?>"></a>
-						<a href="#"><img src="<?= base_url("assets/images/design/fabriques/5.png"); ?>"></a>
-						<a href="#"><img src="<?= base_url("assets/images/design/fabriques/6.png"); ?>"></a>
-						<a href="#"><img src="<?= base_url("assets/images/design/fabriques/7.png"); ?>"></a>
-						<a href="#"><img src="<?= base_url("assets/images/design/fabriques/8.png"); ?>"></a>
-						<a href="#"><img src="<?= base_url("assets/images/design/fabriques/9.png"); ?>"></a>
-						<a href="#"><img src="<?= base_url("assets/images/design/fabriques/10.png"); ?>"></a>
-						<a href="#"><img src="<?= base_url("assets/images/design/fabriques/11.png"); ?>"></a>
-						<a href="#"><img class='active' src="<?= base_url("assets/images/design/fabriques/12.png"); ?>"></a>
-						<a href="#"><img src="<?= base_url("assets/images/design/fabriques/13.png"); ?>"></a>
-						<a href="#"><img src="<?= base_url("assets/images/design/fabriques/14.png"); ?>"></a>
-						<a href="#"><img src="<?= base_url("assets/images/design/fabriques/15.png"); ?>"></a>
-						<a href="#"><img src="<?= base_url("assets/images/design/fabriques/16.png"); ?>"></a>
-						<a href="#"><img src="<?= base_url("assets/images/design/fabriques/17.png"); ?>"></a>
-						<a href="#"><img src="<?= base_url("assets/images/design/fabriques/18.png"); ?>"></a>
-						<a href="#"><img src="<?= base_url("assets/images/design/fabriques/19.png"); ?>"></a>
-						<a href="#"><img src="<?= base_url("assets/images/design/fabriques/20.png"); ?>"></a>
-						<a href="#"><img src="<?= base_url("assets/images/design/fabriques/21.png"); ?>"></a>
-						
-						</div>
-						
-					</div>
+                                        <div class="frame" id="design_options">
+                                                <ul class="clearfix">
+                                                        <li><a ><img src="<?= base_url("assets/images/design/fabriques/1.png"); ?>" width="96%" height="100%"></a></li>
+                                                        <li><a ><img src="<?= base_url("assets/images/design/fabriques/2.png"); ?>" width="96%" height="100%"></a></li>
+                                                        <li><a ><img src="<?= base_url("assets/images/design/fabriques/3.png"); ?>" width="96%" height="100%"></a></li>
+                                                        <li><a ><img src="<?= base_url("assets/images/design/fabriques/4.png"); ?>" width="96%" height="100%"></a></li>
+                                                        <li><a ><img src="<?= base_url("assets/images/design/fabriques/5.png"); ?>" width="96%" height="100%"></a></li>
+                                                        <li><a ><img src="<?= base_url("assets/images/design/fabriques/6.png"); ?>" width="96%" height="100%"></a></li>
+                                                        <li><a ><img src="<?= base_url("assets/images/design/fabriques/7.png"); ?>" width="96%" height="100%"></a></li>
+                                                        <li><a ><img src="<?= base_url("assets/images/design/fabriques/8.png"); ?>" width="96%" height="100%"></a></li>
+                                                        <li><a ><img src="<?= base_url("assets/images/design/fabriques/9.png"); ?>" width="96%" height="100%"></a></li>
+                                                        <li><a ><img src="<?= base_url("assets/images/design/fabriques/10.png"); ?>" width="96%" height="100%"></a></li>
+                                                        <li><a ><img src="<?= base_url("assets/images/design/fabriques/11.png"); ?>" width="96%" height="100%"></a></li>
+                                                        <li><a ><img src="<?= base_url("assets/images/design/fabriques/12.png"); ?>" width="96%" height="100%"></a></li>
+                                                </ul>
+                                        </div>
+
+                                        <div class="controls center">
+                                                <button class="btn prev"><i class="icon-chevron-left"></i> prev</button>
+                                                <button class="btn next">next <i class="icon-chevron-right"></i></button>
+                                        </div>
+                                </div>
+
+                                    
 					
-					<div class="col-sm-2 col-md-2"></div>
-					<div class="controls center">
-	                                        <button class="btn prev"><i class="icon-chevron-left"></i> prev</button>
-	                                        <button class="btn next">next <i class="icon-chevron-right"></i></button>
-                                	</div>
-				</div>
-				
-
 			</div>
 		</div>
 	</div>
 </div>
-<script src='<?= base_url("assets/js/sly.min.js"); ?>'></script>
-<script>
-var options = {
-    horizontal: 1,
-    itemNav: 'basic',
-    speed: 300,
-    mouseDragging: 1,
-    touchDragging: 1,
-    scrollBar:'scrollbar',
-    nextPage:'.next',
-    prevPage:'.prev',
-};
-var frame = new Sly('#design_options', options).init();
-</script>
-

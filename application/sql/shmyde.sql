@@ -1,9 +1,9 @@
 -- phpMyAdmin SQL Dump
--- version 4.5.2
+-- version 4.5.1
 -- http://www.phpmyadmin.net
 --
--- Host: localhost
--- Generation Time: Feb 17, 2016 at 04:16 AM
+-- Host: 127.0.0.1
+-- Generation Time: Feb 14, 2016 at 01:23 AM
 -- Server version: 10.1.9-MariaDB
 -- PHP Version: 5.5.30
 
@@ -130,21 +130,20 @@ CREATE TABLE `shmyde_design_option` (
   `name` varchar(45) DEFAULT NULL COMMENT 'This represents an optional name associated with this value. ',
   `price` decimal(10,0) DEFAULT '0' COMMENT 'This is an additional price required to add this attribute to a design. ',
   `description` longtext COMMENT 'A short description of the attribute to be displayed on the application. ',
-  `is_default` tinyint(1) NOT NULL DEFAULT '0',
-  `applied_to` int(11) NOT NULL COMMENT 'Indicates if the option is applied to the front(0), back(1) or doesn''t matter'
+  `is_default` tinyint(1) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `shmyde_design_option`
 --
 
-INSERT INTO `shmyde_design_option` (`id`, `shmyde_design_sub_menu_id`, `type`, `name`, `price`, `description`, `is_default`, `applied_to`) VALUES
-(1, 1, 0, 'LongSleeve', '0', 'This is the long sleeve of the selected shirt. ', 0, 0),
-(2, 1, 0, 'ShortSleeve', '0', 'This represents a short sleeve option. ', 0, 0),
-(3, 2, 0, 'Coller01', '0', 'Simple Collar', 0, 0),
-(4, 2, 0, 'Coller02', '0', 'Complex Collar', 0, 0),
-(6, 2, 0, 'shiny_collar', '0', 'no description', 1, 0),
-(7, 3, 1, 'vertical_colors', '0', '', 0, 2);
+INSERT INTO `shmyde_design_option` (`id`, `shmyde_design_sub_menu_id`, `type`, `name`, `price`, `description`, `is_default`) VALUES
+(1, 1, 0, 'LongSleeve', '0', 'This is the long sleeve of the selected shirt. ', 0),
+(2, 1, 0, 'ShortSleeve', '0', 'This represents a short sleeve option. ', 0),
+(3, 2, 0, 'Coller01', '0', 'Simple Collar', 0),
+(4, 2, 0, 'Coller02', '0', 'Complex Collar', 0),
+(6, 2, 0, 'shiny_collar', '0', 'no description', 1),
+(7, 3, 1, 'vertical_colors', '0', '', 0);
 
 -- --------------------------------------------------------
 
