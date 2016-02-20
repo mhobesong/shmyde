@@ -442,6 +442,7 @@ class Admin_model extends CI_Model {
 			
 		
 		$this->db->query($sql);
+                
 		
 		if($image_name != '' || $caption_name != ''){
 		

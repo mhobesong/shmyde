@@ -10,7 +10,7 @@
 
                 if(parameters[key][param].length != 0){
 
-                    if(parameters[key][param].type < 2){
+                    if(parameters[key][param].type == 0){
 
                         var image_path = "<?php echo ASSETS_PATH; ?>";
                         image_path = image_path.concat('images/style/').concat(parameters[key][param].image_name);
