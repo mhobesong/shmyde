@@ -441,6 +441,14 @@ class Admin_model extends CI_Model {
             
             $this->db->query($sql);
         }
+        else{
+            
+            $sql = "UPDATE shmyde_design_option SET is_default = false where id = ".$id;
+            
+            $this->db->query($sql);
+            
+            
+        }
        
         if($image_name != '' || $caption_name != ''){
 
