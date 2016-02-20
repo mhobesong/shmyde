@@ -1,5 +1,41 @@
 <script>
-  
+    
+    $(document).ready(function(){
+        
+        var parameters = <?php echo $parameters;  ?>;
+    
+        for (var key in parameters) {
+
+            for(var param in parameters[key]){
+
+                if(parameters[key][param].length != 0){
+
+                    if(parameters[key][param].type < 2){
+
+                        var image_path = "<?php echo ASSETS_PATH; ?>";
+                        image_path = image_path.concat('images/style/').concat(parameters[key][param].image_name);
+                        var elem = document.createElement("img");
+                        elem.setAttribute("src", image_path);
+                        elem.setAttribute("class", "preview-image");
+                        document.getElementById("design-preview").appendChild(elem);
+
+
+                    }
+
+
+                }
+
+            }
+
+        }
+    
+    });
+    
+    
+    
+    
+   
+      
 jQuery(function($){
 	'use strict';
 
@@ -188,9 +224,9 @@ function LoadSubMenus(selected_menu) {
 					
 					<!-- END SUB MENUS  -->
 					
-					
+					                                        
 					<div id='' class='col-md-8 col-sm-8' style='padding:0'>
-						<div id='' class='design-preview'><img src="<?= base_url("assets/images/design/shirt/base_shirt.png") ?>" /></div>
+                                            <div id='design-preview' class='design-preview'><img src="<?= base_url("assets/images/products/").'/'.$base_images['front']['name']; ?>" class="preview-image" /></div>
 					</div>
 					<div id='' class='col-md-2 col-sm-2 design-side'>
 						<h4>SIDES</h4>

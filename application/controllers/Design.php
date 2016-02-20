@@ -40,6 +40,14 @@ class Design extends CI_Controller
 		$data['cssLinks'] = array('design-shirt');
 		
 		$product_id = $this->admin_model->get_product_id($target, $product);
+                                
+                $product_base_images = $this->admin_model->get_base_images($product_id);
+                
+                $product_parameters = $this->admin_model->get_json__parameters($product_id);
+                
+                $data['base_images'] = $product_base_images;
+                
+                $data['parameters'] = $product_parameters;
 		
 		$data['menus'] = $this->admin_model->get_all_menus();
 		

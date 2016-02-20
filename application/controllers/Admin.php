@@ -152,24 +152,24 @@ class Admin extends CI_Controller {
 
                         if($this->input->post('type') == 0){
 
-                                        $dir_name = 'style';
-                                }
+                            $dir_name = 'style';
+                        }
 
-                                if($this->input->post('type') == 1){
+                        if($this->input->post('type') == 1){
 
-                                        $dir_name = 'fabric';
-                                }
+                            $dir_name = 'fabric';
+                        }
 
-                                if(isset($dir_name)){
+                        if(isset($dir_name)){
 
-                                        $image_name = $dir_name.'_'.$this->input->post('product').'_'.$this->input->post('menu').'_'.$this->input->post('submenu').'_option_image.png';
+                            $image_name = $dir_name.'_'.$this->input->post('product').'_'.$this->input->post('menu').'_'.$this->input->post('submenu').'_option_image.png';
 
-                                        $image_upload = $this->do_upload('option_image', $image_name, $dir_name);
+                            $image_upload = $this->do_upload('option_image', $image_name, $dir_name);
 
-                                        $caption_name = $dir_name.'_'.$this->input->post('product').'_'.$this->input->post('menu').'_'.$this->input->post('submenu').'_caption_image.png';
+                            $caption_name = $dir_name.'_'.$this->input->post('product').'_'.$this->input->post('menu').'_'.$this->input->post('submenu').'_caption_image.png';
 
-                                        $caption_upload = $this->do_upload('caption', $caption_name, $dir_name);
-                                }
+                            $caption_upload = $this->do_upload('caption', $caption_name, $dir_name);
+                        }
 
                         if($this->admin_model->edit_option(
                                 $id, $this->input->post('name'), 

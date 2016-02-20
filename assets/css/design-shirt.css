@@ -86,14 +86,35 @@
 }
 
 
+
 .design-page .design-preview
 {
-	background:url('../images/designpage/preview screen/bg.png');
-	width:597px;
-	height:434px;
+	background:url('../images/designpage/preview screen/bg.png') no-repeat center center fixed;
+	-webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+	width:325px;
+	height:450px;
 	margin-top:3%;
 	margin-left:-20px;
 	text-align:center;
+	position:relative;
+
+}
+
+.preview-image
+{
+	position:absolute;
+	height:447px;
+	width:325px:
+	left:0;
+    right:0;
+    margin-left:auto;
+    margin-right:auto;
+
+
+
 }
 
 .fabrique-heading

@@ -36,7 +36,9 @@ class Admin_model extends CI_Model {
 				
 		}
 		
-		$query = $this->db->query("SELECT * from shmyde_product where target = ".$target_id." and url_name = '".$product_url_name."'");
+                $sql = "SELECT * from shmyde_product where target = ".$target_id." and url_name = '".$product_url_name."'";
+                
+		$query = $this->db->query($sql);
 
 		if($query->num_rows() > 0){
 			
@@ -507,5 +509,84 @@ class Admin_model extends CI_Model {
 		return $count;
     }
     
+    public function get_base_images($product_id){
+        
+        $base_image = Array();
+        
+        $sql = "SELECT * from shmyde_product_image where shmyde_product_id = ".$product_id;
+        
+        $result = $this->db->query($sql);
+        
+        foreach ($result->result() as $row){
+            
+            if($row->view_type == 1){
+                
+                $base_image['front']['name'] = $row->name;
+                $base_image['front']['depth'] = $row->z_index;
+            }
+            else{
+                
+                $base_image['back']['name'] = $row->name;
+                $base_image['back']['depth'] = $row->z_index;
+            }
+            
+        }
+        
+        return $base_image;
+    }
+    
+    public function get_json__parameters($product_id){
+        
+        $defaults = Array();
+        
+        $sql = "SELECT * from shmyde_design_sub_menu where shmyde_product_id = ".$product_id;
+        
+        $result = $this->db->query($sql);
+        
+        foreach ($result->result() as $row){
+            
+            $main_menu_id = $row->shmyde_design_main_menu_id;
+            
+            if(!isset($defaults[$main_menu_id][$row->id])){
+                
+                $defaults[$main_menu_id][$row->id] = Array();
+            }
+                        
+            $sql = "SELECT * from shmyde_design_option where shmyde_design_sub_menu_id = ".$row->id;
+            
+            $options = $this->db->query($sql);
+            
+            foreach ($options->result() as $option){
+                
+                if($option->is_default){
+                    
+                    $defaults[$main_menu_id][$row->id]['type'] = $option->type;
+                    $defaults[$main_menu_id][$row->id]['name'] = $option->name;
+                    $defaults[$main_menu_id][$row->id]['description'] = $option->description;
+                    $defaults[$main_menu_id][$row->id]['price'] = $option->price;
+                    
+                               
+                    $sql = "SELECT * from shmyde_images where shmyde_design_options_id = ".$option->id;
+                    
+                    $option_images = $this->db->query($sql);
+                    
+                    foreach ($option_images->result() as $option_image){
+                        
+                        $defaults[$main_menu_id][$row->id]['image_name'] = $option_image->name;
+                        $defaults[$main_menu_id][$row->id]['image_depth'] = $option_image->z_index;
+                        
+                    }
+                    
+                    
+                }
+                
+                           
+            }
+            
+            
+        }
+        
+        return json_encode($defaults);
+    }
     
 }
