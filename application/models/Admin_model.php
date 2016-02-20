@@ -429,38 +429,36 @@ class Admin_model extends CI_Model {
     	SET name = ".$this->db->escape($name).", shmyde_design_sub_menu_id = ".$this->db->escape($shmyde_design_sub_menu_id).", type = ".$this->db->escape($type).", applied_to = ".$this->db->escape($applied_to).", price = ".$this->db->escape($price).", description = ".$this->db->escape($description)." 
     	WHERE id = ".$id;
 
-		$this->db->query($sql);
-		
-		$sql = "UPDATE shmyde_design_option SET is_default = false where shmyde_design_sub_menu_id = ".$shmyde_design_sub_menu_id;
-		
-		$this->db->query($sql);
-		
-		if($is_default)
-			$sql = "UPDATE shmyde_design_option SET is_default = true where id = ".$id;
-		else
-			$sql = "UPDATE shmyde_design_option SET is_default = false where id = ".$id;
-			
-		
-		$this->db->query($sql);
-                
-		
-		if($image_name != '' || $caption_name != ''){
-		
-			if($this->check_option_image_exist($id)){
-			
-				$sql = "UPDATE shmyde_images set name = '".$image_name."', z_index = ".$zindex.", caption = '".$caption_name."' WHERE shmyde_design_options_id = ".$id;
-				
-				$this->db->query($sql);
-			
-			}
-			else{
-			
-				$sql = "INSERT INTO shmyde_images (id, shmyde_design_options_id, name, caption, z_index) 
+        $this->db->query($sql);
 
-        		VALUES (".$this->get_table_next_id("shmyde_images")." , ".$id.", ".$this->db->escape($image_name).", ".$this->db->escape($caption_name).", ".$zindex.")";
-        
-        		$this->db->query($sql);
-        	}
+        if($is_default){
+            
+            $sql = "UPDATE shmyde_design_option SET is_default = false where shmyde_design_sub_menu_id = ".$shmyde_design_sub_menu_id;
+
+            $this->db->query($sql);
+            
+            $sql = "UPDATE shmyde_design_option SET is_default = true where id = ".$id;
+            
+            $this->db->query($sql);
+        }
+       
+        if($image_name != '' || $caption_name != ''){
+
+            if($this->check_option_image_exist($id)){
+
+                $sql = "UPDATE shmyde_images set name = '".$image_name."', z_index = ".$zindex.", caption = '".$caption_name."' WHERE shmyde_design_options_id = ".$id;
+
+                $this->db->query($sql);
+
+            }
+            else{
+
+                $sql = "INSERT INTO shmyde_images (id, shmyde_design_options_id, name, caption, z_index) 
+
+                VALUES (".$this->get_table_next_id("shmyde_images")." , ".$id.", ".$this->db->escape($image_name).", ".$this->db->escape($caption_name).", ".$zindex.")";
+
+                $this->db->query($sql);
+            }
         
         }
         
@@ -501,7 +499,7 @@ class Admin_model extends CI_Model {
     	}
     }
     
-    private function get_table_next_id($table_name){
+    public function get_table_next_id($table_name){
     	
     	$count_sql = "SELECT max(id) as max_id FROM ".$table_name;	
 
