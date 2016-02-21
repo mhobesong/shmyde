@@ -95,6 +95,41 @@ class Admin_model extends CI_Model {
 		 		  
 		return json_encode($submenu_array);
 	}
+        
+        public function get_json_option($id){
+		
+		
+		$sql = "SELECT * from shmyde_design_option where id = ".$id;
+	
+		$query = $this->db->query($sql);
+                
+                $row = $query->row();
+		
+		$option = Array();
+		
+		$option['id'] = $row->id;
+                $option['name'] = $row->name;
+                $option['type'] = $row->type;
+                $option['price'] = $row->price;
+                $option['description'] = $row->description;
+                $option['is_default'] = $row->is_default;
+                $option['applied_to'] = $row->applied_to;
+
+                $image_sql = "SELECT * from shmyde_images where shmyde_design_options_id =".$row->id;
+
+                $image_query = $this->db->query($image_sql);
+
+                if($image_query->num_rows() > 0){
+
+                    $option['image_name'] = $image_query->row()->name;
+
+                    $option['caption'] = $image_query->row()->caption;
+
+                    $option['z_index'] = $image_query->row()->z_index;
+                }
+		 		  
+		return json_encode($option);
+	}
 	
 	public function get_json_submenu_options($submenu_id){
 		

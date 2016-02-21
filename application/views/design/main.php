@@ -1,54 +1,20 @@
 <script>
+    var sly;
+    var parameters;
+    var menu_index;
+    var submenu_index;
     
     $(document).ready(function(){
         
-        var parameters = <?php echo $parameters;  ?>;
+        parameters = <?php echo $parameters;  ?>;
     
-        for (var key in parameters) {
-
-            for(var param in parameters[key]){
-
-                if(parameters[key][param].length != 0){
-
-                    if(parameters[key][param].type == 0){
-
-                        var image_path = "<?php echo ASSETS_PATH; ?>";
-                        image_path = image_path.concat('images/style/').concat(parameters[key][param].image_name);
-                        var elem = document.createElement("img");
-                        elem.setAttribute("src", image_path);
-                        elem.setAttribute("class", "preview-image");
-                        document.getElementById("design-preview").appendChild(elem);
-
-
-                    }
-
-
-                }
-
-            }
-
-        }
-    
-    });
-    
-    
-    
-    
-   
-      
-jQuery(function($){
-	'use strict';
-
-
-	// -------------------------------------------------------------
-	//   Centered Navigation
-	// -------------------------------------------------------------
-	(function () {
-		var $frame = $('#design_options');
-		var $wrap  = $frame.parent();
-
-		// Call Sly on frame
-		 $frame.sly({
+        apply_parameters();
+        
+        var $frame = $('#design_options');
+        
+        var $wrap  = $frame.parent();
+        
+        sly = new Sly( $frame, {
 			horizontal: true,
 			itemNav: 'centered',
 			smart: true,
@@ -64,19 +30,91 @@ jQuery(function($){
 			easing: 'easeOutExpo',
 			dragHandle: 1,
 			dynamicHandle: 1,
-			clickBar: 1,
+			clickBar: 1
 
 			// Buttons
-			prev: $wrap.find('.prev'),
-			next: $wrap.find('.next')
-		});
-	}());
-
-});
+			//prev: $wrap.find('.prev'),
+			//next: $wrap.find('.next')
+		}, {
+                       
+                
+                }).init();
+                
+                    
+    });
     
+    function apply_parameters(){
+        
+        for (var menu in parameters) {
+            
+            
+            document.getElementById("design-preview").innerHTML = "";
+            
+            image_path = "<?= base_url("assets/images/products/").'/'.$base_images['front']['name']; ?>";
+            var elem = document.createElement("img");
+            elem.setAttribute("src", image_path);
+            elem.setAttribute("class", "preview-image");
+            document.getElementById("design-preview").appendChild(elem);
+
+            for(var submenu in parameters[menu]){
+
+                if(parameters[menu][submenu].length != 0){
+
+                    if(parameters[menu][submenu].type == 0){
+
+                        var image_path = "<?php echo ASSETS_PATH; ?>";
+                        image_path = image_path.concat('images/style/').concat(parameters[menu][submenu].image_name);
+                        var elem = document.createElement("img");
+                        elem.setAttribute("src", image_path);
+                        elem.setAttribute("class", "preview-image");
+                        document.getElementById("design-preview").appendChild(elem);
+
+
+                    }
+
+
+                }
+
+            }
+
+        }
+    }
+    
+    
+    
+    function option_selected(option_id){
+       
+       var xmlhttp = new XMLHttpRequest();
+       
+       xmlhttp.onreadystatechange = function() {
+		
+		if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+			
+                    var option_object =  JSON.parse(xmlhttp.responseText);
+                                        
+                    parameters[menu_index][submenu_index].image_name = option_object["image_name"];
+                    
+                    apply_parameters();
+											
+		}
+	};
+             
+       var site_url = "<?php echo site_url('admin/get_option') ?>";
+        	
+	site_url = site_url.concat("/").concat(option_id);
+		
+	xmlhttp.open("GET", site_url, true);
+	
+	xmlhttp.send();
+       
+    }
+    
+        
 
 function LoadOptions(submenu_id){
 	
+        submenu_index = submenu_id;
+        
 	var xmlhttp = new XMLHttpRequest();
 
 	xmlhttp.onreadystatechange = function() {
@@ -85,7 +123,7 @@ function LoadOptions(submenu_id){
 			
 			var json_array =  JSON.parse(xmlhttp.responseText);
 			
-			document.getElementById('design_options').innerHTML = "";
+			document.getElementById('option-list').innerHTML = "";
 			
 			for (var key in json_array) {
 				
@@ -102,48 +140,34 @@ function LoadOptions(submenu_id){
 				link_element.appendChild(image_element);
                                 
                                 var list_element = document.createElement("li");
+                                var function_string = "option_selected(".concat(json_array[key]['id']).concat(")")
+                                list_element.setAttribute("onclick", function_string);
                                 list_element.appendChild(link_element);
 				
-				document.getElementById("design_options").appendChild(list_element);
+				document.getElementById("option-list").appendChild(list_element);
+                                
+                                var $frame = $('#design_options');
+        
+                                var $wrap  = $frame.parent();
+
+                                
+                                
+                                sly.reload();
+                            
+                                 
 				
 				
 			}
                         
-                        if(json_array.lenght > 0){
-                            
-                            var $frame = $('#design_options');
-                            var $wrap  = $frame.parent();
-
-                            // Call Sly on frame
-                             $frame.sly({
-                                    horizontal: 1,
-                                    itemNav: 'centered',
-                                    smart: 1,
-                                    activateOn: 'click',
-                                    mouseDragging: 1,
-                                    touchDragging: 1,
-                                    releaseSwing: 1,
-                                    startAt: 0,
-                                    scrollBar: $wrap.find('.scrollbar'),
-                                    scrollBy: 1,
-                                    speed: 300,
-                                    elasticBounds: 1,
-                                    easing: 'easeOutExpo',
-                                    dragHandle: 1,
-                                    dynamicHandle: 1,
-                                    clickBar: 1,
-
-                                    // Buttons
-                                    prev: $wrap.find('.prev'),
-                                    next: $wrap.find('.next')
-                            });
-                        }
+                       
+                        
+                        
                         
 		}
 	};
 	
 	var site_url = "<?php echo site_url('admin/get_options') ?>";
-	
+        	
 	site_url = site_url.concat("/").concat(submenu_id);
 		
 	xmlhttp.open("GET", site_url, true);
@@ -153,6 +177,8 @@ function LoadOptions(submenu_id){
 
 function LoadSubMenus(selected_menu) {
 	
+        menu_index = selected_menu;
+        
 	var xmlhttp = new XMLHttpRequest();
 	
 	xmlhttp.onreadystatechange = function() {
@@ -167,7 +193,7 @@ function LoadSubMenus(selected_menu) {
 				
 				$('#sub_menu ul').append(
 					$('<li>').attr('value', json_array[key]['id']).attr('onclick', 'LoadOptions(this.value)').append(
-						$('<a>').attr('href','#').append(
+						$('<a>').append(
 							$('<span>').attr('class', 'tab').append(json_array[key]['name'])
 				))); 
 			}
@@ -196,9 +222,9 @@ function LoadSubMenus(selected_menu) {
 			
 			<div id='' class='col-md-2 col-sm-2 design-menu'>
 				<div id='main_menu' class='design-menu-header'>Design Menu</div>
-				<ol>
+				<ol id='main_menu_list'>
 				<?php foreach ($menus->result() as $row) {?>
-					<li value="<?php echo $row->id; ?>" onclick="LoadSubMenus(<?php echo $row->id; ?>)"><a href="#"><?php echo $row->name; ?></a></li>				
+					<li value="<?php echo $row->id; ?>" onclick="LoadSubMenus(<?php echo $row->id; ?>)"><a><?php echo $row->name; ?></a></li>				
 				<?php }?>				
 				</ol>
 			</div>
@@ -212,10 +238,10 @@ function LoadSubMenus(selected_menu) {
 					
 					<div id='' class='col-md-2 col-sm-2' style='padding:0;'>
 						<div id='sub_menu' class='design-sub-menu'>
-							<ul>
+							<ul id='sub_menu_list'>
 								<?php if(isset($product_submenus)) foreach($product_submenus->result() as $submenu) {?>
 								
-								<li value="<?php echo $submenu->id; ?>"><a href="#"><?php echo $submenu->name; ?></a></li>
+								<li value="<?php echo $submenu->id; ?>"><a><?php echo $submenu->name; ?></a></li>
 								
 								<?php } ?>
 							</u>
@@ -256,7 +282,7 @@ function LoadSubMenus(selected_menu) {
                                         </div>
 
                                         <div class="frame" id="design_options">
-                                                <ul class="clearfix">
+                                                <ul class="clearfix" id="option-list">
                                                         <li><a ><img src="<?= base_url("assets/images/design/fabriques/1.png"); ?>" width="96%" height="100%"></a></li>
                                                         <li><a ><img src="<?= base_url("assets/images/design/fabriques/2.png"); ?>" width="96%" height="100%"></a></li>
                                                         <li><a ><img src="<?= base_url("assets/images/design/fabriques/3.png"); ?>" width="96%" height="100%"></a></li>
@@ -272,10 +298,6 @@ function LoadSubMenus(selected_menu) {
                                                 </ul>
                                         </div>
 
-                                        <div class="controls center">
-                                                <button class="btn prev"><i class="icon-chevron-left"></i> prev</button>
-                                                <button class="btn next">next <i class="icon-chevron-right"></i></button>
-                                        </div>
                                 </div>
 
                                     

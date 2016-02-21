@@ -467,5 +467,15 @@ class Admin extends CI_Controller {
 				echo $result;
 			}
 		}
+                
+                public function get_option($id){
+			
+			$result = $this->admin_model->get_json_option($id);
+			
+			if(isset($result)){
+				
+				echo $result;
+			}
+		}
 }
 ?>
