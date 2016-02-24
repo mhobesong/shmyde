@@ -98,8 +98,8 @@
 											
 		}
 	};
-             
-       var site_url = "<?php echo site_url('admin/get_option') ?>";
+         
+       var site_url = "<?php echo base_url("index.php/admin/get_option"); ?>";
         	
 	site_url = site_url.concat("/").concat(option_id);
 		
@@ -114,7 +114,7 @@
 function LoadOptions(submenu_id){
 	
         submenu_index = submenu_id;
-        
+                
 	var xmlhttp = new XMLHttpRequest();
 
 	xmlhttp.onreadystatechange = function() {
@@ -165,8 +165,8 @@ function LoadOptions(submenu_id){
                         
 		}
 	};
-	
-	var site_url = "<?php echo site_url('admin/get_options') ?>";
+        
+        var site_url = "<?php echo base_url("index.php/admin/get_options"); ?>";
         	
 	site_url = site_url.concat("/").concat(submenu_id);
 		
@@ -186,23 +186,25 @@ function LoadSubMenus(selected_menu) {
 		if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
 			
 			var json_array =  JSON.parse(xmlhttp.responseText);
-			
-			$('#sub_menu ul').empty();
-			
+                        			
+			$('#sub_menu_list').empty();
+                        			
 			for (var key in json_array) {
 				
-				$('#sub_menu ul').append(
-					$('<li>').attr('value', json_array[key]['id']).attr('onclick', 'LoadOptions(this.value)').append(
-						$('<a>').append(
+                                
+                                var on_click = 'return LoadOptions('.concat(json_array[key]['id']).concat(');');
+                                
+				$('#sub_menu_list').append(
+					$('<a>').attr('href', '#').attr('value', json_array[key]['id']).attr('onclick', on_click).attr('class', 'list-group-item').append(
 							$('<span>').attr('class', 'tab').append(json_array[key]['name'])
-				))); 
+				)); 
 			}
 							
 		}
 	};
-	
-	var site_url = "<?php echo site_url('admin/get_submenus') ?>";
-	
+        
+        var site_url = "<?php echo base_url("index.php/admin/get_submenus"); ?>";
+		
 	site_url = site_url.concat("/").concat(<?php if(isset($product_id)) echo $product_id; else echo "-1" ?>).concat("/").concat(selected_menu);
 		
 	xmlhttp.open("GET", site_url, true);
@@ -216,93 +218,61 @@ function LoadSubMenus(selected_menu) {
 <!-- Desing Page -->
 <div class='design-page'>
 	<div id='' class='container'>
-		<div id='' class='row'>
+		<div id='' class="row">
 		
 			<!-- MAIN MENUS  -->
 			
-			<div id='' class='col-md-2 col-sm-2 design-menu'>
+			<div id='' class=' design-menu col-sm-4'>
 				<div id='main_menu' class='design-menu-header'>Design Menu</div>
-				<ol id='main_menu_list'>
-				<?php foreach ($menus->result() as $row) {?>
-					<li value="<?php echo $row->id; ?>" onclick="LoadSubMenus(<?php echo $row->id; ?>)"><a><?php echo $row->name; ?></a></li>				
-				<?php }?>				
-				</ol>
+                                <div id='main_menu_list' class="list-group">
+                                    <?php foreach ($menus->result() as $row) {?>
+                                            <a  value="<?php echo $row->id; ?>" onclick="LoadSubMenus(<?php echo $row->id; ?>)" href="#" class="list-group-item"><?php echo $row->name; ?></a>				
+                                    <?php }?>				
+				</div>
 			</div>
+                        
+                        <div id='sub_menu_list' class="col-sm-2">
+                            
+                        </div>
+                        
+                        <div id='design-preview' class='design-preview  col-sm-6'>
+                            <img src="<?= base_url("assets/images/products/").'/'.$base_images['front']['name']; ?>" class="preview-image" />
+                        </div>
+                        
+                </div>
 			
 			<!-- END MAIN MENUS  -->
-			
-			<div id='' class='col-md-10 col-sm-10'>
-				<div id='' class='row'>
-				
-					<!-- SUB MENUS  -->
-					
-					<div id='' class='col-md-2 col-sm-2' style='padding:0;'>
-						<div id='sub_menu' class='design-sub-menu'>
-							<ul id='sub_menu_list'>
-								<?php if(isset($product_submenus)) foreach($product_submenus->result() as $submenu) {?>
-								
-								<li value="<?php echo $submenu->id; ?>"><a><?php echo $submenu->name; ?></a></li>
-								
-								<?php } ?>
-							</u>
-						</div>
-					</div>
-					
-					<!-- END SUB MENUS  -->
-					
-					                                        
-					<div id='' class='col-md-8 col-sm-8' style='padding:0'>
-                                            <div id='design-preview' class='design-preview'><img src="<?= base_url("assets/images/products/").'/'.$base_images['front']['name']; ?>" class="preview-image" /></div>
-					</div>
-					<div id='' class='col-md-2 col-sm-2 design-side'>
-						<h4>SIDES</h4>
-
-						<ul>
-							<li class='active' ><a href="#">
-								<h5>Front</h5>
-								<img src="<?= base_url("assets/images/design/front.png"); ?>">
-							</a></li>
-							<li><a href="#">
-								<h5>Back</h5>
-								<img src="<?= base_url("assets/images/design/back.png"); ?>">
-							</a></li>
-
-						</ul>
-					</div>
-				</div>
-                            
-                                
-				<div class='fabrique-heading'>Chose Your Fabrique</div>
-                                    
-                                <div class="wrap">  
-                                        <div class="scrollbar">
-                                                <div class="handle">
-                                                        <div class="mousearea"></div>
-                                                </div>
-                                        </div>
-
-                                        <div class="frame" id="design_options">
-                                                <ul class="clearfix" id="option-list">
-                                                        <li><a ><img src="<?= base_url("assets/images/design/fabriques/1.png"); ?>" width="96%" height="100%"></a></li>
-                                                        <li><a ><img src="<?= base_url("assets/images/design/fabriques/2.png"); ?>" width="96%" height="100%"></a></li>
-                                                        <li><a ><img src="<?= base_url("assets/images/design/fabriques/3.png"); ?>" width="96%" height="100%"></a></li>
-                                                        <li><a ><img src="<?= base_url("assets/images/design/fabriques/4.png"); ?>" width="96%" height="100%"></a></li>
-                                                        <li><a ><img src="<?= base_url("assets/images/design/fabriques/5.png"); ?>" width="96%" height="100%"></a></li>
-                                                        <li><a ><img src="<?= base_url("assets/images/design/fabriques/6.png"); ?>" width="96%" height="100%"></a></li>
-                                                        <li><a ><img src="<?= base_url("assets/images/design/fabriques/7.png"); ?>" width="96%" height="100%"></a></li>
-                                                        <li><a ><img src="<?= base_url("assets/images/design/fabriques/8.png"); ?>" width="96%" height="100%"></a></li>
-                                                        <li><a ><img src="<?= base_url("assets/images/design/fabriques/9.png"); ?>" width="96%" height="100%"></a></li>
-                                                        <li><a ><img src="<?= base_url("assets/images/design/fabriques/10.png"); ?>" width="96%" height="100%"></a></li>
-                                                        <li><a ><img src="<?= base_url("assets/images/design/fabriques/11.png"); ?>" width="96%" height="100%"></a></li>
-                                                        <li><a ><img src="<?= base_url("assets/images/design/fabriques/12.png"); ?>" width="96%" height="100%"></a></li>
-                                                </ul>
-                                        </div>
-
+			                                                                                            
+                <div class="wrap">  
+                        <div class="scrollbar">
+                                <div class="handle">
+                                        <div class="mousearea"></div>
                                 </div>
+                        </div>
+
+                        <div class="frame" id="design_options">
+                                <ul class="clearfix" id="option-list">
+                                    <!--
+                                        <li><a ><img src="<?= base_url("assets/images/design/fabriques/1.png"); ?>" width="96%" height="100%"></a></li>
+                                        <li><a ><img src="<?= base_url("assets/images/design/fabriques/2.png"); ?>" width="96%" height="100%"></a></li>
+                                        <li><a ><img src="<?= base_url("assets/images/design/fabriques/3.png"); ?>" width="96%" height="100%"></a></li>
+                                        <li><a ><img src="<?= base_url("assets/images/design/fabriques/4.png"); ?>" width="96%" height="100%"></a></li>
+                                        <li><a ><img src="<?= base_url("assets/images/design/fabriques/5.png"); ?>" width="96%" height="100%"></a></li>
+                                        <li><a ><img src="<?= base_url("assets/images/design/fabriques/6.png"); ?>" width="96%" height="100%"></a></li>
+                                        <li><a ><img src="<?= base_url("assets/images/design/fabriques/7.png"); ?>" width="96%" height="100%"></a></li>
+                                        <li><a ><img src="<?= base_url("assets/images/design/fabriques/8.png"); ?>" width="96%" height="100%"></a></li>
+                                        <li><a ><img src="<?= base_url("assets/images/design/fabriques/9.png"); ?>" width="96%" height="100%"></a></li>
+                                        <li><a ><img src="<?= base_url("assets/images/design/fabriques/10.png"); ?>" width="96%" height="100%"></a></li>
+                                        <li><a ><img src="<?= base_url("assets/images/design/fabriques/11.png"); ?>" width="96%" height="100%"></a></li>
+                                        <li><a ><img src="<?= base_url("assets/images/design/fabriques/12.png"); ?>" width="96%" height="100%"></a></li>
+                                    -->
+                                </ul>
+                        </div>
+
+                </div>
 
                                     
 					
-			</div>
-		</div>
+		
 	</div>
 </div>

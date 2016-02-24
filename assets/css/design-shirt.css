@@ -1,71 +1,55 @@
 .design-page{
 	background:url('../images/designpage/bg.png');
 	background-size:cover;
-	padding-top: 6%;
 	padding-top:10%;
 }
 
+
+.inline
+{
+
+	display: inline-block;
+
+}
+
+
+
 .design-page .design-menu
 {
-	background:url('../images/designpage/design menu/bg.png');
-	width:159px;
-	height:732px;
-	padding:0;
+	background-color:#323536;
+	width:200px;
+	height:440px;
 	color:#ddd;
+	margin-right:20px;
 }
 
-.design-page .design-menu ol
-{
-	padding-left:20%;
-}
 
-.design-page .design-menu ol a
-{
-	display:block;
-	color:#ddd;
-	font-size:14px;
-	width:100%;
-	text-decoration:none;
-}
-
-.design-page .design-menu ol a:hover
-{
-	background-image:url('../images/designpage/design menu/selected.png');
-}
-
-.design-page .design-menu ol a:active
-{
-	background-image:url('../images/designpage/design menu/selected.png');
-}
 
 
 .design-page .design-menu .design-menu-header
 {
-	background:url('../images/designpage/design menu/header.png');
-	background-size:cover;
-	width:159px;
-	height:65px;
-	margin:0px;
-}
+	margin-top:5px;
+	width:180px;
+	height:45px;
+	margin-bottom:10px;
 
-
-.design-page .design-menu .design-menu-header
-{
 	font-size:18px;
-	color:#ddd;
 	text-align:center;
-	padding-right:7%;
 	padding-top:5%;
+
 }
+
+
 
 .design-page .design-sub-menu
 {
-	background:url('../images/designpage/sub menu/bg.png');
+	background-color:#4D5659;
 	width:163px;
-	height:383px;
-	margin-top:30%;
+	height:400px;
 	margin-right:0;
 	padding-top:20px;
+	margin-top:20px;
+
 }
 
 .design-page .design-sub-menu ul
@@ -89,17 +73,9 @@
 
 .design-page .design-preview
 {
-	background:url('../images/designpage/preview screen/bg.png') no-repeat center center fixed;
-	-webkit-background-size: cover;
-        -moz-background-size: cover;
-        -o-background-size: cover;
-        background-size: cover;
 	width:325px;
-	height:450px;
-	margin-top:3%;
-	margin-left:-20px;
+	height:400px;
 	text-align:center;
-	position:relative;
 
 }
 
@@ -108,12 +84,6 @@
 	position:absolute;
 	height:447px;
 	width:325px:
-	left:0;
-    right:0;
-    margin-left:auto;
-    margin-right:auto;
-
-
 
 }
 
