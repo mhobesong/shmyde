@@ -60,5 +60,28 @@ class Design extends CI_Controller
 		$this->load->view('design/main');
 		$this->load->view("pages/footer.php");
 	}
+        
+        
+        public function getProductPreview()
+	{
+		$image = $_POST['image'];
+                
+                $blend = $_POST['blend'];
+		
+		$this->load->helper('SimpleImage');
+		
+		$finalImage;
+		
+		$finalImage = new abeautifulsite\SimpleImage($image);
+                                               
+                //$finalImage = $finalImage->overlay($blend, 'top left', 0.5);
+				
+		$finalImage->colorize("#00FF00", 1);
+		
+		//$finalImage->brightness(20);
+			
+		echo $finalImage->output_base64();
+		
+	}
 }
 ?>

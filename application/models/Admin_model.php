@@ -602,6 +602,7 @@ class Admin_model extends CI_Model {
                 
                 if($option->is_default){
                     
+                    $defaults[$main_menu_id][$row->id]['id'] = $option->id;
                     $defaults[$main_menu_id][$row->id]['type'] = $option->type;
                     $defaults[$main_menu_id][$row->id]['name'] = $option->name;
                     $defaults[$main_menu_id][$row->id]['description'] = $option->description;

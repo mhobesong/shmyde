@@ -4,6 +4,19 @@
     var menu_index;
     var submenu_index;
     
+            
+    function isEmpty(obj) {
+        
+        for(var prop in obj) {
+            
+            if(obj.hasOwnProperty(prop))
+                return false;
+        }
+            
+        return true;
+    }
+    
+    
     $(document).ready(function(){
         
         parameters = <?php echo $parameters;  ?>;
@@ -43,7 +56,43 @@
                     
     });
     
+    function get_image_source_after_blend(src, elem){
+
+            
+            for (var menu in parameters) {
+            
+            
+                for(var submenu in parameters[menu]){
+
+
+                    if(!isEmpty(parameters[menu][submenu])){
+
+                        if(parameters[menu][submenu].type == 1){
+
+
+                            var blend_path = "<?php echo ASSETS_PATH; ?>";
+
+                            var img_src = src;
+
+                            blend_path = blend_path.concat('images/fabric/').concat(parameters[menu][submenu].image_name);
+                                                      
+                            $.post('<?= site_url("Design/getProductPreview/"); ?>',{image:img_src, blend:blend_path },function(dataurl){
+
+                                   elem.setAttribute("src", dataurl);
+
+                            });
+                        }
+
+
+                    }
+
+                }
+            
+        }
+    }
+    
     function apply_parameters(){
+        
         
         for (var menu in parameters) {
             
@@ -52,23 +101,28 @@
             
             image_path = "<?= base_url("assets/images/products/").'/'.$base_images['front']['name']; ?>";
             var elem = document.createElement("img");
-            elem.setAttribute("src", image_path);
+            get_image_source_after_blend(image_path, elem);
+            //elem.setAttribute("src", image_path);
             elem.setAttribute("class", "preview-image");
             document.getElementById("design-preview").appendChild(elem);
 
             for(var submenu in parameters[menu]){
 
-                if(parameters[menu][submenu].length != 0){
+                
+                if(!isEmpty(parameters[menu][submenu])){
 
+                        
                     if(parameters[menu][submenu].type == 0){
+                        
 
                         var image_path = "<?php echo ASSETS_PATH; ?>";
                         image_path = image_path.concat('images/style/').concat(parameters[menu][submenu].image_name);
                         var elem = document.createElement("img");
-                        elem.setAttribute("src", image_path);
+                        get_image_source_after_blend(image_path, elem);
+                        //elem.setAttribute("src", image_path);
                         elem.setAttribute("class", "preview-image");
                         document.getElementById("design-preview").appendChild(elem);
-
+                        
 
                     }
 
@@ -76,7 +130,7 @@
                 }
 
             }
-
+            
         }
     }
     
@@ -236,11 +290,11 @@ function LoadSubMenus(selected_menu) {
                         </div>
                         
                         <div id='design-preview' class='design-preview  col-sm-6'>
-                            <img src="<?= base_url("assets/images/products/").'/'.$base_images['front']['name']; ?>" class="preview-image" />
+                            
                         </div>
                         
                 </div>
-			
+            
 			<!-- END MAIN MENUS  -->
 			                                                                                            
                 <div class="wrap">  
