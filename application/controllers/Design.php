@@ -74,7 +74,7 @@ class Design extends CI_Controller
 		
 		$finalImage = new abeautifulsite\SimpleImage($image);
                                                
-                //$finalImage = $finalImage->overlay($blend, 'top left', 0.5);
+                //$finalImage = $finalImage->overlay($blend, 'center', 0.5);
 				
 		$finalImage->colorize("#00FF00", 1);
 		
