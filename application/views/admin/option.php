@@ -8,10 +8,7 @@ function create_table_body(options_array){
     	//alert(JSON.stringify(options_array));
 		
     	var table = document.getElementById("options_table");
-    	
-         
-    	
-    	
+    	   	
     	while(table.rows.length > 1){
     		
     		table.deleteRow(1);
@@ -110,6 +107,8 @@ function MenuChanged(){
 				
 			}
                         
+                      $("#submenu").val('<?php if($default_submenu_id > -1) echo $default_submenu_id; else echo 0; ?>');
+  
                       SubMenuChanged();  
                                                
 		}
@@ -164,10 +163,10 @@ $(document).ready(function() {
     
     $("#menu option[value='<?php if($default_menu_id > -1) echo $default_menu_id; else echo 0; ?>']").prop('selected', true);
     
-    $("#submenu option[value='<?php if($default_submenu_id > -1) echo $default_submenu_id; else echo 0; ?>']").prop('selected', true);
+    //$("#submenu option[value='<?php if($default_submenu_id > -1) echo $default_submenu_id; else echo 0; ?>']").prop('selected', true);
     
     MenuChanged();
-      
+          
 	
 });
         

@@ -89,4 +89,5 @@ defined('EXIT__AUTO_MAX')      OR define('EXIT__AUTO_MAX', 125); // highest auto
 
 defined('ASSETS_PATH')		   OR define('ASSETS_PATH', 'http://'.$_SERVER['HTTP_HOST'].'/shmyde/assets/'); // The assets folder of the application
 defined('CURRENT_LANGUAGE')	   OR define('CURRENT_LANGUAGE', 'english'); // The current language of the application
+defined('ASSETS_DIR_PATH')	   OR define('ASSETS_DIR_PATH', $_SERVER['DOCUMENT_ROOT'].'/shmyde/assets/'); // The assets folder of the application
 

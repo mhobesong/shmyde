@@ -1,22 +1,14 @@
 <script>
+    
+    ///Displays the list of option thumbnail images
     var sly;
+    
     var parameters;
+    
     var menu_index;
+    
     var submenu_index;
-    
-            
-    function isEmpty(obj) {
-        
-        for(var prop in obj) {
-            
-            if(obj.hasOwnProperty(prop))
-                return false;
-        }
-            
-        return true;
-    }
-    
-    
+                      
     $(document).ready(function(){
         
         parameters = <?php echo $parameters;  ?>;
@@ -45,96 +37,41 @@
 			dynamicHandle: 1,
 			clickBar: 1
 
-			// Buttons
-			//prev: $wrap.find('.prev'),
-			//next: $wrap.find('.next')
 		}, {
                        
                 
-                }).init();
+        }).init();
                 
                     
     });
     
-    function get_image_source_after_blend(src, elem){
-
-            
-            for (var menu in parameters) {
-            
-            
-                for(var submenu in parameters[menu]){
-
-
-                    if(!isEmpty(parameters[menu][submenu])){
-
-                        if(parameters[menu][submenu].type == 1){
-
-
-                            var blend_path = "<?php echo ASSETS_PATH; ?>";
-
-                            var img_src = src;
-
-                            blend_path = blend_path.concat('images/fabric/').concat(parameters[menu][submenu].image_name);
-                                                      
-                            $.post('<?= site_url("Design/getProductPreview/"); ?>',{image:img_src, blend:blend_path },function(dataurl){
-
-                                   elem.setAttribute("src", dataurl);
-
-                            });
-                        }
-
-
-                    }
-
-                }
-            
-        }
+    function set_element_color(color, elem){
+         
+         
+        elem.style.backgroundColor = color;
+                
+        
     }
-    
+        
+    ///This function applies the parameters by interwaving the images together and applying blends
     function apply_parameters(){
+
         
-        
-        for (var menu in parameters) {
+                
+        $.post('<?= site_url("Design/getBlendImage/"); ?>',{parameters: JSON.stringify(parameters), product_id : <?php echo $product_id; ?> },function(dataurl){
             
-            
+            ///Clear Preview Area
             document.getElementById("design-preview").innerHTML = "";
             
-            image_path = "<?= base_url("assets/images/products/").'/'.$base_images['front']['name']; ?>";
             var elem = document.createElement("img");
-            get_image_source_after_blend(image_path, elem);
-            //elem.setAttribute("src", image_path);
             elem.setAttribute("class", "preview-image");
+            elem.setAttribute("src", dataurl);
             document.getElementById("design-preview").appendChild(elem);
 
-            for(var submenu in parameters[menu]){
+        });
+        
 
-                
-                if(!isEmpty(parameters[menu][submenu])){
-
-                        
-                    if(parameters[menu][submenu].type == 0){
-                        
-
-                        var image_path = "<?php echo ASSETS_PATH; ?>";
-                        image_path = image_path.concat('images/style/').concat(parameters[menu][submenu].image_name);
-                        var elem = document.createElement("img");
-                        get_image_source_after_blend(image_path, elem);
-                        //elem.setAttribute("src", image_path);
-                        elem.setAttribute("class", "preview-image");
-                        document.getElementById("design-preview").appendChild(elem);
-                        
-
-                    }
-
-
-                }
-
-            }
-            
-        }
     }
-    
-    
     
     function option_selected(option_id){
        
@@ -142,18 +79,21 @@
        
        xmlhttp.onreadystatechange = function() {
 		
-		if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-			
-                    var option_object =  JSON.parse(xmlhttp.responseText);
-                                        
-                    parameters[menu_index][submenu_index].image_name = option_object["image_name"];
-                    
-                    apply_parameters();
-											
-		}
+            if (xmlhttp.readyState === 4 && xmlhttp.status === 200) {
+
+                var option_object =  JSON.parse(xmlhttp.responseText);
+
+                parameters[menu_index][submenu_index].color = option_object["color"];
+                parameters[menu_index][submenu_index].type = option_object["type"];
+                parameters[menu_index][submenu_index].description = option_object["description"];
+                parameters[menu_index][submenu_index].image_data = option_object["image_data"];
+
+                apply_parameters();
+
+            }
 	};
          
-       var site_url = "<?php echo base_url("index.php/admin/get_option"); ?>";
+        var site_url = "<?php echo base_url("index.php/admin/get_option"); ?>";
         	
 	site_url = site_url.concat("/").concat(option_id);
 		
@@ -163,9 +103,7 @@
        
     }
     
-        
-
-function LoadOptions(submenu_id){
+    function LoadOptions(submenu_id){
 	
         submenu_index = submenu_id;
                 
@@ -173,51 +111,54 @@ function LoadOptions(submenu_id){
 
 	xmlhttp.onreadystatechange = function() {
 		
-		if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-			
-			var json_array =  JSON.parse(xmlhttp.responseText);
-			
-			document.getElementById('option-list').innerHTML = "";
-			
-			for (var key in json_array) {
-				
-				var dir_name = json_array[key]['caption'].split("_")[0];
-								
-				var image_path = '<?php echo ASSETS_PATH; ?>'.concat('images/').concat(dir_name).concat('/').concat(json_array[key]['caption']);
-				
-				var image_element = document.createElement("img");
-				image_element.setAttribute("src", image_path);
-				image_element.setAttribute("height", "100");
-				image_element.setAttribute("width", "96");
-				
-				var link_element = document.createElement("a");
-				link_element.appendChild(image_element);
-                                
-                                var list_element = document.createElement("li");
-                                var function_string = "option_selected(".concat(json_array[key]['id']).concat(")")
-                                list_element.setAttribute("onclick", function_string);
-                                list_element.appendChild(link_element);
-				
-				document.getElementById("option-list").appendChild(list_element);
-                                
-                                var $frame = $('#design_options');
-        
-                                var $wrap  = $frame.parent();
+            if (xmlhttp.readyState === 4 && xmlhttp.status === 200) {
 
-                                
-                                
-                                sly.reload();
-                            
-                                 
-				
-				
-			}
+                var json_array =  JSON.parse(xmlhttp.responseText);
+
+                document.getElementById('option-list').innerHTML = "";
+
+                for (var key in json_array) {
+
+                    var image_element = document.createElement("img");
+
+                    try{
+
                         
-                       
-                        
-                        
-                        
-		}
+                        var image_path = '<?php echo ASSETS_PATH; ?>'.concat('images/design/thumbnail/').concat(json_array[key]['image_data']['thumbnail']['name']);
+
+                        image_element.setAttribute("src", image_path);  
+
+                     }
+                     catch(err){
+
+                         if(json_array[key]['color'] === '' )
+                            set_element_color('#ffffff', image_element);   
+                        else
+                            set_element_color(json_array[key]['color'], image_element);
+                     }
+
+                    image_element.setAttribute("height", "100");
+                    image_element.setAttribute("width", "96");
+
+                    var link_element = document.createElement("a");
+                    link_element.appendChild(image_element);
+
+                    var list_element = document.createElement("li");
+
+                    var function_string = "option_selected(".concat(json_array[key]['id']).concat(")")
+                    list_element.setAttribute("onclick", function_string);
+                    list_element.appendChild(link_element);
+
+                    document.getElementById("option-list").appendChild(list_element);
+
+                    var $frame = $('#design_options');
+
+                    sly.reload();                
+
+                }
+
+
+            }
 	};
         
         var site_url = "<?php echo base_url("index.php/admin/get_options"); ?>";
@@ -227,9 +168,9 @@ function LoadOptions(submenu_id){
 	xmlhttp.open("GET", site_url, true);
 	
 	xmlhttp.send();
-}
+    }
 
-function LoadSubMenus(selected_menu) {
+    function LoadSubMenus(selected_menu) {
 	
         menu_index = selected_menu;
         

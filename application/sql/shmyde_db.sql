@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Feb 29, 2016 at 02:57 AM
+-- Generation Time: Apr 14, 2016 at 12:49 AM
 -- Server version: 10.1.9-MariaDB
 -- PHP Version: 5.5.30
 
@@ -131,21 +131,23 @@ CREATE TABLE `shmyde_design_option` (
   `price` decimal(10,0) DEFAULT '0' COMMENT 'This is an additional price required to add this attribute to a design. ',
   `description` longtext COMMENT 'A short description of the attribute to be displayed on the application. ',
   `is_default` tinyint(1) NOT NULL DEFAULT '0',
-  `applied_to` int(11) NOT NULL COMMENT 'Indicates if the option is applied to the front(0), back(1) or doesn''t matter'
+  `applied_to` int(11) NOT NULL COMMENT 'Indicates if the option is applied to the front(0), back(1) or doesn''t matter',
+  `color` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `shmyde_design_option`
 --
 
-INSERT INTO `shmyde_design_option` (`id`, `shmyde_design_sub_menu_id`, `type`, `name`, `price`, `description`, `is_default`, `applied_to`) VALUES
-(1, 1, 0, 'LongSleeve', '0', 'This is the long sleeve of the selected shirt. ', 0, 0),
-(2, 1, 0, 'ShortSleeve', '0', 'This represents a short sleeve option. ', 1, 0),
-(4, 2, 0, 'Coller02', '0', 'Complex Collar', 0, 0),
-(6, 2, 0, 'shiny_collar', '0', 'no description', 1, 0),
-(7, 3, 1, 'vertical_colors', '0', '', 1, 2),
-(8, NULL, 0, '', '0', '', 0, 0),
-(9, NULL, 0, 'sdfgsdg', '0', 'sgdfgs', 0, 0);
+INSERT INTO `shmyde_design_option` (`id`, `shmyde_design_sub_menu_id`, `type`, `name`, `price`, `description`, `is_default`, `applied_to`, `color`) VALUES
+(8, NULL, 0, '', '0', '', 0, 0, ''),
+(9, NULL, 0, 'sdfgsdg', '0', 'sgdfgs', 0, 0, ''),
+(13, NULL, 0, '', '0', 'No Comment', 0, 0, '#000000'),
+(14, 1, 0, 'Dark Collar', '500', 'This is a dark collar', 1, 0, '#000000'),
+(15, 1, 0, 'White Collar', '0', 'This is a white collar', 0, 0, '#000000'),
+(16, 2, 1, 'Plain Colored', '10000', '', 1, 0, '#000000'),
+(17, 3, 0, 'Long Sleeves', '1200', '', 1, 0, '#000000'),
+(18, 3, 0, 'Short Sleeve', '0', '', 0, 0, '#000000');
 
 -- --------------------------------------------------------
 
@@ -166,10 +168,9 @@ CREATE TABLE `shmyde_design_sub_menu` (
 --
 
 INSERT INTO `shmyde_design_sub_menu` (`id`, `shmyde_design_main_menu_id`, `shmyde_product_id`, `name`, `type`) VALUES
-(1, 2, 1, 'Sleeve', 0),
-(2, 2, 1, 'Collar', 0),
-(3, 1, 1, 'Pattern', 0),
-(4, 1, 1, 'Solid', 0);
+(1, 2, 1, 'Collar', 0),
+(2, 1, 1, 'Mixed', 0),
+(3, 2, 1, 'Sleeves', 0);
 
 -- --------------------------------------------------------
 
@@ -181,8 +182,8 @@ CREATE TABLE `shmyde_images` (
   `id` int(11) NOT NULL,
   `name` longtext,
   `caption` text NOT NULL,
-  `shmyde_design_options_id` int(11) DEFAULT NULL,
-  `z_index` int(11) DEFAULT NULL,
+  `item_id` int(11) NOT NULL,
+  `depth` int(11) DEFAULT NULL,
   `values` longtext
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -190,12 +191,12 @@ CREATE TABLE `shmyde_images` (
 -- Dumping data for table `shmyde_images`
 --
 
-INSERT INTO `shmyde_images` (`id`, `name`, `caption`, `shmyde_design_options_id`, `z_index`, `values`) VALUES
-(1, 'style_1_2_1_1_option_image.png', 'style_1_2_1_1_caption_image.png', 1, 4, NULL),
-(2, 'style_1_2_1_2_option_image.png', 'style_1_2_1_2_caption_image.png', 2, 4, NULL),
-(4, 'style_1_2_1_4_option_image.png', 'style_1_2_1_4_caption_image.png', 4, 4, NULL),
-(5, 'style_1_2_2_option_image.png', 'style_1_2_2_caption_image.png', 6, 0, NULL),
-(6, 'fabric_1_1_3_7_option_image.png', 'fabric_1_1_3_7_caption_image.png', 7, 0, NULL);
+INSERT INTO `shmyde_images` (`id`, `name`, `caption`, `item_id`, `depth`, `values`) VALUES
+(1, 'option_image_16_1.png', '', 16, NULL, NULL),
+(29, 'option_image_14_0.png', '', 14, NULL, NULL),
+(30, 'option_image_15_0.png', '', 15, NULL, NULL),
+(32, 'option_image_17_0.png', '', 17, NULL, NULL),
+(33, 'option_image_18_0.png', '', 18, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -208,6 +209,31 @@ CREATE TABLE `shmyde_measurment` (
   `shmyde_product_id` int(11) DEFAULT NULL,
   `name` varchar(45) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `shmyde_option_thumbnail`
+--
+
+CREATE TABLE `shmyde_option_thumbnail` (
+  `id` int(11) NOT NULL,
+  `item_id` int(11) NOT NULL,
+  `name` text NOT NULL,
+  `depth` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `shmyde_option_thumbnail`
+--
+
+INSERT INTO `shmyde_option_thumbnail` (`id`, `item_id`, `name`, `depth`) VALUES
+(0, 15, 'option_image_15_0.jpg', 0),
+(0, 14, 'option_thumbnail_14_0.png', 0),
+(0, 15, 'option_thumbnail_15_0.png', 0),
+(0, 16, 'option_thumbnail_16_0.png', 0),
+(0, 17, 'option_thumbnail_17_0.png', 0),
+(0, 18, 'option_thumbnail_18_0.png', 0);
 
 -- --------------------------------------------------------
 
@@ -228,28 +254,61 @@ CREATE TABLE `shmyde_product` (
 --
 
 INSERT INTO `shmyde_product` (`id`, `name`, `url_name`, `target`, `base_price`) VALUES
-(1, 'Shirts', 'shirt', 0, 10000);
+(1, '0', 'shirt', 0, 0);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `shmyde_product_image`
+-- Table structure for table `shmyde_product_back_image`
 --
 
-CREATE TABLE `shmyde_product_image` (
+CREATE TABLE `shmyde_product_back_image` (
   `id` int(11) NOT NULL,
-  `shmyde_product_id` int(11) DEFAULT NULL,
+  `item_id` int(11) DEFAULT NULL,
   `name` longtext,
-  `view_type` int(11) NOT NULL COMMENT '0 for back and 1 for front',
-  `z_index` int(11) DEFAULT NULL
+  `depth` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `shmyde_product_image`
+-- Dumping data for table `shmyde_product_back_image`
 --
 
-INSERT INTO `shmyde_product_image` (`id`, `shmyde_product_id`, `name`, `view_type`, `z_index`) VALUES
-(1, 1, 'Shirts_front_view.png', 1, NULL);
+INSERT INTO `shmyde_product_back_image` (`id`, `item_id`, `name`, `depth`) VALUES
+(2, 2, 'back_product_image_2_0.jpg', NULL),
+(3, 1, 'back_product_image_1_0.png', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `shmyde_product_front_image`
+--
+
+CREATE TABLE `shmyde_product_front_image` (
+  `id` int(11) NOT NULL,
+  `item_id` int(11) DEFAULT NULL,
+  `name` longtext,
+  `depth` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `shmyde_product_front_image`
+--
+
+INSERT INTO `shmyde_product_front_image` (`id`, `item_id`, `name`, `depth`) VALUES
+(3, 1, 'front_product_image_1_0.png', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `shmyde_secondary_temp_images`
+--
+
+CREATE TABLE `shmyde_secondary_temp_images` (
+  `id` int(11) NOT NULL,
+  `name` longtext,
+  `item_id` int(11) NOT NULL,
+  `depth` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -262,6 +321,19 @@ CREATE TABLE `shmyde_template_measurment` (
   `shmyde_template_id` int(11) DEFAULT NULL,
   `shmyde_measurment_id` int(11) DEFAULT NULL,
   `value` decimal(10,0) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `shmyde_temp_images`
+--
+
+CREATE TABLE `shmyde_temp_images` (
+  `id` int(11) NOT NULL,
+  `name` longtext,
+  `item_id` int(11) NOT NULL,
+  `depth` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -389,8 +461,8 @@ ALTER TABLE `shmyde_design_sub_menu`
 -- Indexes for table `shmyde_images`
 --
 ALTER TABLE `shmyde_images`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `shmyde_design_options_fk_idx` (`shmyde_design_options_id`);
+  ADD PRIMARY KEY (`id`,`item_id`),
+  ADD KEY `shmyde_design_options_fk_idx` (`item_id`);
 
 --
 -- Indexes for table `shmyde_measurment`
@@ -406,11 +478,18 @@ ALTER TABLE `shmyde_product`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `shmyde_product_image`
+-- Indexes for table `shmyde_product_back_image`
 --
-ALTER TABLE `shmyde_product_image`
+ALTER TABLE `shmyde_product_back_image`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `shmyde_product_fk_idx` (`shmyde_product_id`);
+  ADD KEY `shmyde_product_fk_idx` (`item_id`);
+
+--
+-- Indexes for table `shmyde_product_front_image`
+--
+ALTER TABLE `shmyde_product_front_image`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `shmyde_product_fk_idx` (`item_id`);
 
 --
 -- Indexes for table `shmyde_template_measurment`
@@ -480,12 +559,17 @@ ALTER TABLE `shmyde_design_sub_menu`
 -- AUTO_INCREMENT for table `shmyde_images`
 --
 ALTER TABLE `shmyde_images`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 --
--- AUTO_INCREMENT for table `shmyde_product_image`
+-- AUTO_INCREMENT for table `shmyde_product_back_image`
 --
-ALTER TABLE `shmyde_product_image`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+ALTER TABLE `shmyde_product_back_image`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+--
+-- AUTO_INCREMENT for table `shmyde_product_front_image`
+--
+ALTER TABLE `shmyde_product_front_image`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `shmyde_user`
 --
@@ -517,7 +601,7 @@ ALTER TABLE `shmyde_design_sub_menu`
 -- Constraints for table `shmyde_images`
 --
 ALTER TABLE `shmyde_images`
-  ADD CONSTRAINT `shmyde_design_options_fk` FOREIGN KEY (`shmyde_design_options_id`) REFERENCES `shmyde_design_option` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `shmyde_design_options_fk` FOREIGN KEY (`item_id`) REFERENCES `shmyde_design_option` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `shmyde_measurment`
@@ -526,10 +610,10 @@ ALTER TABLE `shmyde_measurment`
   ADD CONSTRAINT `shmyde_product_fk` FOREIGN KEY (`shmyde_product_id`) REFERENCES `shmyde_product` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `shmyde_product_image`
+-- Constraints for table `shmyde_product_front_image`
 --
-ALTER TABLE `shmyde_product_image`
-  ADD CONSTRAINT `shmyde_product_image_fk` FOREIGN KEY (`shmyde_product_id`) REFERENCES `shmyde_product` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `shmyde_product_front_image`
+  ADD CONSTRAINT `shmyde_product_image_fk` FOREIGN KEY (`item_id`) REFERENCES `shmyde_product` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `shmyde_template_measurment`

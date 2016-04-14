@@ -781,6 +781,59 @@ class SimpleImage {
         return $this;
 
     }
+    
+    function imagealphamask($picture) {
+        
+        if( !($picture instanceof SimpleImage) ) {
+            
+            $picture = new SimpleImage($picture);
+            
+        }
+       
+        $mask = $this->image;
+              
+        // Get sizes and set up new picture
+        $xSize = imagesx( $picture->image );
+        
+        $ySize = imagesy( $picture->image );
+        
+        $newPicture = imagecreatetruecolor( $xSize, $ySize );
+        
+        imagesavealpha( $newPicture, true );
+        
+        imagefill( $newPicture, 0, 0, imagecolorallocatealpha( $newPicture, 0, 0, 0, 127 ) );
+
+        // Resize mask if necessary
+        if( $xSize != imagesx( $mask ) || $ySize != imagesy( $mask ) ) {
+            $tempPic = imagecreatetruecolor( $xSize, $ySize );
+            imagecopyresampled( $tempPic, $mask, 0, 0, 0, 0, $xSize, $ySize, imagesx( $mask ), imagesy( $mask ) );
+            imagedestroy( $mask );
+            $mask = $tempPic;
+        }
+
+        // Perform pixel-based alpha map application
+        for( $x = 0; $x < $xSize; $x++ ) {
+            for( $y = 0; $y < $ySize; $y++ ) {
+                
+                $alpha = imagecolorsforindex( $mask, imagecolorat( $mask, $x, $y ) );
+                
+                $mask_color = imagecolorsforindex( $mask, imagecolorat( $mask, $x, $y ) );
+                
+                $alpha = 127 - floor( $alpha[ 'red' ] / 2 );
+                                
+                $color = imagecolorsforindex( $picture->image, imagecolorat( $picture->image, $x, $y ));
+                           
+                imagesetpixel( $newPicture, $x, $y, imagecolorallocatealpha( $newPicture, $color[ 'red' ] + $mask_color['red'], $color[ 'green' ]+ $mask_color['green'], $color[ 'blue' ]+ $mask_color['blue'], $alpha ) );
+            }
+        }
+
+        // Copy back to original picture
+        imagedestroy( $picture->image );
+                
+        $this->image = $newPicture;
+        
+        return $this;
+    }
 
     /**
      * Pixelate
@@ -1270,21 +1323,24 @@ class SimpleImage {
                 $alpha = (imagecolorat($src_im, $x, $y) >> 24) & 0xFF;
                 
                 if ($alpha < $minalpha) {
+                    
                     $minalpha = $alpha;
                 }
             }
         }
-
+        
         // Loop through image pixels and modify alpha for each
         for ($x = 0; $x < $w; $x++) {
+            
             for ($y = 0; $y < $h; $y++) {
+                
                 // Get current alpha value (represents the TANSPARENCY!)
                 $colorxy = imagecolorat($src_im, $x, $y);
+                
                 $alpha = ($colorxy >> 24) & 0xFF;
                 // Calculate new alpha
                 
-                
-                
+                               
                 if ($minalpha !== 127) {
                     $alpha = 127 + 127 * $pct * ($alpha - 127) / (127 - $minalpha);
                 } else {
@@ -1302,9 +1358,13 @@ class SimpleImage {
 
         // Copy it
         imagesavealpha($dst_im, true);
+        
         imagealphablending($dst_im, true);
+        
         imagesavealpha($src_im, true);
+        
         imagealphablending($src_im, true);
+        
         imagecopy($dst_im, $src_im, $dst_x, $dst_y, $src_x, $src_y, $src_w, $src_h);
 
     }
